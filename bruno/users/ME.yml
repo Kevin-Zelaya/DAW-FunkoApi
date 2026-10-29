@@ -1,0 +1,23 @@
+info:
+  name: ME
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:5205/api/auth/login
+  body:
+    type: json
+    data: |-
+      {
+        "Email": "Kenrro2003@gmail.com",
+        "Password": "Kevinelmejor3"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
