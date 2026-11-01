@@ -9,7 +9,7 @@ using Serilog;
 /// </summary>
 /// 
 /// TODO: Hacer control de concurrencia en los patch y updates
-public class PosgreRepository(
+public class FunkoRepository(
     AppDbContext _context
 ) : IFunkoRepository, IScoped
 {
@@ -27,9 +27,7 @@ public class PosgreRepository(
 
         await _context.SaveChangesAsync(ct);
 
-        await _context.Entry(funko) // Obtener el proveedor al que hace referencia
-            .Reference(f => f.Supplier)
-            .LoadAsync(ct);
+
         await _context.Entry(funko) // Obtener el proveedor al que hace referencia
             .Reference(f => f.Category)
             .LoadAsync(ct);
@@ -49,7 +47,6 @@ public class PosgreRepository(
         Funko? funko = await _context.Funkos
             .AsNoTracking()
             .Include(f => f.Category)
-            .Include(f => f.Supplier)
             .FirstOrDefaultAsync(f => f.Id == id, ct);
         return funko;
     } // 
@@ -61,7 +58,6 @@ public class PosgreRepository(
         List<Funko> funkos = await _context.Funkos
             .AsNoTracking()
             .Include(f => f.Category)
-            .Include(f => f.Supplier)
             .ToListAsync(ct);
 
         return funkos;
@@ -82,7 +78,6 @@ public class PosgreRepository(
         // 1. Cargar colecciones founkos/Proveedores
         List<Funko> funkos= await _context.Funkos
             .AsNoTracking()
-            .Include(f => f.Supplier)
             .OrderBy(f => f.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -102,6 +97,16 @@ public class PosgreRepository(
             hasNextPage
         );
     }
+    /// <inheritdoc cref="IFunkoRepository.ExistByNameAsync(string, CancellationToken)"/>
+    public async Task<bool> ExistByNameAsync(
+    string name,
+    CancellationToken ct = default)
+    {
+        return await _context.Funkos
+            .AsNoTracking()
+            .IgnoreQueryFilters()
+            .AnyAsync(f => f.Name == name, ct);
+    } // 
 
     // =========================================================
     // UPDATE
@@ -114,7 +119,6 @@ public class PosgreRepository(
         CancellationToken ct = default)
     {
         var response = await _context.Funkos
-            .Include(f => f.Supplier)
             .Include(f => f.Category)
             .FirstOrDefaultAsync(f => f.Id == id, ct);
 
@@ -134,10 +138,10 @@ public class PosgreRepository(
                 .Property(f => f.RowVersion)
                 .OriginalValue = funko.RowVersion;
             await _context.SaveChangesAsync(ct);
-        } catch(DbUpdateConcurrencyException ex)
+        } catch(DbUpdateConcurrencyException)
         {
             Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
-            throw ex;
+            throw;
         }
 
         return response;
@@ -150,9 +154,8 @@ public class PosgreRepository(
     )
     {
         var response = await _context.Funkos
-            .Include(f => f.Supplier)
             .FirstOrDefaultAsync(f => f.Id == id, ct);
-        response?.CategoryId = request.Id;
+        response?.CategoryId = request.CategoryId;
 
         if (response is null)
             return null;
@@ -163,10 +166,10 @@ public class PosgreRepository(
                 .Property(f => f.RowVersion)
                 .OriginalValue = request.RowVersion;
             await _context.SaveChangesAsync(ct);
-        } catch(DbUpdateConcurrencyException ex)
+        } catch(DbUpdateConcurrencyException)
         {
             Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
-            throw ex;
+            throw;
         }
 
         return response;
@@ -183,17 +186,17 @@ public class PosgreRepository(
 
         if (response is null)
             return null;
-        response.SupplierId = request.Id;
+        response.SupplierId = request.SupplierId;
         try
         {
             _context.Entry(response)
                 .Property(f => f.RowVersion)
                 .OriginalValue = request.RowVersion;
             await _context.SaveChangesAsync(ct);
-        } catch(DbUpdateConcurrencyException ex)
+        } catch(DbUpdateConcurrencyException)
         {
             Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
-            throw ex;
+            throw;
         }
         return response;
     }
@@ -209,7 +212,6 @@ public class PosgreRepository(
         CancellationToken ct = default)
     {
         var response = await _context.Funkos
-            .Include(f => f.Supplier)
             .FirstOrDefaultAsync(f => f.Id == id, ct);
 
         if (response is null)
@@ -231,7 +233,6 @@ public class PosgreRepository(
     {
         var response = await _context.Funkos
             .IgnoreQueryFilters()
-            .Include(f => f.Supplier)
             .FirstOrDefaultAsync(f => f.Id == id && f.IsDelete, ct);
 
         if (response is null)
@@ -246,30 +247,4 @@ public class PosgreRepository(
         return response;
     }
 
-    // =========================================================
-    // Auxiliares
-    // =========================================================
-
-    /// <inheritdoc cref="IFunkoRepository.GetAllCategoriesAsync(CancellationToken)"/>
-    public async Task<List<Category>> GetAllCategoriesAsync(
-        CancellationToken ct = default)
-    {
-        var categories = await _context.Funkos
-            .AsNoTracking()
-            .Select(f => f.Category)
-            .ToListAsync(ct);
-
-        return categories
-            .DistinctBy(c => c.Name)
-            .ToList();
-    }
-    /// <inheritdoc cref="IFunkoRepository.ExistSupplierByIdAsync(int, CancellationToken)"/>
-    public async Task<bool> ExistSupplierByIdAsync(
-        string id,
-        CancellationToken ct = default)
-    {
-        return await _context.Suppliers
-            .AsNoTracking()
-            .FirstOrDefaultAsync(s => s.Id == id, ct) is not null;
-    }
 }

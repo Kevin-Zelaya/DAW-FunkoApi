@@ -161,22 +161,4 @@ public class FunkoController(
             ? Ok(response.Value)
             : NotFound(response.Error);
     }
-
-    // =========================================================
-    // CATEGORIES
-    // =========================================================
-
-    /// <summary>
-    /// Get all categories.
-    /// </summary>
-    [HttpGet("categories")]
-    public async Task<ActionResult> GetAllCategories(
-        CancellationToken ct)
-    {
-        var response = await _service.GetAllCategories(ct);
-
-        return response.IsSuccess
-            ? Ok(response.Value)
-            : BadRequest(response.Error);
-    }
 }

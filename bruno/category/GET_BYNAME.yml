@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/categories
+  url: http://localhost:5205/api/categories/2P_99omq0Y1
   body:
     type: json
     data: |-

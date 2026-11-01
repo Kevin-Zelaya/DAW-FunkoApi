@@ -128,6 +128,22 @@ public class UserRepository(
         );
     }
 
+    public async Task<bool> ExistByUsername(
+        string username,
+        CancellationToken ct
+    )
+    {
+        _logger.LogDebug(
+            "[REPOSITORY-EXIST] Buscando usuario con username {username}.",
+            username);
+
+        return await _context.Users
+            .AsNoTracking()
+            .IgnoreQueryFilters()
+            .AnyAsync(
+                u => u.Username == username, ct);
+    }
+
     // =========================================================
     // UPDATE
     // =========================================================

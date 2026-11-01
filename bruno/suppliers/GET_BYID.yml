@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/suppliers/6ad9b2079611ed4fad8124be
+  url: http://localhost:5205/api/suppliers/6ae7142afe68043f4c0160fa
   body:
     type: json
     data: ""

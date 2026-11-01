@@ -5,6 +5,25 @@ public class CategoryPostgreRepository(
     AppDbContext _context
 ) : ICategoryRepository, IScoped
 {
+    // =========================================================
+    // CREATE
+    // =========================================================
+    
+    /// <inheritdoc cref="ICategoryRepository.CreateCategoryAsync(CategoryCreateRequestDto, CancellationToken)"/>
+    public async Task<Category> CreateCategoryAsync(
+        CategoryCreateRequestDto request, 
+        CancellationToken ct)
+    {
+        var entidad = request.ToEntity();
+        _context.Categories.Add(entidad);
+        await _context.SaveChangesAsync(ct);
+        return entidad;
+    }
+
+    // =========================================================
+    // READ
+    // =========================================================
+
     /// <inheritdoc cref="ICategoryRepository.GetAllCategoriesAsync(CancellationToken)"/>
     public async Task<List<Category>> GetAllCategoriesAsync(
         CancellationToken ct
@@ -15,21 +34,18 @@ public class CategoryPostgreRepository(
                     .ToListAsync(ct);
     }
     /// <inheritdoc cref="ICategoryRepository.GetPaginatedCategoriesAsync(int, int, CancellationToken)"/>
-    public async Task<
-        (
+    public async Task<(
             List<Category> items,
             int count,
             int totalPages,
             bool HasPreviousPage,
             bool HasNextPage
-        )
-    > GetPaginatedCategoriesAsync(
+        )> GetPaginatedCategoriesAsync(
         int pageNumber,
         int pageSize,
         CancellationToken ct
     )
     {
-        
         var response =  await _context.Categories
                     .AsNoTracking()
                     .Skip((pageNumber - 1) * pageSize)
@@ -51,6 +67,7 @@ public class CategoryPostgreRepository(
             hasNextPage
         );
     }
+
     /// <inheritdoc cref="ICategoryRepository.GetCategoryByName(string, CancellationToken)"/>
     public async Task<Category?> GetCategoryByName(
         string name,
@@ -61,65 +78,76 @@ public class CategoryPostgreRepository(
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Name == name, ct);
     }
-    /// <inheritdoc cref="ICategoryRepository.CreateCategoryAsync(CategoryCreateRequestDto, CancellationToken)"/>
-    public async Task<Category> CreateCategoryAsync(
-        CategoryCreateRequestDto request, 
-        CancellationToken ct)
+    /// <inheritdoc cref="ICategoryRepository.GetCategoryByName(string, CancellationToken)"/>
+    public async Task<bool> ExistByName(
+        string name,
+        CancellationToken ct
+    )
     {
-        var entidad = request.ToEntity();
-        _context.Categories.Add(entidad);
-        await _context.SaveChangesAsync(ct);
-        return entidad;
-    }
-    /// <inheritdoc cref="ICategoryRepository.DeleteCategoryAsync(Guid, CancellationToken)"/>
-    public async Task<bool> DeleteCategoryAsync(
-        Guid id,
-        CancellationToken ct)
-    {
-        var entidad = await _context.Categories
-            .AsNoTracking()
-            .FirstOrDefaultAsync(c => c.Id == id);
-        entidad.IsDelete = true;
-        entidad.DeleteAT = DateTime.Now;
-        await _context.SaveChangesAsync(ct);
-        return true;
-    }
-    /// <inheritdoc cref="ICategoryRepository.RestoreCategoryAsync(Guid, CancellationToken)"/>
-    public async Task<bool> RestoreCategoryAsync(
-        Guid id,
-        CancellationToken ct)
-    {
-        var entidad = await _context.Categories
+        return await _context.Categories
             .AsNoTracking()
             .IgnoreQueryFilters()
-            .FirstOrDefaultAsync(c => c.Id == id);
-        entidad.IsDelete = false;
-        await _context.SaveChangesAsync(ct);
-        return true;
+            .AnyAsync(c => c.Name == name, ct);
     }
-    /// <inheritdoc cref="ICategoryRepository.UpdateCategoryAsync(Guid, CategoryUpdateRequestDto, CancellationToken)"/>
-    public async Task<Category> UpdateCategoryAsync(
-        Guid id,
+
+    // =========================================================
+    // UPDATE
+    // =========================================================
+    
+    /// <inheritdoc cref="ICategoryRepository.UpdateCategoryAsync(string, CategoryUpdateRequestDto, CancellationToken)"/>
+    public async Task<Category?> UpdateCategoryAsync(
+        string id,
         CategoryUpdateRequestDto request,
         CancellationToken ct
     )
     {
         var response = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
-        if(response is null) return null;
+        if(response is null) return response;
         response.Name = request.Name;
         response.Description = request.Description;
-        response.UpdatedAt = DateTime.Now;
+        response.UpdatedAt = DateTime.UtcNow;
         try
         {
             _context.Entry(response)
                 .Property(f => f.RowVersion)
                 .OriginalValue = request.RowVersion;
             await _context.SaveChangesAsync(ct);
-        } catch(DbUpdateConcurrencyException ex)
+        } catch(DbUpdateConcurrencyException)
         {
             Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
-            throw ex;
+            throw;
         }
         return response;
+    }
+
+    // =========================================================
+    // DELETE / RESTIRE
+    // =========================================================
+    
+    /// <inheritdoc cref="ICategoryRepository.DeleteCategoryAsync(string, CancellationToken)"/>
+    public async Task<bool> DeleteCategoryAsync(
+        string id,
+        CancellationToken ct)
+    {
+        var entidad = await _context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id);
+        entidad!.IsDelete = true;
+        entidad.DeleteAT = DateTime.Now;
+        await _context.SaveChangesAsync(ct);
+        return true;
+    }
+    /// <inheritdoc cref="ICategoryRepository.RestoreCategoryAsync(string, CancellationToken)"/>
+    public async Task<bool> RestoreCategoryAsync(
+        string id,
+        CancellationToken ct)
+    {
+        var entidad = await _context.Categories
+            .AsNoTracking()
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(c => c.Id == id);
+        entidad!.IsDelete = false;
+        await _context.SaveChangesAsync(ct);
+        return true;
     }
 }

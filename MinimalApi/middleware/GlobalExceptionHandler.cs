@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 
 public class GlobalExceptionHandler(
     RequestDelegate next,
@@ -27,6 +28,7 @@ public class GlobalExceptionHandler(
 
         var statusCode = exception switch
         {
+            MongoWriteException => StatusCodes.Status409Conflict,
             DbUpdateConcurrencyException => StatusCodes.Status409Conflict,
             ArgumentException => StatusCodes.Status400BadRequest,
             UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
@@ -36,6 +38,7 @@ public class GlobalExceptionHandler(
 
         var message = exception switch
         {
+            MongoWriteException => "Ya existe un registro con ese valor.",
             DbUpdateConcurrencyException => "El recurso ha sido modificado por otro usuario. Recarga los datos e inténtalo de nuevo.",
             ArgumentException arg => arg.Message,
             UnauthorizedAccessException => "No autorizado",

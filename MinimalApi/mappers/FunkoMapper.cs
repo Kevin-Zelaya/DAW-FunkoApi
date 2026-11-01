@@ -32,23 +32,40 @@ public static class FunkoMapper
         RowVersion = dto.RowVersion
     };
     /// <summary> De modelo a dto </summary>
-    public static FunkoDto ToDto(this Funko entity) => new FunkoDto(
+    public static FunkoDto ToDto(this Funko entity, Supplier supplier) => new FunkoDto(
         Id: entity.Id,
         Name: entity.Name,
         Category: new CategoryDto(
-            Id: entity.Category.Id,
+            Id: entity.Category!.Id!,
             Name: entity.Category.Name,
-            Description: entity.Category.Description
+            Description: entity.Category.Description,
+            RowVersion: entity.Category.RowVersion
         ),
         Exclusive: entity.Exclusive,
         Number: entity.Number,
         Price: entity.Price,
         Franchise: entity.Franchise,
         Supplier: new SupplierDto(
-            Id: entity.Supplier.Id,
-            Name: entity.Supplier.Name,
+            Id: supplier.Id,
+            Name: supplier.Name,
             RowVersion: entity.RowVersion
         ),
+        RowVersion : entity.RowVersion
+    );
+    public static FunkoDto ToDto(this Funko entity, SupplierDto supplier) => new FunkoDto(
+        Id: entity.Id,
+        Name: entity.Name,
+        Category: new CategoryDto(
+            Id: entity.Category!.Id!,
+            Name: entity.Category.Name,
+            Description: entity.Category.Description,
+            RowVersion: entity.Category.RowVersion
+        ),
+        Exclusive: entity.Exclusive,
+        Number: entity.Number,
+        Price: entity.Price,
+        Franchise: entity.Franchise,
+        Supplier: supplier,
         RowVersion : entity.RowVersion
     );
     // =========================================================
@@ -76,9 +93,10 @@ public static class FunkoMapper
 
     /// <summary> De modelo a dto </summary>
     public static CategoryDto ToDto(this Category category) => new(
-        Id: category.Id,
+        Id: category.Id!,
         Name: category.Name,
-        Description: category.Description
+        Description: category.Description,
+        RowVersion: category.RowVersion
     );
     /// <summary> De dto a modelo </summary>
     public static Category ToEntity(this CategoryCreateRequestDto dto) => new Category{

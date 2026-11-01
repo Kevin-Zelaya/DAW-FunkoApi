@@ -9,11 +9,16 @@ public static class InitializationDb
         
         using var scope = app.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var mongoContext = scope.ServiceProvider.GetRequiredService<AppDbMongoContext>();
 
         ///<summary> Eliminar base de datos <summary>
-        Log.Debug($"[{AppConfig.Environment.ToUpper()}] Eliminando y recreando la base de datos");
+        Log.Debug($"[{AppConfig.Environment.ToUpper()}] Eliminando y recreando la base de datos Postgre");
         await context.Database.EnsureDeletedAsync();
         await context.Database.EnsureCreatedAsync();
+        Log.Information("[POSGRE] Eliminando y recreando la base de datos");
+        Log.Debug($"[{AppConfig.Environment.ToUpper()}] Eliminando y recreando la base de datos Mongo");
+        await mongoContext.Database.EnsureDeletedAsync();
+        await mongoContext.Database.EnsureCreatedAsync();
         Log.Information("[POSGRE] Eliminando y recreando la base de datos");
                
     }

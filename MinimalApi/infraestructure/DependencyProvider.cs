@@ -26,8 +26,11 @@ public class DependencyProvider
         /// <summary> Configuración de postgres </summary>
         Log.Information("[DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil");
         _services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(AppConfig.ConnectionString));
+            options.UseNpgsql(AppConfig.PostgreConnectionString));
         ;
+        var client = new MongoClient(AppConfig.MongoConnectionString);
+        _services.AddDbContext<AppDbMongoContext>(options =>
+            options.UseMongoDB(client, "suppliers"));
               
         ////<summary> Configuración de redis </summary>
         var redis = ConnectionMultiplexer.Connect(

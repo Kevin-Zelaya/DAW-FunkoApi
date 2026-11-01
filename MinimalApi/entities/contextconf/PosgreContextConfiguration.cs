@@ -38,10 +38,6 @@ public abstract class PosgreContextConfiguration
             ///<summary> Versión de la fila para control de concurrencia </summary>
             entity.Property(s => s.RowVersion).IsRowVersion();
 
-            //<summary> Relación con proveedor </summary>
-            entity.HasOne(f => f.Supplier)
-                .WithMany(s => s.Funkos)
-                .HasForeignKey(f => f.SupplierId);
             //<summary> Relación con categoria </summary>
             entity.HasOne(f => f.Category)
                 .WithMany(c => c.Funkos)
@@ -49,57 +45,13 @@ public abstract class PosgreContextConfiguration
 
             entity.HasQueryFilter(f => !f.IsDelete);
         });
-        modelBuilder.Entity<Supplier>(entity =>
-        {
-            ///<summary> Key de categoria se genera automaticamente </summary>
-            entity.HasKey(s => s.Id);
-            entity.Property(s=> s.Id)
-                .HasValueGenerator<YoutubeIdValueGenerator>()
-                .ValueGeneratedOnAdd();
-            ///<summary> 
-            ///     Nombre como indice 
-            ///     requerido y largo máximo de 100
-            /// </summary>
-            entity.Property(s => s.Name).IsRequired().HasMaxLength(100);
-            entity.HasIndex(s => s.Name);
-            ///<summary> Eliminado lógico, falso por defecto </summary>
-            entity.Property(s=>s.IsDeleted).HasDefaultValue(false);
-            ///<summary> Fecha de creación valor por defecto "ahora" </summary>
-            entity.Property(s=>s.CreateAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
-            ///<summary> Fecha de actualización valor por defecto "ahora" </summary>
-            entity.Property(s=>s.UpdateAt).IsRequired(false).HasDefaultValue(null);
-            ///<summary> Fecha de eliminado </summary>
-            entity.Property(s => s.DeleteAt).IsRequired(false).HasDefaultValue(null);
-            ///<summary> Fecha de eliminado </summary>
-            entity.Property(s => s.RowVersion).IsRowVersion();
-            ///<summary> Filtro </summary>
-            entity.HasQueryFilter(f => !f.IsDeleted);
-
-            if(!AppConfig.shouldRecreateDb) return;
-            ///<summary> Semíllas </summary>
-            entity.HasData(
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Funko Europe", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Collector Store", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Pop In A Box", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Entertainment Earth", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "BigBadToyStore", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Amazon Collectibles", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Geek Store", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Comic World", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Pop Culture Shop", IsDeleted = false },
-                new Supplier { Id = YoutubeIdValueGenerator.GenerateId(), Name = "Collector's Corner", IsDeleted = false }
-            );
-
-            Log.Information(
-                "[MONGODB] Se han insertado {Count} proveedores iniciales",
-                10);
-        });
+        
         modelBuilder.Entity<Category>(entity =>
         {
             ///<summary> UUID como id </summary>
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id)
-                .HasValueGenerator<GuidValueGenerator>()
+                .HasValueGenerator<YoutubeIdValueGenerator>()
                 .ValueGeneratedOnAdd();
             ///<summary> Nombre requerido </summary>
             entity.Property(e => e.Name).IsRequired();
@@ -110,42 +62,44 @@ public abstract class PosgreContextConfiguration
             entity.Property(c =>c.UpdatedAt).IsRequired(false).HasDefaultValue(null);
             ///<summary> Fecha de eliminado </summary>
             entity.Property(c => c.DeleteAT).IsRequired(false).HasDefaultValue(null);
+            ///<summary> Versión de la fila para control de concurrencia </summary>
+            entity.Property(s => s.RowVersion).IsRowVersion();
 
 
             entity.HasData(
                 new Category
                 {
-                    Id = Guid.Parse("a1000000-0000-0000-0000-000000000001"),
+                    Id = YoutubeIdValueGenerator.GenerateId(),
                     Name = "Anime",
                     Description = "Figuras Funko de series y películas de anime."
                 },
                 new Category
                 {
-                    Id = Guid.Parse("a1000000-0000-0000-0000-000000000002"),
+                    Id = YoutubeIdValueGenerator.GenerateId(),
                     Name = "Marvel",
                     Description = "Figuras Funko de superhéroes y personajes de Marvel."
                 },
                 new Category
                 {
-                    Id = Guid.Parse("a1000000-0000-0000-0000-000000000003"),
+                    Id = YoutubeIdValueGenerator.GenerateId(),
                     Name = "DC Comics",
                     Description = "Figuras Funko de héroes y villanos de DC Comics."
                 },
                 new Category
                 {
-                    Id = Guid.Parse("a1000000-0000-0000-0000-000000000004"),
+                    Id = YoutubeIdValueGenerator.GenerateId(),
                     Name = "Disney",
                     Description = "Figuras Funko de personajes clásicos y modernos de Disney."
                 },
                 new Category
                 {
-                    Id = Guid.Parse("a1000000-0000-0000-0000-000000000005"),
+                    Id = YoutubeIdValueGenerator.GenerateId(),
                     Name = "Videojuegos",
                     Description = "Figuras Funko de personajes del mundo de los videojuegos."
                 },
                 new Category
                 {
-                    Id = Guid.Parse("a1000000-0000-0000-0000-000000000006"),
+                    Id = YoutubeIdValueGenerator.GenerateId(),
                     Name = "Películas y series",
                     Description = "Figuras Funko de películas y series de televisión."
                 }

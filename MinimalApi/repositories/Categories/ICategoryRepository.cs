@@ -4,6 +4,25 @@
 /// </summary>
 public interface ICategoryRepository
 {
+    // =========================================================
+    // CREATE
+    // =========================================================
+
+    /// <summary>
+    /// Crea una nueva categoría.
+    /// </summary>
+    /// <param name="request">Datos necesarios para crear la categoría.</param>
+    /// <param name="ct">Token de cancelación de la operación.</param>
+    /// <returns>La categoría creada.</returns>
+    Task<Category> CreateCategoryAsync(
+        CategoryCreateRequestDto request,
+        CancellationToken ct
+    );
+
+    // =========================================================
+    // READ
+    // =========================================================
+
     /// <summary>
     /// Obtiene todas las categorías disponibles.
     /// </summary>
@@ -46,18 +65,38 @@ public interface ICategoryRepository
         string name,
         CancellationToken ct
     );
-
     /// <summary>
-    /// Crea una nueva categoría.
+    /// Comporbar si existe una categoría por su nombre.
     /// </summary>
-    /// <param name="request">Datos necesarios para crear la categoría.</param>
+    /// <param name="name">Nombre a comprobar.</param>
     /// <param name="ct">Token de cancelación de la operación.</param>
-    /// <returns>La categoría creada.</returns>
-    Task<Category> CreateCategoryAsync(
-        CategoryCreateRequestDto request,
+    /// <returns>La categoría encontrada o null si no existe.</returns>
+    public Task<bool> ExistByName(
+        string name,
         CancellationToken ct
     );
 
+    // =========================================================
+    // UPDATE
+    // =========================================================
+
+    /// <summary>
+    /// Actualiza los datos de una categoría existente.
+    /// </summary>
+    /// <param name="id">Identificador de la categoría que se desea actualizar.</param>
+    /// <param name="request">Nuevos datos de la categoría, incluida la versión de concurrencia.</param>
+    /// <param name="ct">Token de cancelación de la operación.</param>
+    /// <returns>La categoría actualizada.</returns>
+    Task<Category?> UpdateCategoryAsync(
+        string id,
+        CategoryUpdateRequestDto request,
+        CancellationToken ct
+    );
+
+    // =========================================================
+    // DELETE / RESTORE
+    // =========================================================
+    
     /// <summary>
     /// Marca una categoría como eliminada.
     /// </summary>
@@ -67,7 +106,7 @@ public interface ICategoryRepository
     /// true si la operación se completa correctamente; en caso contrario, false.
     /// </returns>
     Task<bool> DeleteCategoryAsync(
-        Guid id,
+        string id,
         CancellationToken ct
     );
 
@@ -80,20 +119,7 @@ public interface ICategoryRepository
     /// true si la operación se completa correctamente; en caso contrario, false.
     /// </returns>
     Task<bool> RestoreCategoryAsync(
-        Guid id,
-        CancellationToken ct
-    );
-
-    /// <summary>
-    /// Actualiza los datos de una categoría existente.
-    /// </summary>
-    /// <param name="id">Identificador de la categoría que se desea actualizar.</param>
-    /// <param name="request">Nuevos datos de la categoría, incluida la versión de concurrencia.</param>
-    /// <param name="ct">Token de cancelación de la operación.</param>
-    /// <returns>La categoría actualizada.</returns>
-    Task<Category> UpdateCategoryAsync(
-        Guid id,
-        CategoryUpdateRequestDto request,
+        string id,
         CancellationToken ct
     );
 }

@@ -5,9 +5,8 @@ public class Funko
     public string Franchise { get; set; } = string.Empty;
     public int Number { get; set; }
     public string SupplierId {get; set;} = string.Empty;
-    public Supplier? Supplier{get; set;}
-    public Guid CategoryId {get; set;}
-    public Category Category { get; set; }
+    public string? CategoryId {get; set;}
+    public Category? Category { get; set; }
     public bool Exclusive { get; set; }
     public double Price { get; set; }
     public bool IsDelete {get; set;}

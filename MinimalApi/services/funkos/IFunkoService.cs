@@ -77,11 +77,5 @@ public interface IFunkoService
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Funko restaurada</returns>
     public Task<Result<FunkoDto, DomainError>> RestoreDeletedFunkoAsync(long id, CancellationToken ct);
-    /// <summary>
-    /// Auxiliar para obtener las categorias
-    /// </summary>
-    /// <param name="ct">Token de cancelación</param>
-    /// <returns>Lista de categorias sin páginar</returns>
-    public Task<Result<List<Category>, DomainError>> GetAllCategories(CancellationToken ct);
 
 }

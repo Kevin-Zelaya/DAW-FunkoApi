@@ -1,0 +1,674 @@
+2026-11-01 11:27:48.143 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 11:27:49.356 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 11:27:49.474 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 11:27:52.063 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 11:27:52.635 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 11:27:54.352 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 11:27:54.354 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 11:27:54.396 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 11:27:55.081 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 11:31:50.617 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 11:31:50.713 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:31:51.360 [INF] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Se recuperaron 5 proveedores de la página 1 de 2.
+2026-11-01 11:32:07.970 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:32:08.141 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae7142afe68043f4c0160fa recuperado correctamente.
+2026-11-01 11:42:50.380 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 11:42:50.478 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 11:42:50.525 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 11:42:51.412 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 11:42:51.904 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 11:42:52.913 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 11:42:52.915 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 11:42:52.975 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 11:42:53.683 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 11:43:14.105 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 11:43:14.237 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:43:14.691 [INF] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Se recuperaron 5 proveedores de la página 1 de 2.
+2026-11-01 11:45:43.013 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 11:45:43.089 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 11:45:43.111 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 11:45:43.719 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 11:45:44.137 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 11:45:45.144 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 11:45:45.145 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 11:45:45.178 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 11:45:45.727 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 11:45:51.127 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 11:45:51.224 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:46:13.058 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:46:53.457 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae717ac5d4541311e257f6f.
+2026-11-01 11:47:03.730 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:47:28.075 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:48:00.735 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae717ac5d4541311e257f6f.
+2026-11-01 11:48:46.308 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae717ac5d4541311e257f6f.
+2026-11-01 11:48:50.232 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:48:55.609 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: 68ed1a3a
+StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: It was not possible to connect to the redis server(s) localhost:6379/Interactive. ConnectTimeout, command=GET, timeout: 5000, inst: 0, qu: 0, qs: 0, aw: False, bw: CheckingForTimeout, rs: NotStarted, ws: Idle, in: 0, in-pipe: 0, last-in: 0, cur-in: 0, sync-ops: 0, async-ops: 5, serverEndpoint: localhost:6379, conn-sec: n/a, aoc: 0, mc: 1/1/0, clientName: DESKTOP-H01BI2S(SE.Redis-v3.4.5.54687), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=1,Free=32766,Min=16,Max=32767), POOL: (Threads=6,QueuedItems=0,CompletedItems=1128,Timers=6), v: 3.4.5.54687 (see https://seredis.dev/Timeouts for some common client-side issues that can cause timeouts)
+ ---> StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s) localhost:6379/Interactive. ConnectTimeout
+   --- End of inner exception stack trace ---
+   at RedisCache.GetTAsync[T](String key) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\cache\RedisCache.cs:line 11
+   at SupplierService.GetPaginatedSuppliersAsync(Int32 pageNumber, Int32 pageSize, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\suppliers\SuppliersService.cs:line 69
+   at SupplierController.GetPaginatedSuppliers(Int32 pageNumber, Int32 pageSize, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\SupplierController.cs:line 63
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 11:49:07.041 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-01 11:49:32.675 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:50:15.806 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:50:16.469 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:50:16.781 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:50:16.960 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:50:17.093 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:50:17.297 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae7142afe68043f4c0160fa.
+2026-11-01 11:52:39.095 [DBG] [SupplierService] [SERVICE-GETSUPPLIERS] Recuperando todos los proveedores.
+2026-11-01 11:52:39.130 [INF] [SupplierService] [SERVICE-GETSUPPLIERS] Se recuperaron 10 proveedores.
+2026-11-01 11:53:04.723 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:04.836 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:07.572 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:07.580 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:10.265 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:10.272 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:10.823 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:10.830 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:11.382 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:11.398 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:11.924 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:11.931 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:12.429 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:12.434 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:53:12.958 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:53:12.965 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:55:39.507 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:55:39.593 [INF] [SupplierService] [SERVICE-UPDATESUPPLIER] Proveedor con ID 6ae71859e457ae41b5e7a36f actualizado correctamente.
+2026-11-01 11:55:47.182 [DBG] [SupplierService] [SERVICE-UPDATESUPPLIER] Intentando actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+2026-11-01 11:55:47.201 [ERR] [] [REPOSITORY-UPDATE] Error de concurrencia al actualizar el proveedor con ID 6ae71859e457ae41b5e7a36f.
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: Conflicts were detected when performing updates to 'suppliers.suppliers'. Did not perform 1 modifications, 0 insertions, and 0 deletions.
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.AssertWritesApplied(MongoUpdateBatch batch, BulkWriteResult`1 result, CollectionNamespace collectionNamespace)
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.WriteBatchesAsync(IEnumerable`1 updates, IClientSessionHandle session, CancellationToken cancellationToken)
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at SuppliersRepository.UpdateSupplierAsync(String id, SupplierUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\suppliers\SupplierRepository.cs:line 118
+2026-11-01 11:55:47.220 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: e8418d8d
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: Conflicts were detected when performing updates to 'suppliers.suppliers'. Did not perform 1 modifications, 0 insertions, and 0 deletions.
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.AssertWritesApplied(MongoUpdateBatch batch, BulkWriteResult`1 result, CollectionNamespace collectionNamespace)
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.WriteBatchesAsync(IEnumerable`1 updates, IClientSessionHandle session, CancellationToken cancellationToken)
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at SuppliersRepository.UpdateSupplierAsync(String id, SupplierUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\suppliers\SupplierRepository.cs:line 118
+   at SupplierService.UpdateSupplierAsync(String id, SupplierUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\suppliers\SuppliersService.cs:line 147
+   at SupplierController.UpdateSupplier(String id, SupplierUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\SupplierController.cs:line 99
+   at lambda_method101(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 11:58:54.163 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 11:58:54.265 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-01 11:58:54.267 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-01 11:58:54.550 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1.
+2026-11-01 12:04:26.169 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:04:26.256 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:04:26.288 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:04:27.055 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:04:27.551 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:04:28.784 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:04:28.785 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:04:28.832 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:04:29.669 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:04:37.900 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:04:37.994 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:04:38.081 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-01 12:05:37.799 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:05:37.879 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:05:37.911 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:05:38.774 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:05:39.401 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:05:40.817 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:05:40.820 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:05:40.887 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:05:42.070 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:05:43.912 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:05:44.074 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:05:44.164 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-01 12:05:45.449 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:05:45.455 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-01 12:05:49.346 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:05:49.352 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-01 12:06:45.413 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:06:45.419 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-01 12:09:33.840 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:09:33.905 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:09:33.932 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:09:34.694 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:09:35.049 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:09:36.325 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:09:36.327 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:09:36.380 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:09:37.137 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:10:00.406 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:10:00.482 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:10:00.748 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-01 12:10:00.753 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-01 12:10:01.126 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1.
+2026-11-01 12:11:48.468 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:11:48.547 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:11:48.581 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:11:49.570 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:11:50.051 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:11:51.275 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:11:51.278 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:11:51.346 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:11:52.242 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:12:14.437 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:12:14.596 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:12:14.677 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:13:52.684 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:13:52.772 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:13:52.806 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:13:53.745 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:13:54.381 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:13:55.619 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:13:55.620 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:13:55.679 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:13:56.653 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:14:05.115 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:14:05.248 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:14:05.330 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:14:14.470 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID -bnZ04d_0C5.
+2026-11-01 12:14:37.331 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:14:37.418 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:14:37.450 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:14:38.431 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:14:39.141 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:14:40.198 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:14:40.199 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:14:40.254 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:14:40.894 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:14:47.213 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:14:47.327 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:14:47.413 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:14:56.372 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:14:56.380 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:21.871 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:15:21.877 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:22.769 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:15:22.773 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:23.342 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:15:23.346 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:23.870 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:15:23.875 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:24.414 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:15:24.418 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:24.936 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:15:24.940 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:15:46.049 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID 1QoXawhWD_N.
+2026-11-01 12:16:28.996 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:16:29.055 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:16:29.081 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:16:29.831 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:16:30.237 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:16:31.267 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:16:31.268 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:16:31.311 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:16:31.915 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:16:38.258 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:16:38.356 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:16:38.449 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:17:37.004 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:17:37.103 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:17:37.138 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:17:37.902 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:17:38.355 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:17:39.660 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:17:39.662 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:17:39.708 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:17:40.376 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:17:52.712 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:17:52.925 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:17:53.083 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-01 12:23:25.129 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID oJdUv3evFeH.
+2026-11-01 12:23:25.872 [ERR] [Microsoft.EntityFrameworkCore.Database.Command] Failed executing DbCommand (9ms) [Parameters=[@p3='?', @p0='?', @p1='?', @p4='?' (DbType = Object), @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Categories" SET "Description" = @p0, "Name" = @p1, "UpdatedAt" = @p2
+WHERE "Id" = @p3 AND xmin = @p4
+RETURNING xmin;
+2026-11-01 12:23:25.908 [ERR] [Microsoft.EntityFrameworkCore.Update] An exception occurred in the database while saving changes for context type 'AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-11-01 12:23:25.947 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: b335a1c9
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at CategoryPostgreRepository.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\Categories\CategoryRepository.cs:line 114
+   at CategoryService.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\categories\CategoryService.cs:line 147
+   at CategoryController.UpdateCategory(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\CategoryController.cs:line 98
+   at lambda_method101(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 12:23:58.392 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID oJdUv3evFeH.
+2026-11-01 12:23:58.512 [ERR] [Microsoft.EntityFrameworkCore.Database.Command] Failed executing DbCommand (0ms) [Parameters=[@p3='?', @p0='?', @p1='?', @p4='?' (DbType = Object), @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Categories" SET "Description" = @p0, "Name" = @p1, "UpdatedAt" = @p2
+WHERE "Id" = @p3 AND xmin = @p4
+RETURNING xmin;
+2026-11-01 12:23:58.521 [ERR] [Microsoft.EntityFrameworkCore.Update] An exception occurred in the database while saving changes for context type 'AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-11-01 12:23:58.553 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: 08aadda1
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at CategoryPostgreRepository.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\Categories\CategoryRepository.cs:line 114
+   at CategoryService.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\categories\CategoryService.cs:line 147
+   at CategoryController.UpdateCategory(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\CategoryController.cs:line 98
+   at lambda_method101(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 12:24:25.994 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID oJdUv3evFeH.
+2026-11-01 12:24:26.022 [ERR] [Microsoft.EntityFrameworkCore.Database.Command] Failed executing DbCommand (0ms) [Parameters=[@p3='?', @p0='?', @p1='?', @p4='?' (DbType = Object), @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Categories" SET "Description" = @p0, "Name" = @p1, "UpdatedAt" = @p2
+WHERE "Id" = @p3 AND xmin = @p4
+RETURNING xmin;
+2026-11-01 12:24:26.031 [ERR] [Microsoft.EntityFrameworkCore.Update] An exception occurred in the database while saving changes for context type 'AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-11-01 12:24:26.056 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: 0d54f94b
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options, IDbTypeResolver dbTypeResolver)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(ReloadableState reloadableState, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at CategoryPostgreRepository.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\Categories\CategoryRepository.cs:line 114
+   at CategoryService.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\categories\CategoryService.cs:line 147
+   at CategoryController.UpdateCategory(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\CategoryController.cs:line 98
+   at lambda_method101(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 12:26:35.680 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-01 12:26:35.797 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-01 12:26:35.842 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-01 12:26:36.859 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-01 12:26:37.501 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:26:39.039 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:26:39.042 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-01 12:26:39.134 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-01 12:26:39.876 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-01 12:27:09.037 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-01 12:27:09.145 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID 2P_99omq0Y1.
+2026-11-01 12:27:09.746 [ERR] [] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id 2P_99omq0Y1
+2026-11-01 12:27:09.789 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: e7ee86ef
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Update.Internal.NpgsqlModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Update.Internal.NpgsqlModificationCommandBatch.Consume(RelationalDataReader reader, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at CategoryPostgreRepository.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\Categories\CategoryRepository.cs:line 114
+   at CategoryService.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\categories\CategoryService.cs:line 147
+   at CategoryController.UpdateCategory(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\CategoryController.cs:line 98
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 12:27:51.282 [DBG] [CategoryService] [SERVICE-GETCATEGORYBYNAME] Buscando categoría con nombre 2P_99omq0Y1.
+2026-11-01 12:27:58.375 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-01 12:27:58.403 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-01 12:27:58.407 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-01 12:27:58.471 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1.
+2026-11-01 12:28:28.579 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID 2P_99omq0Y1.
+2026-11-01 12:28:28.592 [ERR] [] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id 2P_99omq0Y1
+2026-11-01 12:28:28.596 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: a8e65062
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Update.Internal.NpgsqlModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Update.Internal.NpgsqlModificationCommandBatch.Consume(RelationalDataReader reader, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at CategoryPostgreRepository.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\Categories\CategoryRepository.cs:line 114
+   at CategoryService.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\categories\CategoryService.cs:line 147
+   at CategoryController.UpdateCategory(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\CategoryController.cs:line 98
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 12:28:34.144 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-01 12:28:34.156 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-01 12:28:39.426 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID 2P_99omq0Y1.
+2026-11-01 12:28:39.483 [INF] [CategoryService] [SERVICE-UPDATECATEGORY] Categoría con ID 2P_99omq0Y1 actualizada correctamente.
+2026-11-01 12:28:43.613 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID 2P_99omq0Y1.
+2026-11-01 12:28:43.622 [ERR] [] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id 2P_99omq0Y1
+2026-11-01 12:28:43.626 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: ab054423
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Update.Internal.NpgsqlModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Update.Internal.NpgsqlModificationCommandBatch.Consume(RelationalDataReader reader, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at CategoryPostgreRepository.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\repositories\Categories\CategoryRepository.cs:line 114
+   at CategoryService.UpdateCategoryAsync(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\services\categories\CategoryService.cs:line 147
+   at CategoryController.UpdateCategory(String id, CategoryUpdateRequestDto request, CancellationToken ct) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\controllers\CategoryController.cs:line 98
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-01 12:28:51.612 [DBG] [CategoryService] [SERVICE-UPDATECATEGORY] Intentando actualizar la categoría con ID 2P_99omq0Y1.
+2026-11-01 12:28:51.630 [INF] [CategoryService] [SERVICE-UPDATECATEGORY] Categoría con ID 2P_99omq0Y1 actualizada correctamente.

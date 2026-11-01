@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class FunkoService(
     IFunkoRepository _repository,
+    ISupplierService _supplierService,
     ILogger<FunkoService> _logger,
     ICache _cache
 ) : IFunkoService, IScoped
@@ -19,15 +20,21 @@ public class FunkoService(
     {
         _logger.LogDebug(
             "[SERVICE-CREATE] Intentando crear un Funko.");
-        // Comprobar si existe el proveedor
-        if(!await _repository.ExistSupplierByIdAsync(funko.SupplierId, ct))
+        // Comprobar si existe algún con ese username
+        var exist = await _repository.ExistByNameAsync(funko.Name, ct);
+        if(!exist)
+            return Result.Failure<FunkoDto, DomainError>(
+                ConflictError.Duplicate("Supplier", funko.Name));
+        // Comprobar si existe el proveedor y obtenerlo
+        var supplier = await _supplierService.GetSupplierByIdAsync(funko.SupplierId, ct);
+        if(supplier.Value is null)
             return Result.Failure<FunkoDto, DomainError>(
                 NotFoundError.FromResource("Supplier", funko.SupplierId));
         // Crear funko
         var response = await _repository.CreateFunkoAsync(
             funko.ToModel(), ct);
         // Retornar como dto
-        return Result.Success<FunkoDto, DomainError>(response.ToDto())
+        return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
             .Tap(f => _logger.LogInformation(
                 "[SERVICE-CREATE] Funko creado correctamente con ID {Id}.",
                 f.Id));
@@ -49,10 +56,15 @@ public class FunkoService(
 
         // 1. Buscar en caché
         var cached = await _cache.GetTAsync<Funko>(key);
-        if(cached is not null) 
-            Result.Success<FunkoDto, DomainError>(cached.ToDto())
-                .Tap(f => _logger.LogInformation(
+        if(cached is not null) {
+
+            var result = await _supplierService.GetSupplierByIdAsync(cached.SupplierId)
+                .Map(cached.ToDto)
+                .Tap(funkoDto => _logger.LogInformation(
                     "[SERVICE-GET] Funko con ID {Id} recuperado correctamente desde la cache.", id));
+
+            return result; // Devuelve un Result<FunkoDto, DomainError>
+        } 
         // buscar en la bd
         var response = await _repository.GetFunkoByIdAsync(id, ct);
         if(response is null)
@@ -63,12 +75,19 @@ public class FunkoService(
                         id)); 
         // Agregar a la caché
         try{await _cache.SetAsync(key, response);
+        // Buscar proveedor en el servicio
         await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); }// Eliminar páginación cacheada
         catch(Exception ex){_logger.LogWarning(ex, "No se pudo guardar el funko {id} en la cache", id);}
-        // Retornar si todo sale bien
-        return Result.Success<FunkoDto, DomainError>(response.ToDto())
-                .Tap(f => _logger.LogInformation(
+        // = Preparar respuesta ========
+        // 1. Buscar proveedor
+        // 2. mapear respuesta a funko dto pasandole el proveedor para mapear
+        var toReturn = await _supplierService.GetSupplierByIdAsync(response.SupplierId)
+            .Map(response.ToDto)
+            .Tap(f => _logger.LogInformation(
                     "[SERVICE-GET] Funko con ID {Id} recuperado correctamente.", id));
+        
+        return toReturn;
+                
     }
 
     /// <inheritdoc cref="IFunkoService.GetAllFunkos(CancellationToken)"/>
@@ -77,14 +96,26 @@ public class FunkoService(
     {
         _logger.LogDebug(
             "[SERVICE-GETALL] Recuperando todos los Funkos.");
-
-        var response = await _repository.GetAllFunkosAsync(ct);
-
+        // Obtener de forma asíncrona funkos y provedores
+        var response = _repository.GetAllFunkosAsync(ct);
+        var responseSuppliers = _supplierService.GetAllSuppliersAsync(ct); // quería cachear pero mucho problema por invalidaciones y concurrencia
+        await Task.WhenAll(response, responseSuppliers); 
+        // Transformar la respuesta de los proveedores en un diccionario para mejorar busquedas
+        var dictionary = responseSuppliers.Result.Value.ToDictionary(s => s.Id); // a diccionario
+        // Por cada funko asignar su proveedor y convertir a dto
+        var toReturn = response.Result.AsParallel().Select(f => {
+            if(dictionary.TryGetValue(f.SupplierId, out var supplier))
+            {
+                return f.ToDto(supplier);
+            }
+            return f.ToDto(new Supplier());
+        }).ToList();
+        // Retornar nueva lista con proveedores asignados
         return Result.Success<List<FunkoDto>, DomainError>(
-            response.Select(f => f.ToDto()).ToList())
+            toReturn)
             .Tap(_ => _logger.LogInformation(
                 "[SERVICE-GETALL] Se recuperaron {Count} Funkos.",
-                response.Count));
+                toReturn.Count));
     }
 
     /// <inheritdoc cref="IFunkoService.GetPaginatedFunkos(string, string, CancellationToken)"/>
@@ -109,11 +140,24 @@ public class FunkoService(
                         cached.Count, pageNumber));
         }
         // Buscar en la base de datos
-        var response = await _repository.GetPaginatedFunkosAsync(
+        var frepository = _repository.GetPaginatedFunkosAsync(
             pageNumber, pageSize, ct);
+        var suppliers = _supplierService.GetAllSuppliersAsync(ct);
+        await Task.WhenAll(frepository, suppliers);
+        // Transformar la respuesta de los proveedores en un diccionario para mejorar busquedas
+        var dictionary = suppliers.Result.Value.ToDictionary(s => s.Id); // a diccionario
+        var response = await frepository; // obtener valor
+        // Por cada funko asignar su proveedor y convertir a dto
+        var toReturn = response.items.AsParallel().Select(f => {
+            if(dictionary.TryGetValue(f.SupplierId, out var supplier))
+            {
+                return f.ToDto(supplier);
+            }
+            return f.ToDto(new Supplier());
+        }).ToList();
         // Transpofmar la respuesta en un dto que representa mejor la paginación
         var paginatedResponse = new PaginatedResouce<FunkoDto>(
-                response.items.Select(f => f.ToDto()).ToList(),
+                toReturn,
                 response.count,
                 response.totalPages,
                 response.HasPreviousPage,
@@ -145,20 +189,22 @@ public class FunkoService(
             id);
         // Actualizar en db
         var response = await _repository.UpdateFunkoAsync(id, request, ct);
-        // Invalidar en caché
-        await _cache.RemoveAsync(key);
-        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        // retornar según si es nulo o no
-        return response is not null
-            ? Result.Success<FunkoDto, DomainError>(response.ToDto())
-                .Tap(f => _logger.LogInformation(
-                    "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
-                    f.Id))
-            : Result.Failure<FunkoDto, DomainError>(
+        if(response is null)
+            return Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
                     id));
+
+        var supplier = await _supplierService.GetSupplierByIdAsync(response.SupplierId); // ejecutar si el anterior funciona
+        // Invalidar en caché
+        await _cache.RemoveAsync(key);
+        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
+        // retornar según si es nulo o no
+        return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value)) // se le pasa el proveedor para convertir
+                .Tap(f => _logger.LogInformation(
+                    "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
+                    f.Id));
     }
     /// <inheritdoc cref="IFunkoService.UpdateCategoryFromAsync(long, CategoryUpdateRequestDto, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> UpdateCategoryFromAsync(
@@ -172,22 +218,23 @@ public class FunkoService(
             id);
         // Actualizar la categoría en la db
         var response = await _repository.UpdateCategoryFromFunkoAsync(id, request, ct);
-        if(response is not null) // solo si lo encontró
-        {
-            // Invalidar en caché
-            await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        }
-        return response is not null
-            ? Result.Success<FunkoDto, DomainError>(response.ToDto())
-                .Tap(f => _logger.LogInformation(
-                    "[SERVICE-UPDATECATEGORY] Funko con ID {Id} actualizado correctamente.",
-                    f.Id))
-            : Result.Failure<FunkoDto, DomainError>(
+        
+        if(response is null)
+            return Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-UPDATECATEGORY] No se encontró el Funko con ID {Id}.",
                     id));
+        
+            var supplier = await _supplierService.GetSupplierByIdAsync(response.SupplierId); // ejecutar si el anterior funciona
+            // Invalidar en caché
+            await _cache.RemoveAsync(key);
+            await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
+        
+        return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
+                .Tap(f => _logger.LogInformation(
+                    "[SERVICE-UPDATECATEGORY] Funko con ID {Id} actualizado correctamente.",
+                    f.Id));
     }
     /// <inheritdoc cref="IFunkoService.UpdateSupplierFromFunko(long, FunkoUpdateSupplierDto, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> UpdateSupplierFromFunko(
@@ -199,10 +246,11 @@ public class FunkoService(
         _logger.LogDebug(
             "[SERVICE-UPDATECATEGORY] Intentando actualizar la categoría del Funko con el ID {Id}.",
             id);
-        // Verificar si existe el proveedor
-        if(!await _repository.ExistSupplierByIdAsync(request.Id, ct))
+        var supplier = await _supplierService.GetSupplierByIdAsync(request.SupplierId, ct);
+        // Verificar si existe el proveedor 
+        if(supplier.IsFailure)
             return Result.Failure<FunkoDto, DomainError>(
-                NotFoundError.FromResource("Supplier", request.Id));
+                NotFoundError.FromResource("Supplier", request.SupplierId));
         // Actualizar en la base de datos
         var response = await _repository.UpdateSuplierFromFunkoAsync(id, request, ct);
         if(response is not null) // solo si lo encontró
@@ -211,7 +259,7 @@ public class FunkoService(
             await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
         }
         return response is not null
-            ? Result.Success<FunkoDto, DomainError>(response.ToDto())
+            ? Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-UPDATESUPPLIER] Funko con ID {Id} actualizado correctamente.",
                     f.Id))
@@ -267,9 +315,9 @@ public class FunkoService(
             id);
 
         var response = await _repository.RestoreFunkoAsync(id, ct);
-
+        var supplier = await _supplierService.GetSupplierByIdAsync(response!.SupplierId, ct);
         return response is not null
-            ? Result.Success<FunkoDto, DomainError>(response.ToDto())
+            ? Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-RESTORE] Funko con ID {Id} restaurado correctamente.",
                     f.Id))
@@ -280,22 +328,5 @@ public class FunkoService(
                     id));
     }
 
-    // =========================================================
-    // CATEGORIES
-    // =========================================================
-
-    /// <inheritdoc cref="IFunkoService.GetAllCategories(CancellationToken)"/>
-    public async Task<Result<List<Category>, DomainError>> GetAllCategories(
-        CancellationToken ct = default)
-    {
-        _logger.LogDebug(
-            "[SERVICE-GETCATEGORIES] Recuperando todas las categorías.");
-
-        var response = await _repository.GetAllCategoriesAsync(ct);
-
-        return Result.Success<List<Category>, DomainError>(response)
-            .Tap(_ => _logger.LogInformation(
-                "[SERVICE-GETCATEGORIES] Se recuperaron {Count} categorías.",
-                response.Count));
-    }
+  
 }

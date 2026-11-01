@@ -28,10 +28,12 @@ public record FunkoCreateRequestDto(
     int Number,
 
     [param: Required(ErrorMessage = "Id del proveedor requerida")]
+    [param: ObjectId]
     string SupplierId,
 
     [param: Required(ErrorMessage = "Categoría requerida")]
-    Guid CategoryId,
+    [param: YoutubeId]
+    string CategoryId,
 
     bool Exclusive,
 

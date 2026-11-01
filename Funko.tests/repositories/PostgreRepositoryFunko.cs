@@ -8,7 +8,7 @@ public class PosgreRepositoryTests
     private PostgreSqlContainer _container = null!;
 
     private AppDbContext _context = null!;
-    private PosgreRepository _repository = null!;
+    private FunkoRepository _repository = null!;
 
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
@@ -36,7 +36,7 @@ public class PosgreRepositoryTests
         await _context.Database.EnsureDeletedAsync();
         await _context.Database.EnsureCreatedAsync();
 
-        _repository = new PosgreRepository(_context);
+        _repository = new FunkoRepository(_context);
     }
 
     [TearDown]
@@ -73,7 +73,7 @@ public class PosgreRepositoryTests
     {
         return new FunkoUpdateCategoryRequestDto
         (
-            Id : Guid.Parse("10000000-0000-0000-0000-000000000000"),
+            SupplierId : Guid.Parse("10000000-0000-0000-0000-000000000000"),
             RowVersion : row
         );
     }
@@ -208,7 +208,7 @@ public class PosgreRepositoryTests
         int id = 999;
         var supplier = new FunkoUpdateSupplierDto
         (
-            Id : "dsfko65es",
+            SupplierId : "dsfko65es",
             RowVersion : 954
         );
 
@@ -321,7 +321,7 @@ public class PosgreRepositoryTests
         var request = CrearCategoryUpdateRequestValido(funko.RowVersion);
         var save = new Category
         {
-            Id = request.Id,
+            Id = request.SupplierId,
             Name = "prueba",
             Description = "prueba"
         };
@@ -350,7 +350,7 @@ public class PosgreRepositoryTests
         _context.Funkos.Add(funko);
         await _context.SaveChangesAsync();
     var updateSupplier = new FunkoUpdateSupplierDto(
-                Id: supplier.Id,
+                SupplierId: supplier.Id,
                 RowVersion: funko.RowVersion
             );
 

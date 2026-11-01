@@ -89,9 +89,9 @@ public class CategoryController(
     /// <summary>
     /// Actualiza una categoría existente.
     /// </summary>
-    [HttpPut("{id:guid}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult> UpdateCategory(
-        Guid id,
+        string id,
         [FromBody] CategoryUpdateRequestDto request,
         CancellationToken ct)
     {
@@ -111,7 +111,7 @@ public class CategoryController(
     /// </summary>
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteCategory(
-        Guid id,
+        string id,
         CancellationToken ct)
     {
         var response = await _service.DeleteCategoryAsync(id, ct);
@@ -130,7 +130,7 @@ public class CategoryController(
     /// </summary>
     [HttpPatch("{id:guid}/restore")]
     public async Task<ActionResult> RestoreCategory(
-        Guid id,
+        string id,
         CancellationToken ct)
     {
         var response = await _service.RestoreCategoryAsync(id, ct);

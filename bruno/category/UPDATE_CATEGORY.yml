@@ -1,0 +1,25 @@
+info:
+  name: UPDATE_CATEGORY
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://localhost:5205/api/categories/2P_99omq0Y1
+  body:
+    type: json
+    data: |-
+      {
+            "id": "2P_99omq0Y1",
+            "name": "pedro",
+            "description": "Figuras Funko de personajes del mundo de los videojuegos.",
+            "rowVersion": 871
+          }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
