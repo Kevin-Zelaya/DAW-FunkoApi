@@ -126,6 +126,29 @@ public class CategoryService(
                     "[SERVICE-GETCATEGORYBYNAME] No se encontró la categoría {Name}.",
                     name));
     }
+    
+    /// <inheritdoc cref="ICategoryService.GetCategoryByIdAsync(string, CancellationToken)"/>
+    public async Task<Result<CategoryDto?, DomainError>> GetCategoryByIdAsync(
+        string id,
+        CancellationToken ct)
+    {
+        _logger.LogDebug(
+            "[SERVICE-GETCATEGORYBYID] Buscando categoría con ID {Id}.",
+            id);
+
+        var response = await _repository.GetCategoryById(id, ct);
+
+        return response is not null
+            ? Result.Success<CategoryDto?, DomainError>(response.ToDto())
+                .Tap(c => _logger.LogInformation(
+                    "[SERVICE-GETCATEGORYBYID] Categoría con ID {Id} recuperada correctamente.",
+                    c!.Id))
+            : Result.Failure<CategoryDto?, DomainError>(
+                NotFoundError.FromResource("Category", id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-GETCATEGORYBYID] No se encontró la categoría con ID {Id}.",
+                    id));
+    }
 
     // =========================================================
     // UPDATE

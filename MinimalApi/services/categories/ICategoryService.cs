@@ -23,6 +23,16 @@ public interface ICategoryService
     Task<Result<CategoryDto?, DomainError>> GetCategoryByNameAsync(
         string name,
         CancellationToken ct);
+    
+    /// <summary>
+    /// Obtiene una categoría por su ID.
+    /// </summary>
+    /// <param name="id">ID de la categoría.</param>
+    /// <param name="ct">Token de cancelación.</param>
+    /// <returns>Categoría encontrada o error de dominio.</returns>
+    Task<Result<CategoryDto?, DomainError>> GetCategoryByIdAsync(
+        string id,
+        CancellationToken ct);
 
     /// <summary>
     /// Obtiene una lista paginada de categorías.

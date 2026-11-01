@@ -60,6 +60,21 @@ public class CategoryController(
             : NotFound(response.Error);
     }
 
+    /// <summary>
+    /// Obtiene una categoría por su ID.
+    /// </summary>
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetCategoryById(
+        string id,
+        CancellationToken ct)
+    {
+        var response = await _service.GetCategoryByIdAsync(id, ct);
+
+        return response.IsSuccess
+            ? Ok(response.Value)
+            : NotFound(response.Error);
+    }
+
     // =========================================================
     // CREATE
     // =========================================================

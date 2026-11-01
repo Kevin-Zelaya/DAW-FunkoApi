@@ -65,6 +65,17 @@ public interface ICategoryRepository
         string name,
         CancellationToken ct
     );
+    
+    /// <summary>
+    /// Busca una categoría por su ID.
+    /// </summary>
+    /// <param name="id">ID de la categoría que se desea buscar.</param>
+    /// <param name="ct">Token de cancelación de la operación.</param>
+    /// <returns>La categoría encontrada o null si no existe.</returns>
+    Task<Category?> GetCategoryById(
+        string id,
+        CancellationToken ct
+    );  
     /// <summary>
     /// Comporbar si existe una categoría por su nombre.
     /// </summary>

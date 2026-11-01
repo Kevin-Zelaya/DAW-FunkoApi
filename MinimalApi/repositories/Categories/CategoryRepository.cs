@@ -78,6 +78,16 @@ public class CategoryPostgreRepository(
             .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Name == name, ct);
     }
+    /// <inheritdoc cref="ICategoryRepository.GetCategoryById(string, CancellationToken)"/>
+    public async Task<Category?> GetCategoryById(
+        string id,
+        CancellationToken ct
+    )
+    {
+        return await _context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id, ct);
+    }
     /// <inheritdoc cref="ICategoryRepository.GetCategoryByName(string, CancellationToken)"/>
     public async Task<bool> ExistByName(
         string name,
