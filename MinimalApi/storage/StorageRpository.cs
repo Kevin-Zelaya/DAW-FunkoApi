@@ -3,16 +3,16 @@ using MinimalApi.Errors;
 
 namespace MinimalApi.Storage;
 
-public class StorageService : IStorageService
+public class StorageRepository : IStorageService
 {
     private readonly string _rootPath;
     private readonly string _uploadPath;
     private readonly long _maxFileSize;
     private readonly string[] _allowedExtensions;
     private readonly string[] _allowedContentTypes;
-    private readonly ILogger<StorageService> _logger;
+    private readonly ILogger<StorageRepository> _logger;
 
-    public StorageService(IConfiguration configuration, ILogger<StorageService> logger, IWebHostEnvironment env)
+    public StorageService(IConfiguration configuration, ILogger<StorageRepository> logger, IWebHostEnvironment env)
     {
         _logger = logger;
 
