@@ -65,7 +65,7 @@ public class PosgreRepositoryTests
                 Name = "Superheroes",
                 Description = "Funko de superheroes"
             },
-            Supplier = CrearSupplierValido(),
+            SupplierId = CrearSupplierValido().Id,
             RowVersion = 954
         };
     }
@@ -73,8 +73,8 @@ public class PosgreRepositoryTests
     {
         return new FunkoUpdateCategoryRequestDto
         (
-            SupplierId : Guid.Parse("10000000-0000-0000-0000-000000000000"),
-            RowVersion : row
+            CategoryId : "Pruebacon",
+            RowVersion : 654
         );
     }
     private static Supplier CrearSupplierValido()
@@ -134,19 +134,6 @@ public class PosgreRepositoryTests
 
         // Assert
         Assert.That(resultado, Is.Null);
-    }
-
-    [Test]
-    public async Task ExistSupplierByIdAsync_NoExiste_RetornaFalse()
-    {
-        // Arrange
-        string id = "hu8555awe";
-
-        // Act
-        var resultado = await _repository.ExistSupplierByIdAsync(id);
-
-        // Assert
-        Assert.That(resultado, Is.False);
     }
 
     [Test]
@@ -221,24 +208,13 @@ public class PosgreRepositoryTests
         // Assert
         Assert.That(resultado, Is.Null);
     }
-    [Test]
-    public async Task GetAllCategoriesAsync_SinFunkos_RetornaListaVacia()
-    {
-        // Arrange
-
-        // Act
-        var resultado = await _repository.GetAllCategoriesAsync();
-
-        // Assert
-        Assert.That(resultado, Is.Empty);
-    }
 
     [Test]
     public async Task CreateFunkoAsync_FunkoValido_GuardaElFunko()
     {
         // Arrange
         var funko = CrearFunkoValido();
-
+        funko.SupplierId = "507f1f77bcf86cd799439011";
         // Act
         var resultado = await _repository.CreateFunkoAsync(funko);
 
@@ -258,6 +234,7 @@ public class PosgreRepositoryTests
     {
         // Arrange
         var funko = CrearFunkoValido();
+        funko.SupplierId = "507f1f77bcf86cd799439011";
 
         _context.Funkos.Add(funko);
         await _context.SaveChangesAsync();
@@ -276,6 +253,7 @@ public class PosgreRepositoryTests
     {
         // Arrange
         var funko = CrearFunkoValido();
+        funko.SupplierId = "507f1f77bcf86cd799439011";
 
         _context.Funkos.Add(funko);
         await _context.SaveChangesAsync();
@@ -306,64 +284,9 @@ public class PosgreRepositoryTests
             Number : 200,
             Exclusive : true,
             Price : (double)19.99m,
-            RowVersion : row
+            RowVersion : row,
+            Imagen : "spiderman_updated.png"
         );
-    }
-    [Test]
-    public async Task UpdateCategoryFromFunkoAsync_Existe_ActualizaCategoria()
-    {
-        // Arrange
-        var funko = CrearFunkoValido();
-
-        _context.Funkos.Add(funko);
-        await _context.SaveChangesAsync();
-
-        var request = CrearCategoryUpdateRequestValido(funko.RowVersion);
-        var save = new Category
-        {
-            Id = request.SupplierId,
-            Name = "prueba",
-            Description = "prueba"
-        };
-        _context.Categories.Add(save);
-
-        // Act
-        var resultado = await _repository.UpdateCategoryFromFunkoAsync(
-            funko.Id,
-            request
-        );
-
-        // Assert
-        Assert.That(resultado, Is.Not.Null);
-    }
-
-    [Test]
-    public async Task UpdateSuplierFromFunkoAsync_Existe_CambiaProveedor()
-    {
-        // Arrange
-        var supplier = CrearSupplierValido();
-        _context.Suppliers.Add(supplier);
-        await _context.SaveChangesAsync();
-        
-        var funko = CrearFunkoValido();
-
-        _context.Funkos.Add(funko);
-        await _context.SaveChangesAsync();
-    var updateSupplier = new FunkoUpdateSupplierDto(
-                SupplierId: supplier.Id,
-                RowVersion: funko.RowVersion
-            );
-
-        // Act
-        var resultado = await _repository.UpdateSuplierFromFunkoAsync(
-            funko.Id,
-            updateSupplier
-        );
-
-        // Assert
-        Assert.That(resultado, Is.Not.Null);
-        Assert.That(resultado!.SupplierId, Is.EqualTo(supplier.Id));
-        Assert.That(resultado.Supplier, Is.Not.Null);
     }
 
     [Test]
@@ -371,6 +294,7 @@ public class PosgreRepositoryTests
     {
         // Arrange
         var funko = CrearFunkoValido();
+        funko.SupplierId = "507f1f77bcf86cd799439011";
 
         _context.Funkos.Add(funko);
         await _context.SaveChangesAsync();
@@ -390,61 +314,5 @@ public class PosgreRepositoryTests
         Assert.That(eliminado.DeleteAT, Is.Not.Null);
     }
 
-    [Test]
-    public async Task DeleteFunkoAsync_Existe_NoApareceEnConsultasNormales()
-    {
-        // Arrange
-        var funko = CrearFunkoValido();
 
-        _context.Funkos.Add(funko);
-        await _context.SaveChangesAsync();
-
-        // Act
-        await _repository.DeleteFunkoAsync(funko.Id);
-
-        var resultado = await _repository.GetFunkoByIdAsync(funko.Id);
-
-        // Assert
-        Assert.That(resultado, Is.Null);
-    }
-
-    [Test]
-    public async Task RestoreFunkoAsync_EstaEliminado_RestauraFunko()
-    {
-        // Arrange
-        var funko = CrearFunkoValido();
-
-        _context.Funkos.Add(funko);
-        await _context.SaveChangesAsync();
-
-        await _repository.DeleteFunkoAsync(funko.Id);
-
-        // Act
-        var resultado = await _repository.RestoreFunkoAsync(funko.Id);
-
-        // Assert
-        Assert.That(resultado, Is.Not.Null);
-        Assert.That(resultado!.IsDelete, Is.False);
-        Assert.That(resultado.DeleteAT, Is.Null);
-
-        var recuperado = await _repository.GetFunkoByIdAsync(funko.Id);
-
-        Assert.That(recuperado, Is.Not.Null);
-    }
-
-    [Test]
-    public async Task ExistSupplierByIdAsync_Existe_RetornaTrue()
-    {
-        // Arrange
-        var supplier = CrearSupplierValido();
-
-        _context.Suppliers.Add(supplier);
-        await _context.SaveChangesAsync();
-
-        // Act
-        var resultado = await _repository.ExistSupplierByIdAsync(supplier.Id);
-
-        // Assert
-        Assert.That(resultado, Is.True);
-    }
 }

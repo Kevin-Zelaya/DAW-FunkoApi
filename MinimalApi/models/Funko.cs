@@ -9,6 +9,7 @@ public class Funko
     public Category? Category { get; set; }
     public bool Exclusive { get; set; }
     public double Price { get; set; }
+    public string? Imagen { get; set; }
     public bool IsDelete {get; set;}
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

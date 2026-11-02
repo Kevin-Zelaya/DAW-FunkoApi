@@ -161,4 +161,20 @@ public class FunkoController(
             ? Ok(response.Value)
             : NotFound(response.Error);
     }
+
+    // =========================================================
+    // UPDATE IMAGE
+    // =========================================================
+    [HttpPost("{id}/image")]
+    public async Task<ActionResult> UploadFunkoImage(
+        long id,
+        IFormFile file,
+        CancellationToken ct)
+    {
+        var response = await _service.UpdateImageFromFunkoAsync(id, file, ct);
+
+        return response.IsSuccess
+            ? Ok(response.Value)
+            : BadRequest(response.Error);
+    }
 }

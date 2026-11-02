@@ -10,11 +10,11 @@ http:
     type: json
     data: |-
       {
-        "name": "Gata de miguel",
+        "name": "Gata mahoso",
         "franchise": "Marvel",
         "number": 123,
-        "supplierId": "6ae4bb3a9e4bc50b8be14b82",
-        "categoryId": "2qDjcdM4rh_",
+        "supplierId": "6ae9062dde1a14f83138128b",
+        "categoryId": "7G7yFhPcC2l",
         "exclusive": false,
         "price": 14.99
       }

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-public class CategoryPostgreRepository(
+public class CategoryRepository(
     AppDbContext _context
 ) : ICategoryRepository, IScoped
 {

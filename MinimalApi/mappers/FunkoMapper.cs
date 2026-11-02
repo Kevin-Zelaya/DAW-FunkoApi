@@ -13,7 +13,8 @@ public static class FunkoMapper
         Number = dto.Number,
         SupplierId = dto.SupplierId,
         Price = dto.Price,
-        Franchise = dto.Franchise
+        Franchise = dto.Franchise,
+        Imagen = "default.png",
     };
     /// <summary> De dto a modelo </summary>
     public static Funko ToModel(this FunkoDto dto) => new()
@@ -45,6 +46,7 @@ public static class FunkoMapper
         Number: entity.Number,
         Price: entity.Price,
         Franchise: entity.Franchise,
+        Image: entity.Imagen,
         Supplier: new SupplierDto(
             Id: supplier.Id,
             Name: supplier.Name,
@@ -56,13 +58,14 @@ public static class FunkoMapper
         Id: entity.Id,
         Name: entity.Name,
         Category: new CategoryDto(
-            Id: entity.Category!.Id!,
+            Id: entity.Category.Id,
             Name: entity.Category.Name,
             Description: entity.Category.Description,
             RowVersion: entity.Category.RowVersion
         ),
         Exclusive: entity.Exclusive,
         Number: entity.Number,
+        Image: entity.Imagen,
         Price: entity.Price,
         Franchise: entity.Franchise,
         Supplier: supplier,

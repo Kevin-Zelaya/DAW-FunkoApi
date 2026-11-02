@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 public class FunkoService(
     IFunkoRepository _repository,
     ISupplierService _supplierService,
+    IStorageService _storageService,
     ILogger<FunkoService> _logger,
     ICache _cache
 ) : IFunkoService, IScoped
@@ -22,9 +23,9 @@ public class FunkoService(
             "[SERVICE-CREATE] Intentando crear un Funko.");
         // Comprobar si existe algún con ese username
         var exist = await _repository.ExistByNameAsync(funko.Name, ct);
-        if(!exist)
+        if(exist)
             return Result.Failure<FunkoDto, DomainError>(
-                ConflictError.Duplicate("Supplier", funko.Name));
+                ConflictError.Duplicate("Funko", funko.Name));
         // Comprobar si existe el proveedor y obtenerlo
         var supplier = await _supplierService.GetSupplierByIdAsync(funko.SupplierId, ct);
         if(supplier.Value is null)
@@ -285,6 +286,14 @@ public class FunkoService(
         _logger.LogDebug(
             "[SERVICE-DELETE] Intentando eliminar el Funko con ID {Id}.",
             id);
+        // Comprobar y obtener el funko
+        var exist = await _repository.GetFunkoByIdAsync(id, ct);
+        if(exist is null)
+            return Result.Failure<bool, DomainError>(
+                FunkoError.NotFound(id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-DELETE] No se encontró el Funko con ID {Id}.",
+                    id));
         // Eliminar en la base de datos
         var response = await _repository.DeleteFunkoAsync(id, ct);
         // Eliminar en la caché
@@ -292,16 +301,14 @@ public class FunkoService(
             await _cache.RemoveAsync(key);
             await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
         }
+        // Eliminar imaegen en el storage service
+        if(exist.Imagen is not null && exist.Imagen != "/uploads/funkos/default.png")
+            await _storageService.DeleteFileAsync(exist.Imagen);
+        
         // Retornar según si es verdadero o false la eliminación
-        return response
-            ? Result.Success<bool, DomainError>(true)
+        return Result.Success<bool, DomainError>(true)
                 .Tap(_ => _logger.LogInformation(
                     "[SERVICE-DELETE] Funko con ID {Id} eliminado correctamente.",
-                    id))
-            : Result.Failure<bool, DomainError>(
-                FunkoError.NotFound(id))
-                .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-DELETE] No se encontró el Funko con ID {Id}.",
                     id));
     }
 
@@ -328,5 +335,62 @@ public class FunkoService(
                     id));
     }
 
-  
+    // =========================================================
+    // UPDATE IMAGE
+    // =========================================================
+
+    /// <inheritdoc cref="IFunkoService.UpdateFunkoAsync(long, FunkoUpdateRequestDto, CancellationToken)"/>
+    public async Task<Result<FunkoDto, DomainError>> UpdateImageFromFunkoAsync(
+        long id,
+        IFormFile file,
+        CancellationToken ct = default)
+    {
+        string key = $"FUNKO:{id}";
+        _logger.LogDebug(
+            "[SERVICE-UPDATE] Intentando actualizar la imagen del Funko con ID {Id}.",
+            id);
+        // Obtener funko
+        var exist = await _repository.GetFunkoByIdAsync(id, ct);
+        if(exist is null)
+            return Result.Failure<FunkoDto, DomainError>(
+                FunkoError.NotFound(id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
+                    id));
+
+        // Eliminar anterior en storage service
+        var delete = await _storageService.DeleteFileAsync(exist.Imagen!);
+        if(delete.IsFailure)
+            return Result.Failure<FunkoDto, DomainError>(
+                StorageError.ErrorEliminando())
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-UPDATE] No se pudo eliminar la imagen anterior del Funko con ID {Id}.",
+                    id));
+        // Guardar nueva imagen en storage service
+        var save = await _storageService.SaveFileAsync(file, "funkos");
+        if(save.IsFailure)
+            return Result.Failure<FunkoDto, DomainError>(
+                StorageError.ErrorGuardando())
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-UPDATE] No se pudo guardar la nueva imagen del Funko con ID {Id}.",
+                    id));
+        // Actualizar en la base de datos
+        var response = await _repository.UpdateImageFromFunkoAsync(id, save.Value, ct);
+        if(!response)
+            return Result.Failure<FunkoDto, DomainError>(
+                StorageError.ErrorEliminando())
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-UPDATE] No se pudo agregar la nueva imagen del Funko con ID {Id}.",
+                    id));
+        exist.Imagen = save.Value; // actualizar la propiedad de la imagen en el objeto existente
+        var supplier = await _supplierService.GetSupplierByIdAsync(exist.SupplierId); // ejecutar si el anterior 
+        // Invalidar en caché
+        await _cache.RemoveAsync(key);
+        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
+        // retornar según si es nulo o no
+        return Result.Success<FunkoDto, DomainError>(exist.ToDto(supplier.Value)) // se le pasa el proveedor para convertir
+                .Tap(f => _logger.LogInformation(
+                    "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
+                    f.Id));
+    }
 }
