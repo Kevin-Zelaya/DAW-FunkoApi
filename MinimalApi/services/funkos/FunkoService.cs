@@ -364,9 +364,9 @@ public class FunkoService(
             return Result.Failure<FunkoDto, DomainError>(
                 StorageError.ErrorEliminando())
                 .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-UPDATE] No se pudo eliminar la imagen anterior del Funko con ID {Id}.",
-                    id));
-        // Guardar nueva imagen en storage service
+                    "[SERVICE-UPDATE] No se pudo eliminar la imagen anterior del Funko con ID {Id}.", // TODO: proteger el resto de rutas
+                    id));                                                                              // Crear usuario admin por defecto
+        // Guardar nueva imagen en storage service                                                    // 
         var save = await _storageService.SaveFileAsync(file, "funkos");
         if(save.IsFailure)
             return Result.Failure<FunkoDto, DomainError>(
