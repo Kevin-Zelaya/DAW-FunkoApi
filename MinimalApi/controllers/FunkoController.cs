@@ -198,6 +198,7 @@ public class FunkoController : ControllerBase
     /// </summary>
     [HttpGet("{id}/historial-precios")]
     [Authorize(Roles = "Admin")]
+    [Route("api/funkos")]
     public async Task<ActionResult> GetFunkoPriceHistory(long id)
     {
         var historial = await _priceHistoryRepository.ObtenerHistorialPorFunkoAsync(id);
