@@ -14,21 +14,21 @@ public class CategoryController(
     /// Obtiene todas las categorías.
     /// </summary>
     [HttpGet("all")]
-    public async Task<ActionResult> GetAllCategories(
+    public async Task<ActionResult<List<CategoryDto>>> GetAllCategories(
         CancellationToken ct)
     {
-        var response = await _service.GetAllCategoriesAsync(ct);
+        var result = await _service.GetAllCategoriesAsync(ct);
 
-        return response.IsSuccess
-            ? Ok(response.Value)
-            : BadRequest(response.Error);
+        return result.IsSuccess
+            ? Ok(result.Value)
+            : result.Error.ToHttpResult<List<CategoryDto>>();
     }
 
     /// <summary>
     /// Obtiene las categorías paginadas.
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult> GetPaginatedCategories(
+    public async Task<ActionResult<PaginatedResouce<CategoryDto>>> GetPaginatedCategories(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,
         CancellationToken ct = default)
@@ -42,29 +42,14 @@ public class CategoryController(
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : BadRequest(response.Error);
-    }
-
-    /// <summary>
-    /// Obtiene una categoría por su nombre.
-    /// </summary>
-    [HttpGet("{name}")]
-    public async Task<ActionResult> GetCategoryByName(
-        string name,
-        CancellationToken ct)
-    {
-        var response = await _service.GetCategoryByNameAsync(name, ct);
-
-        return response.IsSuccess
-            ? Ok(response.Value)
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<PaginatedResouce<CategoryDto>>();
     }
 
     /// <summary>
     /// Obtiene una categoría por su ID.
     /// </summary>
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetCategoryById(
+    public async Task<ActionResult<CategoryDto>> GetCategoryById(
         string id,
         CancellationToken ct)
     {
@@ -72,7 +57,7 @@ public class CategoryController(
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<CategoryDto>();
     }
 
     // =========================================================
@@ -83,7 +68,7 @@ public class CategoryController(
     /// Crea una nueva categoría.
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult> CreateCategory(
+    public async Task<ActionResult<CategoryDto>> CreateCategory(
         [FromBody] CategoryCreateRequestDto request,
         CancellationToken ct)
     {
@@ -91,10 +76,10 @@ public class CategoryController(
 
         return response.IsSuccess
             ? CreatedAtAction(
-                nameof(GetCategoryByName),
-                new { name = response.Value.Name },
+                nameof(GetCategoryById),
+                new { id = response.Value.Id },
                 response.Value)
-            : BadRequest(response.Error);
+            : response.Error.ToHttpResult<CategoryDto>();
     }
 
     // =========================================================
@@ -105,7 +90,7 @@ public class CategoryController(
     /// Actualiza una categoría existente.
     /// </summary>
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateCategory(
+    public async Task<ActionResult<CategoryDto>> UpdateCategory(
         string id,
         [FromBody] CategoryUpdateRequestDto request,
         CancellationToken ct)
@@ -114,7 +99,7 @@ public class CategoryController(
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : BadRequest(response.Error);
+            : response.Error.ToHttpResult<CategoryDto>();
     }
 
     // =========================================================
@@ -125,7 +110,7 @@ public class CategoryController(
     /// Elimina lógicamente una categoría.
     /// </summary>
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> DeleteCategory(
+    public async Task<ActionResult<CategoryDto>> DeleteCategory(
         string id,
         CancellationToken ct)
     {
@@ -133,7 +118,7 @@ public class CategoryController(
 
         return response.IsSuccess
             ? NoContent()
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<CategoryDto>();
     }
 
     // =========================================================
@@ -144,7 +129,7 @@ public class CategoryController(
     /// Restaura una categoría eliminada.
     /// </summary>
     [HttpPatch("{id:guid}/restore")]
-    public async Task<ActionResult> RestoreCategory(
+    public async Task<ActionResult<CategoryDto>> RestoreCategory(
         string id,
         CancellationToken ct)
     {
@@ -152,6 +137,6 @@ public class CategoryController(
 
         return response.IsSuccess
             ? NoContent()
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<CategoryDto>();
     }
 }
