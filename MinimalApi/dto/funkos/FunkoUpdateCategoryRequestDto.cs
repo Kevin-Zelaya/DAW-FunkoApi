@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations;
 ///     Dto complementario para crear un funko,
 ///     desacopla la validaciones del dto original
 /// </summary>
-/// <param name="Id"></param>
+/// <param name="SupplierId"></param>
 /// <param name="Name"></param>
 /// <param name="Description"></param>
 public record FunkoUpdateCategoryRequestDto(
 
     [param: Required(ErrorMessage = "Id requerido")]
-    Guid Id,
+    [param: YoutubeId]
+    string CategoryId,
     [param: Required(ErrorMessage = "RowVersion requerido")]
     uint RowVersion
 );

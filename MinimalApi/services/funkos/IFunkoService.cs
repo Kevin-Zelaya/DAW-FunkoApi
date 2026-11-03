@@ -78,10 +78,10 @@ public interface IFunkoService
     /// <returns>Funko restaurada</returns>
     public Task<Result<FunkoDto, DomainError>> RestoreDeletedFunkoAsync(long id, CancellationToken ct);
     /// <summary>
-    /// Auxiliar para obtener las categorias
+    /// Restaurar funko eliminado a partir de su id
     /// </summary>
     /// <param name="ct">Token de cancelación</param>
-    /// <returns>Lista de categorias sin páginar</returns>
-    public Task<Result<List<Category>, DomainError>> GetAllCategories(CancellationToken ct);
+    /// <returns>Funko restaurada</returns>
+    public Task<Result<FunkoDto, DomainError>> UpdateImageFromFunkoAsync(long id, IFormFile file, CancellationToken ct = default);
 
 }

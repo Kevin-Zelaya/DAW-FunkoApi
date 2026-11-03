@@ -7,10 +7,8 @@ using System.ComponentModel.DataAnnotations;
 /// <param name="Id"></param>
 /// <param name="Name"></param>
 /// <param name="Description"></param>
-public record CategoryCreateRequestDto(
-
-    [param: Required(ErrorMessage = "Id requerido")]
-    Guid Id,
+public record CategoryCreateRequestDto
+(
     [param: Required(ErrorMessage = "Nombre requerido")]
     [param: MinLength(2)]
     [param: MaxLength(100)]

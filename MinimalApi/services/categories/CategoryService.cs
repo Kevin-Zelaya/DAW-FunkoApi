@@ -18,7 +18,11 @@ public class CategoryService(
     {
         _logger.LogDebug(
             "[SERVICE-CREATECATEGORY] Intentando crear una categoría.");
-
+        // Comporbar si existe categoría con ese nombre
+        var exist = await _repository.ExistByName(request.Name, ct);
+        if(!exist)
+            return Result.Failure<CategoryDto, DomainError>(
+                ConflictError.Duplicate("Categoria", request.Name));
         // Crear categoría
         var response = await _repository.CreateCategoryAsync(request, ct);
 
@@ -115,12 +119,35 @@ public class CategoryService(
             ? Result.Success<CategoryDto?, DomainError>(response.ToDto())
                 .Tap(c => _logger.LogInformation(
                     "[SERVICE-GETCATEGORYBYNAME] Categoría con ID {Id} recuperada correctamente.",
-                    c.Id))
+                    c!.Id))
             : Result.Failure<CategoryDto?, DomainError>(
                 NotFoundError.FromResource("Category", name))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-GETCATEGORYBYNAME] No se encontró la categoría {Name}.",
                     name));
+    }
+    
+    /// <inheritdoc cref="ICategoryService.GetCategoryByIdAsync(string, CancellationToken)"/>
+    public async Task<Result<CategoryDto?, DomainError>> GetCategoryByIdAsync(
+        string id,
+        CancellationToken ct)
+    {
+        _logger.LogDebug(
+            "[SERVICE-GETCATEGORYBYID] Buscando categoría con ID {Id}.",
+            id);
+
+        var response = await _repository.GetCategoryById(id, ct);
+
+        return response is not null
+            ? Result.Success<CategoryDto?, DomainError>(response.ToDto())
+                .Tap(c => _logger.LogInformation(
+                    "[SERVICE-GETCATEGORYBYID] Categoría con ID {Id} recuperada correctamente.",
+                    c!.Id))
+            : Result.Failure<CategoryDto?, DomainError>(
+                NotFoundError.FromResource("Category", id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-GETCATEGORYBYID] No se encontró la categoría con ID {Id}.",
+                    id));
     }
 
     // =========================================================
@@ -129,7 +156,7 @@ public class CategoryService(
 
     /// <inheritdoc cref="ICategoryService.UpdateCategoryAsync(Guid, CategoryUpdateRequestDto, CancellationToken)"/>
     public async Task<Result<CategoryDto, DomainError>> UpdateCategoryAsync(
-        Guid id,
+        string id,
         CategoryUpdateRequestDto request,
         CancellationToken ct = default)
     {
@@ -167,7 +194,7 @@ public class CategoryService(
 
     /// <inheritdoc cref="ICategoryService.DeleteCategoryAsync(Guid, CancellationToken)"/>
     public async Task<Result<bool, DomainError>> DeleteCategoryAsync(
-        Guid id,
+        string id,
         CancellationToken ct = default)
     {
         string key = $"CATEGORY:{id}";
@@ -204,7 +231,7 @@ public class CategoryService(
 
     /// <inheritdoc cref="ICategoryService.RestoreCategoryAsync(Guid, CancellationToken)"/>
     public async Task<Result<bool, DomainError>> RestoreCategoryAsync(
-        Guid id,
+        string id,
         CancellationToken ct = default)
     {
         _logger.LogDebug(

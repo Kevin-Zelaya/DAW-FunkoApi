@@ -81,6 +81,19 @@ public interface IUserRepository
         int pageSize,
         CancellationToken ct = default);
 
+    /// <summary>
+    /// Restaura un usuario previamente eliminado lógicamente.
+    /// </summary>
+    /// <param name="id">Identificador del usuario que se restaurará.</param>
+    /// <param name="ct">Token para cancelar la operación.</param>
+    /// <returns>
+    /// El usuario restaurado o null si no existe o no está eliminado.
+    /// </returns>
+    public Task<bool> ExistByUsername(
+        string username,
+        CancellationToken ct
+    );
+
     // =========================================================
     // UPDATE
     // =========================================================

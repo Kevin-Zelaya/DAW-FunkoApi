@@ -1,0 +1,442 @@
+2026-11-02 17:36:50.098 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 17:36:50.526 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 17:36:50.585 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 17:36:51.773 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 17:36:52.029 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:36:52.817 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:36:52.817 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 17:36:52.850 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:36:53.223 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:37:26.008 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-02 17:37:26.054 [DBG] [SupplierService] [SERVICE-GETSUPPLIERS] Recuperando todos los proveedores.
+2026-11-02 17:37:26.309 [INF] [SupplierService] [SERVICE-GETSUPPLIERS] Se recuperaron 10 proveedores.
+2026-11-02 17:37:54.844 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-02 17:37:54.915 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-02 17:37:54.917 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-02 17:37:55.066 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1.
+2026-11-02 17:38:15.823 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:38:15.848 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:38:31.631 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:38:31.633 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:38:49.303 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:38:49.304 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:41:00.560 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:41:00.562 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:41:01.308 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:41:01.310 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:41:08.815 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:41:08.816 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:41:09.596 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:41:09.598 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:43:02.075 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 17:43:02.118 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 17:43:02.134 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 17:43:02.533 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 17:43:02.804 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:43:03.510 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:43:03.511 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 17:43:03.540 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:43:03.916 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:43:13.026 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-02 17:43:13.058 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:43:13.087 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:44:00.091 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 17:44:00.133 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 17:44:00.148 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 17:44:00.545 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 17:44:00.791 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:44:01.401 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:44:01.402 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 17:44:01.430 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:44:01.783 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:44:14.613 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-02 17:44:14.647 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:44:14.677 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:44:14.890 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8bc243420aee95d9903dd.
+2026-11-02 17:44:15.096 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: fcbdb1c2
+CSharpFunctionalExtensions.ResultFailureException`1[DomainError]: You attempted to access the Value property for a failed result. A failed result has no Value. The error was: You attempted to access the Value property for a failed result. A failed result has no Value. The error was: NotFoundError { Message = No existe Supplier con id 6ae8bc243420aee95d9903dd, StatusCode = NotFound }
+   at CSharpFunctionalExtensions.Result`2.get_Value()
+   at FunkoService.CreateFunkoAsync(FunkoCreateRequestDto funko, CancellationToken ct) in F:\Funkos-solopostgre\MinimalApi\services\funkos\FunkoService.cs:line 31
+   at FunkoController.CreateFunko(FunkoCreateRequestDto dto) in F:\Funkos-solopostgre\MinimalApi\controllers\FunkoController.cs:line 16
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in F:\Funkos-solopostgre\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-02 17:44:29.155 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-02 17:44:29.261 [INF] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Se recuperaron 5 proveedores de la página 1 de 2.
+2026-11-02 17:44:51.724 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-02 17:44:51.732 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-02 17:45:32.581 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-02 17:45:32.583 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-02 17:45:52.303 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:45:52.306 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:45:52.365 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8bdd1e939d02b0ac7eb38.
+2026-11-02 17:45:52.394 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae8bdd1e939d02b0ac7eb38 recuperado correctamente.
+2026-11-02 17:45:52.513 [ERR] [Microsoft.EntityFrameworkCore.Database.Command] Failed executing DbCommand (8ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Double), @p7='?', @p8='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Funkos" ("CategoryId", "DeleteAT", "Franchise", "Imagen", "Name", "Number", "Price", "SupplierId", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)
+RETURNING "Id", "CreatedAt", "Exclusive", "IsDelete", xmin;
+2026-11-02 17:45:52.532 [ERR] [Microsoft.EntityFrameworkCore.Update] An exception occurred in the database while saving changes for context type 'AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Funkos
+    ConstraintName: FK_Funkos_Categories_CategoryId
+    File: ri_triggers.c
+    Line: 2599
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Funkos
+    ConstraintName: FK_Funkos_Categories_CategoryId
+    File: ri_triggers.c
+    Line: 2599
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-11-02 17:45:52.542 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: e85290d5
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Funkos
+    ConstraintName: FK_Funkos_Categories_CategoryId
+    File: ri_triggers.c
+    Line: 2599
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at FunkoRepository.CreateFunkoAsync(Funko funko, CancellationToken ct) in F:\Funkos-solopostgre\MinimalApi\repositories\funkos\FunkoPostgreRepository.cs:line 28
+   at FunkoService.CreateFunkoAsync(FunkoCreateRequestDto funko, CancellationToken ct) in F:\Funkos-solopostgre\MinimalApi\services\funkos\FunkoService.cs:line 35
+   at FunkoController.CreateFunko(FunkoCreateRequestDto dto) in F:\Funkos-solopostgre\MinimalApi\controllers\FunkoController.cs:line 16
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in F:\Funkos-solopostgre\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-02 17:46:18.079 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:46:18.081 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:46:18.085 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8bdd1e939d02b0ac7eb38.
+2026-11-02 17:46:18.091 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae8bdd1e939d02b0ac7eb38 recuperado desde la caché.
+2026-11-02 17:46:18.203 [INF] [FunkoService] [SERVICE-CREATE] Funko creado correctamente con ID 2.
+2026-11-02 17:48:44.276 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 17:48:44.318 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 17:48:44.332 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 17:48:44.712 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 17:48:44.958 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:48:45.550 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:48:45.551 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 17:48:45.577 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 17:48:45.938 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 17:48:51.130 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-02 17:48:51.172 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:48:51.200 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:48:51.424 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8bdd1e939d02b0ac7eb38.
+2026-11-02 17:48:51.443 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae8bdd1e939d02b0ac7eb38 recuperado desde la caché.
+2026-11-02 17:48:51.536 [ERR] [Microsoft.EntityFrameworkCore.Database.Command] Failed executing DbCommand (7ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Double), @p7='?', @p8='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Funkos" ("CategoryId", "DeleteAT", "Franchise", "Imagen", "Name", "Number", "Price", "SupplierId", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)
+RETURNING "Id", "CreatedAt", "Exclusive", "IsDelete", xmin;
+2026-11-02 17:48:51.562 [ERR] [Microsoft.EntityFrameworkCore.Update] An exception occurred in the database while saving changes for context type 'AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Funkos
+    ConstraintName: FK_Funkos_Categories_CategoryId
+    File: ri_triggers.c
+    Line: 2599
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Funkos
+    ConstraintName: FK_Funkos_Categories_CategoryId
+    File: ri_triggers.c
+    Line: 2599
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-11-02 17:48:51.595 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: c3af5fab
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "Funkos" violates foreign key constraint "FK_Funkos_Categories_CategoryId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: Funkos
+    ConstraintName: FK_Funkos_Categories_CategoryId
+    File: ri_triggers.c
+    Line: 2599
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at FunkoRepository.CreateFunkoAsync(Funko funko, CancellationToken ct) in F:\Funkos-solopostgre\MinimalApi\repositories\funkos\FunkoPostgreRepository.cs:line 28
+   at FunkoService.CreateFunkoAsync(FunkoCreateRequestDto funko, CancellationToken ct) in F:\Funkos-solopostgre\MinimalApi\services\funkos\FunkoService.cs:line 35
+   at FunkoController.CreateFunko(FunkoCreateRequestDto dto) in F:\Funkos-solopostgre\MinimalApi\controllers\FunkoController.cs:line 16
+   at lambda_method93(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in F:\Funkos-solopostgre\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-02 17:49:05.120 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-02 17:49:05.187 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-02 17:49:05.189 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-02 17:49:05.238 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1.
+2026-11-02 17:49:49.098 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-02 17:49:49.104 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-02 17:49:50.191 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 5.
+2026-11-02 17:49:50.194 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 5 categorías de la página 1 desde la caché.
+2026-11-02 17:51:09.699 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 17:51:09.719 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 17:51:09.726 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8beedf16d290805bab772.
+2026-11-02 17:51:09.947 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae8beedf16d290805bab772 recuperado correctamente.
+2026-11-02 17:51:10.011 [INF] [FunkoService] [SERVICE-CREATE] Funko creado correctamente con ID 2.
+2026-11-02 18:07:49.510 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 18:07:49.552 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 18:07:49.567 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 18:07:50.953 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 18:07:51.179 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 18:07:51.782 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 18:07:51.783 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 18:07:51.811 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 18:07:52.251 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 18:10:34.974 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-02 18:10:35.014 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-02 18:10:35.309 [INF] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Se recuperaron 5 proveedores de la página 1 de 2.
+2026-11-02 18:11:27.663 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-02 18:11:27.727 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-02 18:11:27.729 [WRN] [Microsoft.EntityFrameworkCore.Query] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-11-02 18:11:27.849 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1.
+2026-11-02 18:12:09.800 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 18:12:09.818 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 18:12:09.911 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8c3674a1e54a97f5bad11.
+2026-11-02 18:12:09.981 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae8c3674a1e54a97f5bad11 recuperado correctamente.
+2026-11-02 18:12:10.147 [INF] [FunkoService] [SERVICE-CREATE] Funko creado correctamente con ID 1.
+2026-11-02 18:15:58.831 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 18:15:58.867 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 18:15:58.884 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 18:15:59.282 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 18:15:59.557 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 18:16:00.146 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 18:16:00.146 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 18:16:00.179 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 18:16:00.563 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 18:16:12.470 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.
+2026-11-02 18:16:12.510 [DBG] [SupplierService] [SERVICE-GETSUPPLIERS] Recuperando todos los proveedores.
+2026-11-02 18:16:12.746 [INF] [SupplierService] [SERVICE-GETSUPPLIERS] Se recuperaron 10 proveedores.
+2026-11-02 18:16:16.416 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-02 18:19:01.881 [DBG] [SupplierService] [SERVICE-GETSUPPLIERS] Recuperando todos los proveedores.
+2026-11-02 18:19:01.932 [INF] [SupplierService] [SERVICE-GETSUPPLIERS] Se recuperaron 10 proveedores.
+2026-11-02 18:19:07.700 [DBG] [SupplierService] [SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página 1 con tamaño 5.
+2026-11-02 18:19:42.360 [DBG] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Recuperando página 1 con tamaño 10.
+2026-11-02 18:19:42.367 [INF] [CategoryService] [SERVICE-GETPAGINATEDCATEGORIES] Se recuperaron 6 categorías de la página 1 desde la caché.
+2026-11-02 18:19:58.292 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 18:19:58.309 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 18:19:58.516 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8c3674a1e54a97f5bad12.
+2026-11-02 18:19:58.560 [ERR] [GlobalExceptionHandler] Excepción no manejada. ErrorId: ee9ea607
+CSharpFunctionalExtensions.ResultFailureException`1[DomainError]: You attempted to access the Value property for a failed result. A failed result has no Value. The error was: You attempted to access the Value property for a failed result. A failed result has no Value. The error was: NotFoundError { Message = No existe Supplier con id 6ae8c3674a1e54a97f5bad12, StatusCode = NotFound }
+   at CSharpFunctionalExtensions.Result`2.get_Value()
+   at FunkoService.CreateFunkoAsync(FunkoCreateRequestDto funko, CancellationToken ct) in F:\Funkos-solopostgre\MinimalApi\services\funkos\FunkoService.cs:line 31
+   at FunkoController.CreateFunko(FunkoCreateRequestDto dto) in F:\Funkos-solopostgre\MinimalApi\controllers\FunkoController.cs:line 16
+   at lambda_method119(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at GlobalExceptionHandler.InvokeAsync(HttpContext context) in F:\Funkos-solopostgre\MinimalApi\middleware\GlobalExceptionHandler.cs:line 15
+2026-11-02 18:21:48.378 [INF] [FileSystemStorageService] Storage service inicializado en: F:\Funkos-solopostgre\MinimalApi\wwwroot\uploads
+2026-11-02 18:21:48.391 [DBG] [FunkoService] [SERVICE-CREATE] Intentando crear un Funko.
+2026-11-02 18:21:48.458 [DBG] [SupplierService] [SERVICE-GETSUPPLIER] Buscando proveedor con ID 6ae8c5509955a57719b8e8f2.
+2026-11-02 18:21:48.476 [INF] [SupplierService] [SERVICE-GETSUPPLIER] Proveedor con ID 6ae8c5509955a57719b8e8f2 recuperado correctamente.
+2026-11-02 18:21:48.661 [INF] [FunkoService] [SERVICE-CREATE] Funko creado correctamente con ID 1.
+2026-11-02 18:43:53.545 [INF] [] [PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.
+2026-11-02 18:43:53.588 [INF] [] [DEPENDENCY-PROVIDER] Configurando la inyección de dependencias.
+2026-11-02 18:43:53.603 [INF] [] [DEPENDENCY-PROVIDER] Aplicando proveedor segun perfil
+2026-11-02 18:43:53.947 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Postgre
+2026-11-02 18:43:54.164 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 18:43:54.709 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 18:43:54.710 [DBG] [] [POSTGRE] Eliminando y recreando la base de datos Mongo
+2026-11-02 18:43:54.733 [DBG] [] [DBCONTEXT-CONFIG] Configurando entidades para el proveedor 'PosgreSql'
+2026-11-02 18:43:55.052 [INF] [] [POSGRE] Eliminando y recreando la base de datos
+2026-11-02 18:44:11.779 [WRN] [Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware] Failed to determine the https port for redirect.

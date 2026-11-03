@@ -1,0 +1,24 @@
+info:
+  name: UPDATE_IMAGE
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:5205/api/funkos/1/image
+  body:
+    type: multipart-form
+    data:
+      - name: File
+        type: file
+        value:
+          - C:\Users\kenrr\Desktop\omar\MV5BMTQ2ODE2NDQ5OF5BMl5BanBnXkFtZTcwOTU3OTM1OQ@@._V1_.jpg
+        contentType: image/jpeg
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

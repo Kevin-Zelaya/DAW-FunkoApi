@@ -17,6 +17,7 @@ public record FunkoDto(
     CategoryDto Category,
     bool Exclusive,
     double Price,
+    string? Image,
     SupplierDto Supplier,
     uint RowVersion
 

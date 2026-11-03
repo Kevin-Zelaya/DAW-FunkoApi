@@ -23,6 +23,16 @@ public interface ICategoryService
     Task<Result<CategoryDto?, DomainError>> GetCategoryByNameAsync(
         string name,
         CancellationToken ct);
+    
+    /// <summary>
+    /// Obtiene una categoría por su ID.
+    /// </summary>
+    /// <param name="id">ID de la categoría.</param>
+    /// <param name="ct">Token de cancelación.</param>
+    /// <returns>Categoría encontrada o error de dominio.</returns>
+    Task<Result<CategoryDto?, DomainError>> GetCategoryByIdAsync(
+        string id,
+        CancellationToken ct);
 
     /// <summary>
     /// Obtiene una lista paginada de categorías.
@@ -54,7 +64,7 @@ public interface ICategoryService
     /// <param name="ct">Token de cancelación.</param>
     /// <returns>Categoría actualizada o un error de dominio.</returns>
     Task<Result<CategoryDto, DomainError>> UpdateCategoryAsync(
-        Guid id,
+        string id,
         CategoryUpdateRequestDto request,
         CancellationToken ct = default);
 
@@ -65,7 +75,7 @@ public interface ICategoryService
     /// <param name="ct">Token de cancelación.</param>
     /// <returns>true si la categoría se eliminó correctamente o un error de dominio.</returns>
     Task<Result<bool, DomainError>> DeleteCategoryAsync(
-        Guid id,
+        string id,
         CancellationToken ct = default);
 
     /// <summary>
@@ -75,6 +85,6 @@ public interface ICategoryService
     /// <param name="ct">Token de cancelación.</param>
     /// <returns>true si la categoría se restauró correctamente o un error de dominio.</returns>
     Task<Result<bool, DomainError>> RestoreCategoryAsync(
-        Guid id,
+        string id,
         CancellationToken ct = default);
 }

@@ -163,17 +163,15 @@ public class FunkoController(
     }
 
     // =========================================================
-    // CATEGORIES
+    // UPDATE IMAGE
     // =========================================================
-
-    /// <summary>
-    /// Get all categories.
-    /// </summary>
-    [HttpGet("categories")]
-    public async Task<ActionResult> GetAllCategories(
+    [HttpPost("{id}/image")]
+    public async Task<ActionResult> UploadFunkoImage(
+        long id,
+        IFormFile file,
         CancellationToken ct)
     {
-        var response = await _service.GetAllCategories(ct);
+        var response = await _service.UpdateImageFromFunkoAsync(id, file, ct);
 
         return response.IsSuccess
             ? Ok(response.Value)

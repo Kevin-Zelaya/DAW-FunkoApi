@@ -1,5 +1,9 @@
 public interface IFunkoRepository
 {
+    // =========================================================
+    // CREATE
+    // =========================================================
+
     /// <summary>
     /// Crear un funko de forma asincrona
     /// </summary>
@@ -14,13 +18,11 @@ public interface IFunkoRepository
     /// <param name="id">Id del funkko a eliminar</param>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>True o false dependiendo de si se encontró o no</returns>
-    Task<bool> DeleteFunkoAsync(long id, CancellationToken ct);
-    /// <summary>
-    /// Obtener todos los funkos, incluyen su categoria
-    /// no página
-    /// </summary>
-    /// <param name="ct">token de cancelación</param>
-    /// <returns> Lista sin filtrar de funkos </returns>
+    
+    // =========================================================
+    // READ
+    // =========================================================
+
     Task<List<Funko>> GetAllFunkosAsync(CancellationToken ct);
     /// <summary>
     /// Obtener un funko por id
@@ -29,6 +31,13 @@ public interface IFunkoRepository
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Funko encontrado o null</returns>
     Task<Funko?> GetFunkoByIdAsync(long id, CancellationToken ct);
+    /// <summary>
+    /// Comprobar si existe alguno con el username
+    /// </summary>
+    /// <param name="name">Nombre a comprobar</param>
+    /// <param name="ct">Token de cancelación</param>
+    /// <returns>Funko encontrado o null</returns>
+    public Task<bool> ExistByNameAsync(string name, CancellationToken ct = default);
     /// <summary>
     /// Obtener lista páginada de funkos
     /// </summary>
@@ -43,7 +52,11 @@ public interface IFunkoRepository
     /// <param name="id">Id del funko a restablecer</param>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>True o false dependiendo de si se encontró</returns>
-    Task<Funko?> RestoreFunkoAsync(long id, CancellationToken ct);
+    
+    // =========================================================
+    // UPDATE
+    // =========================================================
+
     /// <summary>
     /// Actualizar funko
     /// </summary>
@@ -57,16 +70,7 @@ public interface IFunkoRepository
     /// </summary>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Lista de categorias</returns>
-    public Task<List<Category>> GetAllCategoriesAsync(CancellationToken ct);
-    /// <summary>
-    /// Actualización parcial, solo
-    /// categoria del funko
-    /// </summary>
-    /// <param name="id">Id del funko a actualizar</param>
-    /// <param name="request">Dto de categoría a actualizar</param>
-    /// <see cref="CategoryUpdateRequestDto"/>
-    /// <param name="ct">Token de cancelación</param>
-    /// <returns>Funko actualizado</returns>
+    
     public  Task<Funko?> UpdateCategoryFromFunkoAsync(long id, FunkoUpdateCategoryRequestDto request, CancellationToken ct = default);
     /// <summary>
     /// Actualizacion parcial, solo
@@ -78,10 +82,24 @@ public interface IFunkoRepository
     /// <returns>Funko actualizado</returns>
     public Task<Funko?> UpdateSuplierFromFunkoAsync(long id, FunkoUpdateSupplierDto request, CancellationToken ct = default);
     /// <summary>
-    /// Comprueba si existe el proveedor
+    /// Actualizacion parcial, solo
+    /// imagen a proveedor
     /// </summary>
-    /// <param name="id">Id del proveedor a consultar</param>
+    /// <param name="id">Id del funko a actualizar</param>
+    /// <param name="SupplierId">Id del proveedor</param>
     /// <param name="ct">Token de cancelación</param>
-    /// <returns>Proveedor consultado</returns>
-    public  Task<bool> ExistSupplierByIdAsync(string id, CancellationToken ct);
+    /// <returns>Funko actualizado</returns>
+    public Task<bool> UpdateImageFromFunkoAsync(long id, string image, CancellationToken ct = default);
+
+    // =========================================================
+    // DELETE / RESTORE
+    // =========================================================
+    Task<bool> DeleteFunkoAsync(long id, CancellationToken ct);
+    /// <summary>
+    /// Obtener todos los funkos, incluyen su categoria
+    /// no página
+    /// </summary>
+    /// <param name="ct">token de cancelación</param>
+    /// <returns> Lista sin filtrar de funkos </returns>
+    Task<Funko?> RestoreFunkoAsync(long id, CancellationToken ct);
 }

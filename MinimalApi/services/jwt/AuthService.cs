@@ -4,6 +4,9 @@ public class AuthService(
     ILogger<AuthService> logger
 )
 {
+    // =========================================================
+    // CREATE
+    // =========================================================
     public async Task<AuthResponse> SignupAsync(SingupRequest request)
     {
         var existing = await _userRepository.GetUserByEmailAsync(request.Email);
@@ -28,6 +31,9 @@ public class AuthService(
             user.Role.ToString());
     }
 
+    // =========================================================
+    // READ
+    // =========================================================
     public async Task<AuthResponse> LoginAsync(
         LoginRequest request
     )

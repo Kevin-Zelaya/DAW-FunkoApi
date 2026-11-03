@@ -5,7 +5,9 @@
 /// <param name="Name"></param>
 /// <param name="Description"></param>
 public record CategoryDto(
-    Guid Id,
+    string Id,
     string Name,
-    string Description
+    string Description,
+    uint RowVersion
+
 );

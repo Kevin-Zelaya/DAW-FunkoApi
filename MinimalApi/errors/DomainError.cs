@@ -13,3 +13,7 @@ public sealed record ConflictError(string Message, HttpStatusCode StatusCode) : 
     public static ConflictError Duplicate(string resourceType, string value) =>
         new($"Ya existe un {resourceType} con el valor '{value}'", HttpStatusCode.Conflict);
 }
+
+public sealed record BusinessRuleError(string Message) : DomainError(Message, HttpStatusCode.BadRequest);
+
+public sealed record InternalError(string Message) : DomainError(Message, HttpStatusCode.InternalServerError);

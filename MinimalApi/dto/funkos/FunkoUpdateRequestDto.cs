@@ -27,6 +27,7 @@ public record FunkoUpdateRequestDto(
 
     bool Exclusive,
 
+    string? Imagen,
     [param: Range(0.01, 1000000)]
     double Price,
     [param: Required(ErrorMessage = "RowVersion requerido")]

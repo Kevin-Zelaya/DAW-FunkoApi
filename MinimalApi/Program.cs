@@ -6,24 +6,38 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 // ======= Logger de Serilog =============
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+    .MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning)
+    .WriteTo.Console(
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.File(
+        path: "logs/productos-.log",
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 7,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
-builder.Logging.AddSerilog(Log.Logger);
 
-Log.Information("[PROGRAM] Aplicada la configuración de serilog mediante 'appsettings.json'.");
+Log.Information("Iniciando aplicación...");
+
+// ======= Configuración tipada ==========
+builder.Services.Configure<ApiConfig>(
+    builder.Configuration.GetSection("Api")); 
+
 
 // ======= Registrando contoladores ========== 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.RespectBrowserAcceptHeader = true;
+    options.ReturnHttpNotAcceptable = true;
+})
+.AddXmlDataContractSerializerFormatters();
 
-/// ==============
-/// Proveedor de dependencias con scrutor y
-/// configuración según perfíl
-/// =============== 
-DependencyProvider.Configure(
-    builder.Services);
-builder.Services.AddAuthenticationJwt(builder.Configuration);
+// proximamente validadores
 
+<<<<<<< HEAD
 // REGISTRAR EL STORAGE EN EL CONTENEDOR DE DEPENDENCIAS 
 builder.Services.AddScoped<IStorageService, StorageService>();
 
@@ -34,20 +48,43 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // ======= Configuración de open api ========== 
+=======
+// ======= Infraestructura ========== 
+builder.Services
+    .AddRepositories()
+    .AddDatabases(builder.Configuration)
+    .AddRedisConnection(builder.Configuration)
+    .AddServices()
+    .AddStorage();
+
+
+
+// ======= MIDLEWARES ========== 
+var app = builder.Build();
+app.UseHttpsRedirection();
+
+if(AppConfig.shouldRecreateDb)
+    await app.InitializationDatabaseAsync();
+
+app.UseStaticFiles();
+>>>>>>> origin/main
 app.MapOpenApi();
 
+app.UseGlobalExceptionHandler();
+
+// ======= AUTHENTICATION - AUTHORIZATION ========== 
+app.UseAuthentication();
+app.UseAuthorization();
+
+
+// ======= Configuración de Swagger ==========
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
 });
 
-// ======= Registar controlador de excepciones ========== 
-app.UseGlobalExceptionHandler();
 // ======= Buscar todos los controladores ========== 
 app.MapControllers();
-// ======= Inicializar estructura y db en caso de postgre ========== 
-if(AppConfig.shouldRecreateDb)
-    await app.InitializationDatabaseAsync();
 
 // Falta vaciar la bd en el caso de mongo
 Console.WriteLine("======================================================");
@@ -59,7 +96,5 @@ Console.WriteLine($"| api_environment   |      {AppConfig.Environment}    |");
 Console.WriteLine($"|  swagger_route    |localhost:5205/swagger/index.html|");
 Console.WriteLine($"|   Recreate_db     |                {(AppConfig.shouldRecreateDb ? "true " : "false")}            |");
 Console.WriteLine($"+===================+=================================+");
-
-
 
 app.Run();

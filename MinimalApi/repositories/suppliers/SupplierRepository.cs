@@ -1,11 +1,32 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-public class SupplierPostgreRepository(
-    AppDbContext _context
+public class SuppliersRepository(
+    AppDbMongoContext _context
 ) : ISupplierRepository, IScoped
 {
-     /// <inheritdoc cref="ISupplierRepository.GetAllSuppliersAsync(CancellationToken)"/>
+
+    // =========================================================
+    // CREATE
+    // =========================================================
+
+    /// <inheritdoc cref="ISupplierRepository.CreateSupplierAsync(SupplierCreateRequestDto, CancellationToken)"/>
+    public async Task<Supplier> CreateSupplierAsync(
+        SupplierCreateRequestDto request,
+        CancellationToken ct)
+    {
+        var entity = request.ToEntity();
+        _context.Suppliers.Add(entity);
+        await _context.SaveChangesAsync(ct);
+
+        return entity;
+    }
+
+    // =========================================================
+    // READ
+    // =========================================================
+
+    /// <inheritdoc cref="ISupplierRepository.GetAllSuppliersAsync(CancellationToken)"/>
     public async Task<List<Supplier>> GetAllSuppliersAsync(
         CancellationToken ct)
     {
@@ -61,18 +82,20 @@ public class SupplierPostgreRepository(
             .AsNoTracking()
             .FirstOrDefaultAsync(s => s.Id == id, ct);
     }
-
-    /// <inheritdoc cref="ISupplierRepository.CreateSupplierAsync(SupplierCreateRequestDto, CancellationToken)"/>
-    public async Task<Supplier> CreateSupplierAsync(
-        SupplierCreateRequestDto request,
-        CancellationToken ct)
+    /// <inheritdoc cref="ISupplierRepository.ExistByNameAsync(string, CancellationToken)"/>
+    public async Task<bool> ExistByNameAsync(
+    string name,
+    CancellationToken ct = default)
     {
-        var entity = request.ToEntity();
-        _context.Suppliers.Add(entity);
-        await _context.SaveChangesAsync(ct);
-
-        return entity;
-    }
+        return await _context.Suppliers
+            .AsNoTracking()
+            .IgnoreQueryFilters()
+            .AnyAsync(f => f.Name == name, ct);
+    } 
+    
+    // =========================================================
+    // UPDATE
+    // =========================================================
 
     /// <inheritdoc cref="ISupplierRepository.UpdateSupplierAsync(string, SupplierUpdateRequestDto, CancellationToken)"/>
     public async Task<Supplier?> UpdateSupplierAsync(
@@ -106,6 +129,10 @@ public class SupplierPostgreRepository(
         return response;
     }
 
+    // =========================================================
+    // DELETE / RESTORE
+    // =========================================================
+    
     /// <inheritdoc cref="ISupplierRepository.DeleteSupplierAsync(string, CancellationToken)"/>
     public async Task<bool> DeleteSupplierAsync(
         string id,

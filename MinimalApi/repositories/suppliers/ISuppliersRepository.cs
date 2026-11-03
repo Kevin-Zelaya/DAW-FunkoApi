@@ -1,5 +1,23 @@
 public interface ISupplierRepository
 {
+    // =========================================================
+    // CREATE
+    // =========================================================
+
+    /// <summary>
+    /// Crea un nuevo proveedor.
+    /// </summary>
+    /// <param name="supplier">Datos del proveedor que se desea crear.</param>
+    /// <param name="ct">Token de cancelación de la operación.</param>
+    /// <returns>El proveedor creado.</returns>
+    Task<Supplier> CreateSupplierAsync(
+        SupplierCreateRequestDto supplier,
+        CancellationToken ct = default);
+    
+    // =========================================================
+    // CREATE
+    // =========================================================
+
     /// <summary>
     /// Obtiene todos los proveedores.
     /// </summary>
@@ -35,16 +53,19 @@ public interface ISupplierRepository
     Task<Supplier?> GetSupplierByIdAsync(
         string id,
         CancellationToken ct = default);
-
     /// <summary>
-    /// Crea un nuevo proveedor.
+    /// Comprobar si existe por nombre
     /// </summary>
-    /// <param name="supplier">Datos del proveedor que se desea crear.</param>
+    /// <param name="name">Nombre a comprobar.</param>
     /// <param name="ct">Token de cancelación de la operación.</param>
-    /// <returns>El proveedor creado.</returns>
-    Task<Supplier> CreateSupplierAsync(
-        SupplierCreateRequestDto supplier,
+    /// <returns>El proveedor encontrado o null si no existe.</returns>
+    public Task<bool> ExistByNameAsync(
+        string name,
         CancellationToken ct = default);
+
+    // =========================================================
+    // UPDATE
+    // =========================================================
 
     /// <summary>
     /// Actualiza los datos de un proveedor existente.
@@ -64,6 +85,10 @@ public interface ISupplierRepository
     /// <param name="id">Identificador del proveedor que se desea eliminar.</param>
     /// <param name="ct">Token de cancelación de la operación.</param>
     /// <returns>true si se elimina correctamente; false si no existe.</returns>
+    
+    // =========================================================
+    // UPDATE
+    // =========================================================
     Task<bool> DeleteSupplierAsync(
         string id,
         CancellationToken ct = default);
@@ -74,7 +99,7 @@ public interface ISupplierRepository
     /// <param name="id">Identificador del proveedor que se desea restaurar.</param>
     /// <param name="ct">Token de cancelación de la operación.</param>
     /// <returns>true si se restaura correctamente; false si no existe.</returns>
-    Task<bool> RestoreSupplierAsync(
+    public Task<bool> RestoreSupplierAsync(
         string id,
-        CancellationToken ct = default);
+        CancellationToken ct);
 }
