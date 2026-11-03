@@ -1,5 +1,5 @@
 using Serilog;
-
+using MinimalApi.extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -41,6 +41,7 @@ builder.Services
     .AddRepositories()
     .AddDatabases(builder.Configuration)
     .AddRedisConnection(builder.Configuration)
+    .AddCassandra(builder.Configuration)
     .AddServices()
     .AddStorage();
 

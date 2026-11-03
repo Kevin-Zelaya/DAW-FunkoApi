@@ -1,11 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using MinimalApi.config;
+using MinimalApi.repositories;
 
 [ApiController]
-[Route("api/funkos")] // Seguir a partir de aqui toca probar endpoints y hacer crud de los otros dos
-public class FunkoController(
-    IFunkoService _service
-) : ControllerBase
+[Route("api/[controller]")]
+public class FunkoController : ControllerBase
 {
+    private readonly IFunkoService _service;
+    private readonly IFunkoPriceHistoryRepository _priceHistoryRepository; // <--- 1. Declara la variable aquí
+
+    // 2. Inyéctala en el constructor
+    public FunkoController(
+        IFunkoService service,
+        IFunkoPriceHistoryRepository priceHistoryRepository)
+    {
+        _service = service;
+        _priceHistoryRepository = priceHistoryRepository;
+    }
     // =========================================================
     // CREATE
     // =========================== 
@@ -177,4 +189,25 @@ public class FunkoController(
             ? Ok(response.Value)
             : BadRequest(response.Error);
     }
+    // =========================================================
+    // HISTORIAL DE PRECIOS (CASSANDRA) - SOLO ADMINS
+    // =========================================================
+
+    /// <summary>
+    /// Obtiene el historial de cambios de precio de un Funko desde Cassandra (Exclusivo para Admins).
+    /// </summary>
+    [HttpGet("{id}/historial-precios")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> GetFunkoPriceHistory(long id)
+    {
+        var historial = await _priceHistoryRepository.ObtenerHistorialPorFunkoAsync(id);
+
+        if (historial == null || !historial.Any())
+        {
+            return NotFound(new { mensaje = $"No se encontró historial de precios para el Funko con ID {id}." });
+        }
+
+        return Ok(historial);
+    }
+ // <--- Esta es la ÚLTIMA llave del archivo (cierra la clase FunkoController)
 }

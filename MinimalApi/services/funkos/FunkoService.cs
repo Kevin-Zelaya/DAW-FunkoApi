@@ -1,13 +1,15 @@
 
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MinimalApi.repositories;
 
 public class FunkoService(
     IFunkoRepository _repository,
     ISupplierService _supplierService,
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
-    ICache _cache
+    ICache _cache,
+    IFunkoPriceHistoryRepository _priceHistoryRepository
 ) : IFunkoService, IScoped
 {
     // =========================================================
