@@ -44,6 +44,7 @@ public abstract class PosgreContextConfiguration
                 .HasForeignKey(f => f.CategoryId);
 
             entity.HasQueryFilter(f => !f.IsDelete);
+            
         });
         
         modelBuilder.Entity<Category>(entity =>
@@ -130,7 +131,16 @@ public abstract class PosgreContextConfiguration
 
             // Los otros datos no los utilizo de momento
             
-
+            entity.HasData(
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
+                    Email = "kevin@correo.com",
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+                    Role = Role.ADMIN
+                }
+            );
         });
     }
     

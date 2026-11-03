@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-public class JwtService(IConfiguration configuration)
+public class JwtService(IConfiguration configuration) : IJwtService
 {
     private readonly string _secretKey = configuration["Jwt:Secret"]
         ?? throw new InvalidOperationException("JWT Secret no configurado");
@@ -35,7 +35,7 @@ public class JwtService(IConfiguration configuration)
         var token = new JwtSecurityToken(
             issuer: _issuer,
             audience: _audience,
-            claims:claims,
+            claims: claims,
             expires: DateTime.UtcNow.AddMinutes(_accessTokenExpiryMinutes),
             signingCredentials: creds
         );

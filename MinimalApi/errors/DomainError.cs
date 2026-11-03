@@ -15,5 +15,10 @@ public sealed record ConflictError(string Message, HttpStatusCode StatusCode) : 
 }
 
 public sealed record BusinessRuleError(string Message) : DomainError(Message, HttpStatusCode.BadRequest);
+public sealed record UnauthorizedError(string Message, HttpStatusCode StatusCode) : DomainError(Message, StatusCode)
+{
+    public static UnauthorizedError InvalidCredentials() => new("Credenciales inválidas", HttpStatusCode.Unauthorized);
+    
+}
 
 public sealed record InternalError(string Message) : DomainError(Message, HttpStatusCode.InternalServerError);

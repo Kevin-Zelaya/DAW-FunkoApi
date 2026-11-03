@@ -8,6 +8,7 @@ public static class RepositoriesConfig
         services.AddScoped<IFunkoRepository, FunkoRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ISupplierRepository, SuppliersRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         Log.Information("Repositorios registrados correctamente.");
         return services;
     }
