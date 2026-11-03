@@ -42,8 +42,8 @@ builder.Services
     .AddDatabases(builder.Configuration)
     .AddRedisConnection(builder.Configuration)
     .AddServices()
+    .AddAuthenticationJwt(builder.Configuration)
     .AddStorage();
-
 
 
 // ======= MIDLEWARES ========== 

@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,6 +15,7 @@ public class SupplierController(
     /// <summary>
     /// Crea un nuevo proveedor.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPost]
     public async Task<ActionResult> CreateSupplier(
         [FromBody] SupplierCreateRequestDto request,
@@ -36,6 +38,7 @@ public class SupplierController(
     /// <summary>
     /// Obtiene todos los proveedores.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpGet("all")]
     public async Task<ActionResult> GetAllSuppliers(
         CancellationToken ct)
@@ -50,6 +53,7 @@ public class SupplierController(
     /// <summary>
     /// Obtiene proveedores paginados.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpGet]
     public async Task<ActionResult> GetPaginatedSuppliers(
         [FromQuery] int pageNumber = 1,
@@ -71,6 +75,7 @@ public class SupplierController(
     /// <summary>
     /// Obtiene un proveedor por su ID.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpGet("{id}")]
     public async Task<ActionResult> GetSupplierById(
         string id,
@@ -90,6 +95,7 @@ public class SupplierController(
     /// <summary>
     /// Actualiza un proveedor existente.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateSupplier(
         string id,
@@ -110,6 +116,7 @@ public class SupplierController(
     /// <summary>
     /// Elimina lógicamente un proveedor.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteSupplier(
         string id,
@@ -129,6 +136,7 @@ public class SupplierController(
     /// <summary>
     /// Restaura un proveedor eliminado lógicamente.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/restore")]
     public async Task<ActionResult> RestoreSupplier(
         string id,

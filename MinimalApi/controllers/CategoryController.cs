@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -67,6 +68,7 @@ public class CategoryController(
     /// <summary>
     /// Crea una nueva categoría.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPost]
     public async Task<ActionResult<CategoryDto>> CreateCategory(
         [FromBody] CategoryCreateRequestDto request,
@@ -89,6 +91,7 @@ public class CategoryController(
     /// <summary>
     /// Actualiza una categoría existente.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
     public async Task<ActionResult<CategoryDto>> UpdateCategory(
         string id,
@@ -109,6 +112,7 @@ public class CategoryController(
     /// <summary>
     /// Elimina lógicamente una categoría.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult<CategoryDto>> DeleteCategory(
         string id,
@@ -128,6 +132,7 @@ public class CategoryController(
     /// <summary>
     /// Restaura una categoría eliminada.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id:guid}/restore")]
     public async Task<ActionResult<CategoryDto>> RestoreCategory(
         string id,

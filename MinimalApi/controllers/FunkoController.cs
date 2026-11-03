@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -9,6 +10,7 @@ public class FunkoController(
     // =========================================================
     // CREATE
     // =========================== 
+    [Authorize(Roles = "ADMIN")]
     [HttpPost]
     public async Task<ActionResult<FunkoDto>> CreateFunko(
         [FromBody] FunkoCreateRequestDto dto)
@@ -82,6 +84,7 @@ public class FunkoController(
     /// <summary>
     /// Update a Funko.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
     public async Task<ActionResult<FunkoDto>> UpdateFunko(
         long id,
@@ -98,6 +101,7 @@ public class FunkoController(
     /// <summary>
     /// Update a Funko's category.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/category")]
     public async Task<ActionResult<FunkoDto>> UpdateCategoryFromFunko(
         long id,
@@ -114,6 +118,7 @@ public class FunkoController(
     /// <summary>
     /// Update a Funko's supplier.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/supplier/{supplierId}")]
     public async Task<ActionResult<FunkoDto>> UpdateSupplierFromFunko(
         long id,
@@ -135,6 +140,7 @@ public class FunkoController(
     /// <summary>
     /// Soft-delete a Funko.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteFunko(
         long id,
@@ -150,6 +156,7 @@ public class FunkoController(
     /// <summary>
     /// Restore a deleted Funko.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/restore")]
     public async Task<ActionResult<FunkoDto>> RestoreFunko(
         long id,
@@ -166,6 +173,7 @@ public class FunkoController(
     // UPDATE IMAGE
     // =========================================================
     [HttpPost("{id}/image")]
+    [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult> UploadFunkoImage(
         long id,
         IFormFile file,
