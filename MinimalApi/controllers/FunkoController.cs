@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using MinimalApi.repositories;
 
 [ApiController]
 [Route("api/funkos")] // Seguir a partir de aqui toca probar endpoints y hacer crud de los otros dos
 public class FunkoController(
-    IFunkoService _service
+    IFunkoService _service,
+    IFunkoPriceHistoryRepository _priceHistoryRepository
 ) : ControllerBase
 {
     // =========================================================
@@ -177,4 +179,24 @@ public class FunkoController(
             ? Ok(response.Value)
             : BadRequest(response.Error);
     }
+
+  /// <summary>
+    /// Obtiene el historial de cambios de precio de un Funko desde Cassandra.
+    /// </summary>
+    [HttpGet("{id}/historial-precios")]
+    public async Task<ActionResult> GetFunkoPriceHistory(
+        long id,
+        CancellationToken ct)
+    {
+        // Nota: Si tu método en el repositorio no acepta CancellationToken, puedes omitir 'ct' o añadirlo al repositorio.
+        var historial = await _priceHistoryRepository.ObtenerHistorialPorFunkoAsync(id);
+
+        if (historial == null || !historial.Any())
+        {
+            return NotFound(new { mensaje = $"No se encontró historial de precios para el Funko con ID {id}." });
+        }
+
+        return Ok(historial);
+    }
+    
 }

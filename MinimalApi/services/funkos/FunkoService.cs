@@ -1,13 +1,17 @@
 
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MinimalApi.repositories;
+
+
 
 public class FunkoService(
     IFunkoRepository _repository,
     ISupplierService _supplierService,
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
-    ICache _cache
+    ICache _cache,
+    IFunkoPriceHistoryRepository _priceHistoryRepository
 ) : IFunkoService, IScoped
 {
     // =========================================================
@@ -188,7 +192,20 @@ public class FunkoService(
         _logger.LogDebug(
             "[SERVICE-UPDATE] Intentando actualizar el Funko con ID {Id}.",
             id);
-        // Actualizar en db
+
+        // Obtenemos el Funko actual antes de actualizar para conocer su precio previo
+        var funkoActual = await _repository.GetFunkoByIdAsync(id, ct);
+        if(funkoActual is null)
+            return Result.Failure<FunkoDto, DomainError>(
+                FunkoError.NotFound(id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
+                    id));
+
+        double precioAnterior = funkoActual.Price;
+        bool haCambiadoElPrecio = precioAnterior != request.Price;
+
+        // Actualizar en la base de datos principal (Postgre/Mongo)
         var response = await _repository.UpdateFunkoAsync(id, request, ct);
         if(response is null)
             return Result.Failure<FunkoDto, DomainError>(
@@ -197,12 +214,33 @@ public class FunkoService(
                     "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
                     id));
 
-        var supplier = await _supplierService.GetSupplierByIdAsync(response.SupplierId); // ejecutar si el anterior funciona
+        // Si el precio cambió, lo registramos en Cassandra de forma segura
+        if (haCambiadoElPrecio)
+        {
+            try
+            {
+                await _priceHistoryRepository.InsertarHistorialAsync(
+                    funkoId: id,
+                    precio: request.Price,
+                    precioAnterior: precioAnterior
+                );
+                _logger.LogInformation("[SERVICE-UPDATE] Historial de precios de Cassandra actualizado para el Funko {Id}.", id);
+            }
+            catch (Exception ex)
+            {
+                // Protegemos el flujo por si Cassandra falla puntualmente, para que no tumbe la petición principal
+                _logger.LogWarning(ex, "[SERVICE-UPDATE] No se pudo registrar el historial de precios en Cassandra para el Funko {Id}.", id);
+            }
+        }
+
+        var supplier = await _supplierService.GetSupplierByIdAsync(response.SupplierId); 
+        
         // Invalidar en caché
         await _cache.RemoveAsync(key);
-        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        // retornar según si es nulo o no
-        return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value)) // se le pasa el proveedor para convertir
+        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar paginación cacheada
+
+        // Retornar respuesta exitosa
+        return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
                     f.Id));

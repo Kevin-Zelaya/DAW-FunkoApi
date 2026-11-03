@@ -1,5 +1,5 @@
 using CSharpFunctionalExtensions;
-<<<<<<< HEAD
+
 using Microsoft.AspNetCore.Http;
 using MinimalApi.Errors;
 
@@ -12,7 +12,7 @@ public interface IStorageService
     bool FileExists(string filename);
     string GetFullPath(string filename);
     string GetRelativePath(string filename, string folder = "funkos");
-=======
+
 
 /// <summary>
 /// Interfaz para operaciones de almacenamiento de archivos.
@@ -55,5 +55,5 @@ public interface IStorageService
     /// <param name="folder">Carpeta dentro del storage.</param>
     /// <returns>Ruta relativa formateada: /uploads/{carpeta}/{nombre}</returns>
     string GetRelativePath(string filename, string folder = "productos");
->>>>>>> origin/main
+}
 }

@@ -1,7 +1,7 @@
 info:
   name: RESTORE_FUNKO
   type: http
-  seq: 5
+  seq: 9
 
 http:
   method: DELETE

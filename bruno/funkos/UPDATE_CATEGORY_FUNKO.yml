@@ -1,7 +1,7 @@
 info:
   name: UPDATE_CATEGORY_FUNKO
   type: http
-  seq: 8
+  seq: 7
 
 http:
   method: PATCH

@@ -1,7 +1,7 @@
 info:
   name: DELETE_FUNKO
   type: http
-  seq: 4
+  seq: 8
 
 http:
   method: DELETE

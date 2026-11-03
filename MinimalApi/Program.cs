@@ -1,5 +1,6 @@
 using Serilog;
 using ProductosEFCore.Storage;
+using Cassandra;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,7 @@ builder.Services.AddControllers(options =>
 
 // proximamente validadores
 
-<<<<<<< HEAD
+
 // REGISTRAR EL STORAGE EN EL CONTENEDOR DE DEPENDENCIAS 
 builder.Services.AddScoped<IStorageService, StorageService>();
 
@@ -48,17 +49,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // ======= Configuración de open api ========== 
-=======
+
 // ======= Infraestructura ========== 
 builder.Services
     .AddRepositories()
     .AddDatabases(builder.Configuration)
     .AddRedisConnection(builder.Configuration)
     .AddServices()
-    .AddStorage();
-
-
-
+    .AddStorage()
+    .AddCassandra(builder.Configuration);
 // ======= MIDLEWARES ========== 
 var app = builder.Build();
 app.UseHttpsRedirection();
@@ -67,7 +66,6 @@ if(AppConfig.shouldRecreateDb)
     await app.InitializationDatabaseAsync();
 
 app.UseStaticFiles();
->>>>>>> origin/main
 app.MapOpenApi();
 
 app.UseGlobalExceptionHandler();
