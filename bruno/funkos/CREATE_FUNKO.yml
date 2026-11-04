@@ -10,15 +10,17 @@ http:
     type: json
     data: |-
       {
-        "name": "Gata mahoso",
+        "name": "jOSESITO",
         "franchise": "Marvel",
         "number": 123,
-        "supplierId": "6ae9062dde1a14f83138128b",
-        "categoryId": "7G7yFhPcC2l",
+        "supplierId": "6aeb8b948f171298f54dd73c",
+        "categoryId": "6mdoLOgLln5",
         "exclusive": false,
         "price": 14.99
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDkzYTJkZTktYjgwMC00Y2YxLTk1OTMtY2EyOWNlNjcyZGMyIiwiaWF0IjoxNzkzODIxNjc4LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzODIyNTc4LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.HPzxvqLWPBOAus4q1jjwnuiM4TRHQVeHR3e2bgVP2Qg
 
 settings:
   encodeUrl: true

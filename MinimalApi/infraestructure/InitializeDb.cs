@@ -20,6 +20,5 @@ public static class InitializationDb
         await mongoContext.Database.EnsureDeletedAsync();
         await mongoContext.Database.EnsureCreatedAsync();
         Log.Information("[POSGRE] Eliminando y recreando la base de datos");
-               
     }
 }
