@@ -119,7 +119,7 @@ public class FunkoController(
     /// Update a Funko's supplier.
     /// </summary>
     [Authorize(Roles = "ADMIN")]
-    [HttpPatch("{id}/supplier/{supplierId}")]
+    [HttpPatch("{id}/supplier/{supplierId}")] // QUITAR ID
     public async Task<ActionResult<FunkoDto>> UpdateSupplierFromFunko(
         long id,
         FunkoUpdateSupplierDto request,
