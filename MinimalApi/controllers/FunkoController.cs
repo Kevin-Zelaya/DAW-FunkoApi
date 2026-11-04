@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using MinimalApi.config;
@@ -21,6 +22,7 @@ public class FunkoController : ControllerBase
     // =========================================================
     // CREATE
     // =========================== 
+    [Authorize(Roles = "ADMIN")]
     [HttpPost]
     public async Task<ActionResult<FunkoDto>> CreateFunko(
         [FromBody] FunkoCreateRequestDto dto)
@@ -94,6 +96,7 @@ public class FunkoController : ControllerBase
     /// <summary>
     /// Update a Funko.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
     public async Task<ActionResult<FunkoDto>> UpdateFunko(
         long id,
@@ -110,6 +113,7 @@ public class FunkoController : ControllerBase
     /// <summary>
     /// Update a Funko's category.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/category")]
     public async Task<ActionResult<FunkoDto>> UpdateCategoryFromFunko(
         long id,
@@ -126,7 +130,8 @@ public class FunkoController : ControllerBase
     /// <summary>
     /// Update a Funko's supplier.
     /// </summary>
-    [HttpPatch("{id}/supplier/{supplierId}")]
+    [Authorize(Roles = "ADMIN")]
+    [HttpPatch("{id}/supplier/{supplierId}")] // QUITAR ID
     public async Task<ActionResult<FunkoDto>> UpdateSupplierFromFunko(
         long id,
         FunkoUpdateSupplierDto request,
@@ -147,6 +152,7 @@ public class FunkoController : ControllerBase
     /// <summary>
     /// Soft-delete a Funko.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteFunko(
         long id,
@@ -162,6 +168,7 @@ public class FunkoController : ControllerBase
     /// <summary>
     /// Restore a deleted Funko.
     /// </summary>
+    [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/restore")]
     public async Task<ActionResult<FunkoDto>> RestoreFunko(
         long id,
@@ -178,6 +185,7 @@ public class FunkoController : ControllerBase
     // UPDATE IMAGE
     // =========================================================
     [HttpPost("{id}/image")]
+    [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult> UploadFunkoImage(
         long id,
         IFormFile file,

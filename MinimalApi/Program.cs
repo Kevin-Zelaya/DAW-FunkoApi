@@ -43,8 +43,8 @@ builder.Services
     .AddRedisConnection(builder.Configuration)
     .AddCassandra(builder.Configuration)
     .AddServices()
+    .AddAuthenticationJwt(builder.Configuration)
     .AddStorage();
-
 
 
 // ======= MIDLEWARES ========== 
