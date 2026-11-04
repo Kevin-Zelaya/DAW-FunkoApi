@@ -36,6 +36,20 @@ public class FunkoService(
         // Crear funko
         var response = await _repository.CreateFunkoAsync(
             funko.ToModel(), ct);
+        try
+        {
+            await _priceHistoryRepository.InsertarHistorialAsync(
+                funkoId: response.Id,
+                precioNuevo: (decimal)response.Price, 
+                precioAnterior: (decimal)0
+            );
+            _logger.LogInformation("[SERVICE-UPDATE] Historial de precios de Cassandra actualizado para el Funko {Id}.", response.Id);
+        }
+        catch (Exception ex)
+        {
+            // Protegemos el flujo por si Cassandra falla puntualmente, para que no tumbe la petición principal
+            _logger.LogWarning(ex, "[SERVICE-UPDATE] No se pudo registrar el historial de precios en Cassandra para el Funko {Id}.", response.Id);
+        }
         // Retornar como dto
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
             .Tap(f => _logger.LogInformation(

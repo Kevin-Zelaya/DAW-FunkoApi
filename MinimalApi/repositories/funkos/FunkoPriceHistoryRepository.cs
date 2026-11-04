@@ -57,6 +57,6 @@ public class FunkoPriceHistoryRepository(Cassandra.ISession _session) : IFunkoPr
             Fecha = row.GetValue<DateTimeOffset>("fecha"),
             Precio = row.GetValue<decimal>("precio"),
             PrecioAnterior = row.GetValue<decimal>("precio_anterior")
-        });
+        }).ToList();
     }
 }

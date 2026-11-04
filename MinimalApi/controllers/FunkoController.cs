@@ -4,13 +4,13 @@ using MinimalApi.config;
 using MinimalApi.repositories;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/funkos")]
 public class FunkoController : ControllerBase
 {
     private readonly IFunkoService _service;
-    private readonly IFunkoPriceHistoryRepository _priceHistoryRepository; // <--- 1. Declara la variable aquí
+    private readonly IFunkoPriceHistoryRepository _priceHistoryRepository;
 
-    // 2. Inyéctala en el constructor
+    
     public FunkoController(
         IFunkoService service,
         IFunkoPriceHistoryRepository priceHistoryRepository)
@@ -197,8 +197,6 @@ public class FunkoController : ControllerBase
     /// Obtiene el historial de cambios de precio de un Funko desde Cassandra (Exclusivo para Admins).
     /// </summary>
     [HttpGet("{id}/historial-precios")]
-    [Authorize(Roles = "Admin")]
-    [Route("api/funkos")]
     public async Task<ActionResult> GetFunkoPriceHistory(long id)
     {
         var historial = await _priceHistoryRepository.ObtenerHistorialPorFunkoAsync(id);
