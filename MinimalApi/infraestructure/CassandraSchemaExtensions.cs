@@ -32,16 +32,17 @@ public static class CassandraSchemaExtensions
         Log.Information("[CASSANDRA] Eliminando y recreando las tablas.");
         // Eliminar la tabla existente: se puede separar para futuras consultas
         await session.ExecuteAsync(new SimpleStatement(
-            "DROP TABLE IF EXISTS historial_precios_por_funko"));
+            "DROP TABLE IF EXISTS funko_price_history"));
         // Tabla de precios
         await session.ExecuteAsync(new SimpleStatement(@"
-            CREATE TABLE IF NOT EXISTS historial_precios_por_funko (
+            CREATE TABLE IF NOT EXISTS funko_price_history (
                 funko_id bigint,
-                fecha timestamp,
-                precio decimal,
-                precio_anterior decimal,
+                date timestamp,
+                price decimal,
+                old_price decimal,
+                deleted BOOLEAN,
                 PRIMARY KEY (funko_id, fecha)
-            ) WITH CLUSTERING ORDER BY (fecha DESC);"));
+            ) WITH CLUSTERING ORDER BY (date DESC);"));
 
         Log.Information("Esquema de Cassandra listo en el keyspace {Keyspace}", keyspace);
     }
