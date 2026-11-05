@@ -14,7 +14,7 @@ public static class RedisConnectionConfig
             .Get<RedisConfig>();
 
         var redis = ConnectionMultiplexer.Connect(
-            AppConfig.RedisConnection
+            redisConfig!.ConnectionString
         );
         services.AddSingleton<IConnectionMultiplexer>(redis);
         Log.Information("Conexión a Redis configurada correctamente.");

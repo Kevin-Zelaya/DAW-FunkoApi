@@ -1,5 +1,7 @@
 using Serilog;
-using MinimalApi.extensions;
+using ISession = Cassandra.ISession;
+using MinimalApi.config;
+using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -49,10 +51,21 @@ builder.Services
 
 // ======= MIDLEWARES ========== 
 var app = builder.Build();
+var apiConfig = app.Services
+    .GetRequiredService<IOptions<ApiConfig>>()
+    .Value;
+
+    
 app.UseHttpsRedirection();
 
-if(AppConfig.shouldRecreateDb)
+// inicializar datos en desarrollos
+if (apiConfig.shouldRecreateDb &&
+    app.Environment.IsDevelopment())
+{
     await app.InitializationDatabaseAsync();
+    var settings = app.Services.GetRequiredService<CassandraSettings>();
+    await app.Services.GetRequiredService<ISession>().InitializeSchemaAsync(settings.Keyspace);
+}
 
 app.UseStaticFiles();
 app.MapOpenApi();
@@ -79,9 +92,9 @@ Console.WriteLine("=================     FUNKO API     ==================");
 Console.WriteLine("======================================================");
 Console.WriteLine("");
 Console.WriteLine("+===================+================================== ");
-Console.WriteLine($"| api_environment   |      {AppConfig.Environment}    |");
+Console.WriteLine($"| api_environment   |      {app.Environment}    |");
 Console.WriteLine($"|  swagger_route    |localhost:5205/swagger/index.html|");
-Console.WriteLine($"|   Recreate_db     |                {(AppConfig.shouldRecreateDb ? "true " : "false")}            |");
+Console.WriteLine($"|   Recreate_db     |                {(apiConfig.shouldRecreateDb ? "true " : "false")}            |");
 Console.WriteLine($"+===================+=================================+");
 
 app.Run();
