@@ -41,40 +41,56 @@ public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistory
         }).ToList();
     }
     // queda pendiente eliminar todos los registros de 
-    public async Task DeleteHistoryByFunkoId(long funkoId, CancellationToken ct)
+    public async Task DeleteHistoryByFunkoId(
+        long funkoId,
+        CancellationToken ct)
     {
-        var delete = @"
-            UPDATE funko_price_history 
-            SET deleted = true 
-            WHERE funko_id = ?;
-        ";
-        try
+        var select = await _session.PrepareAsync(
+            "SELECT date FROM funko_price_history WHERE funko_id = ?"
+        );
+
+        var rows = await _session.ExecuteAsync(select.Bind(funkoId));
+
+        var update = await _session.PrepareAsync(
+            @"UPDATE funko_price_history
+            SET deleted = true
+            WHERE funko_id = ? AND date = ?"
+        );
+
+        foreach (var row in rows)
         {
-            var prepared = await _session.PrepareAsync(delete);
-            var statement = prepared.Bind(funkoId);
-            await _session.ExecuteAsync(statement); 
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "[CASSANDRA-REPOSITORY] Error al eliminar los registros de precio del Funko ID {FunkoId}", funkoId);
+            ct.ThrowIfCancellationRequested();
+
+            var date = row.GetValue<DateTime>("date");
+
+            await _session.ExecuteAsync(
+                update.Bind(funkoId, date)
+            );
         }
     }
     public async Task RestoreHistoryByFunkoId(long funkoId, CancellationToken ct)
     {
-        var restore = @"
-            UPDATE funko_price_history 
-            SET deleted = false 
-            WHERE funko_id = ?;
-        ";
-        try
+        var select = await _session.PrepareAsync(
+            "SELECT date FROM funko_price_history WHERE funko_id = ?"
+        );
+
+        var rows = await _session.ExecuteAsync(select.Bind(funkoId));
+
+        var update = await _session.PrepareAsync(
+            @"UPDATE funko_price_history
+            SET deleted = false
+            WHERE funko_id = ? AND date = ?"
+        );
+
+        foreach (var row in rows)
         {
-            var prepared = await _session.PrepareAsync(restore);
-            var statement = prepared.Bind(funkoId);
-            await _session.ExecuteAsync(statement); 
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "[CASSANDRA-REPOSITORY] Error al restaurar los registros de precio del Funko ID {FunkoId}", funkoId);
+            ct.ThrowIfCancellationRequested();
+
+            var date = row.GetValue<DateTime>("date");
+
+            await _session.ExecuteAsync(
+                update.Bind(funkoId, date)
+            );
         }
     }
 }

@@ -74,17 +74,23 @@ public class FunkoRepository(
         int pageSize,
         CancellationToken ct = default)
     {
-        // 1. Cargar colecciones founkos/Proveedores
-        List<Funko> funkos= await _context.Funkos
-            .AsNoTracking()
+        // Obtener todos los registros disponibles
+        var query = _context.Funkos.AsNoTracking();
+
+        // Calcular el total de registros
+        int count = await query.CountAsync(ct);
+
+        // Calcular el número total de páginas
+        int totalPages = (int)Math.Ceiling(
+            (double)count / pageSize);
+
+        // Obtener los Funkos de la página solicitada
+        List<Funko> funkos = await query
             .OrderBy(f => f.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync(ct);
-        // 3. Calcular metadatos
-        int count = funkos.Count;
-        int totalPages = (int)Math.Ceiling(
-            (double)count / pageSize);
+
         bool hasPreviousPage = pageNumber > 1;
         bool hasNextPage = pageNumber < totalPages;
 

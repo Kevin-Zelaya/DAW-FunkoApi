@@ -19,7 +19,7 @@ public class SupplierService(
             "[SERVICE-CREATESUPPLIER] Intentando crear un proveedor.");
         // Comprobar si existe proveedor con ese nombre
         var exist = await _repository.ExistByNameAsync(request.Name, ct);
-        if(!exist)
+        if(exist)
             return Result.Failure<SupplierDto, DomainError>(
                 ConflictError.Duplicate("Proveedor", request.Name));
         // Crear en repositorio

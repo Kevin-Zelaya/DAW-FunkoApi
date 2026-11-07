@@ -130,7 +130,7 @@ public class UserRepository(
 
     public async Task<bool> ExistByUsername(
         string username,
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         _logger.LogDebug(
