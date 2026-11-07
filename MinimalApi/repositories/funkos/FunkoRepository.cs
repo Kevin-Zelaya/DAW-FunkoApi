@@ -26,11 +26,6 @@ public class FunkoRepository(
         _context.Funkos.Add(funko);
 
         await _context.SaveChangesAsync(ct);
-
-        await _context.Entry(funko) // Obtener el proveedor al que hace referencia
-            .Reference(f => f.Category)
-            .LoadAsync(ct);
-
         return funko;
     }
 

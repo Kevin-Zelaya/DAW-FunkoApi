@@ -6,6 +6,7 @@ using MinimalApi.repositories;
 public class FunkoService(
     IFunkoRepository _repository,
     ISupplierService _supplierService,
+    ICategoryService _categoryService,
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
     ICache _cache,
@@ -28,11 +29,15 @@ public class FunkoService(
         if(exist)
             return Result.Failure<FunkoDto, DomainError>(
                 ConflictError.Duplicate("Funko", funko.Name));
-        // Comprobar si existe el proveedor y obtenerlo
-        var supplier = await _supplierService.GetSupplierByIdAsync(funko.SupplierId, ct);
-        if(supplier.Value is null)
-            return Result.Failure<FunkoDto, DomainError>(
-                NotFoundError.FromResource("Supplier", funko.SupplierId));
+        // Obtener categoria y proveedor
+        var rs = _supplierService.GetSupplierByIdAsync(funko.SupplierId, ct);
+        var rc = _categoryService.GetCategoryByIdAsync(funko.CategoryId, ct);
+        await Task.WhenAll(rs, rc);
+        var supplier = await rs;
+        var category = await rc;
+        // Comprobar el resultado de ambos
+        if(supplier.IsFailure || category.IsFailure) // Si alguno de los dos es falla
+            return supplier.IsFailure ? supplier.Error : category.Error; // se comprueba cual fue y se retorna el erro que ya es un result
         // Crear funko
         var response = await _repository.CreateFunkoAsync(
             funko.ToModel(), ct);
@@ -48,7 +53,7 @@ public class FunkoService(
             .Tap(f => _logger.LogInformation(
                 "[SERVICE-CREATE] Funko creado correctamente con ID {Id}.",
                 f.Id));
-    }
+        }
 
     // =========================================================
     // READ
