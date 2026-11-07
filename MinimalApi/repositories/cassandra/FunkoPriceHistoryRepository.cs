@@ -7,11 +7,11 @@ namespace MinimalApi.repositories;
 
 public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistoryRepository
 {
-    public async Task InsertarHistorialAsync(long funkoId, decimal precioNuevo, decimal precioAnterior)
+    public async Task AddPriceAsync(long funkoId, decimal precioNuevo, decimal precioAnterior, CancellationToken ct)
     {
        
         var insertCql = @"
-            INSERT INTO historial_precios_por_funko (funko_id, date, price, old_price, deleted)
+            INSERT INTO funko_price_history (funko_id, date, price, old_price, deleted)
             VALUES (?, ?, ?, ?, ?);";
 
         var prepared = await _session.PrepareAsync(insertCql);
@@ -20,27 +20,28 @@ public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistory
         await _session.ExecuteAsync(statement);
     }
 
-    public async Task<IEnumerable<HistorialPrecioFunkoModel>> ObtenerHistorialPorFunkoAsync(long funkoId)
+    public async Task<List<PriceHistoryDto>> GetHistoryByFunkoIdAsync(long funkoId, CancellationToken ct)
     {
         var selectCql = @"
             SELECT funko_id, date, price, old_price 
             FROM funko_price_history
-            WHERE funko_id = ? AND deleted = false;";
+            WHERE funko_id = ? AND deleted = false
+            ALLOW FILTERING;";
 
         var prepared = await _session.PrepareAsync(selectCql);
         var statement = prepared.Bind(funkoId);
         var rs = await _session.ExecuteAsync(statement);
 
-        return rs.Select(row => new HistorialPrecioFunkoModel
+        return rs.Select(row => new PriceHistoryDto
         {
             FunkoId = row.GetValue<long>("funko_id"),
-            Fecha = row.GetValue<DateTimeOffset>("date"),
-            Precio = row.GetValue<decimal>("price"),
-            PrecioAnterior = row.GetValue<decimal>("old_price")
+            Date = row.GetValue<DateTime>("date"),
+            Price = row.GetValue<decimal>("price"),
+            OldPrice = row.GetValue<decimal>("old_price")
         }).ToList();
     }
     // queda pendiente eliminar todos los registros de 
-    public async Task DeleteHistoryByFunkoId(long funkoId)
+    public async Task DeleteHistoryByFunkoId(long funkoId, CancellationToken ct)
     {
         var delete = @"
             UPDATE funko_price_history 
@@ -58,7 +59,7 @@ public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistory
             Log.Error(ex, "[CASSANDRA-REPOSITORY] Error al eliminar los registros de precio del Funko ID {FunkoId}", funkoId);
         }
     }
-    public async Task RestoreHistoryByFunkoId(long funkoId)
+    public async Task RestoreHistoryByFunkoId(long funkoId, CancellationToken ct)
     {
         var restore = @"
             UPDATE funko_price_history 

@@ -13,6 +13,7 @@ public static class ServicesConfiguration
         services.AddScoped<ICache, RedisCache>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IFunkoPriceHistoryService, FunkoPriceHistoryService>();
         Log.Information("Servicios configurados correctamente.");
         return services;
     }

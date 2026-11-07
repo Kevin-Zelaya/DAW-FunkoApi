@@ -4,8 +4,8 @@ namespace MinimalApi.repositories;
 
 public interface IFunkoPriceHistoryRepository
 {
-    Task InsertarHistorialAsync(long funkoId, decimal precioNuevo, decimal precioAnterior);
-    Task<IEnumerable<HistorialPrecioFunkoModel>> ObtenerHistorialPorFunkoAsync(long funkoId);
-    Task RestoreHistoryByFunkoId(long funkoId);
-    Task DeleteHistoryByFunkoId(long funkoId);
+    Task AddPriceAsync(long funkoId, decimal precioNuevo, decimal precioAnterior, CancellationToken ct);
+    Task<List<PriceHistoryDto>> GetHistoryByFunkoIdAsync(long funkoId, CancellationToken ct);
+    Task RestoreHistoryByFunkoId(long funkoId, CancellationToken ct);
+    Task DeleteHistoryByFunkoId(long funkoId, CancellationToken ct);
 }

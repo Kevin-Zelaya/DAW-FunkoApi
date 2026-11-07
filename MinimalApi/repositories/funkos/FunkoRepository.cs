@@ -217,6 +217,29 @@ public class FunkoRepository(
 
         return true;
     }
+    /// <inheritdoc cref="IFunkoRepository.UpdatePriceFromFunkoAsync(long, FunkoUpdatePriceRequestDto, CancellationToken)"/>
+    public async Task<bool> UpdatePriceFromFunkoAsync(
+        long id,
+        FunkoUpdatePriceRequestDto request,
+        CancellationToken ct = default
+    )
+    {
+        var old = await _context.Funkos.FirstOrDefaultAsync(f => f.Id == id);
+        if(old is null ) return false;
+        old.Price = request.Price;
+        try
+        {
+            _context.Entry(old)
+                .Property(f => f.RowVersion)
+                .OriginalValue = request.RowVersion;
+            await _context.SaveChangesAsync(ct);
+        } catch(DbUpdateConcurrencyException)
+        {
+            Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
+            throw;
+        }
+        return true;
+    }
 
     
     // =========================================================

@@ -43,7 +43,7 @@ public abstract class MongoContextConfiguration
             entity.HasQueryFilter(s => !s.IsDeleted);
             
             entity.HasData(
-                new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Funko Europe", IsDeleted = false },
+                new Supplier { Id = "6aee3ce4035ea0d4b4a44432", Name = "Funko Europe", IsDeleted = false },
                 new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Collector Store", IsDeleted = false },
                 new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Pop In A Box", IsDeleted = false },
                 new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Entertainment Earth", IsDeleted = false },

@@ -13,14 +13,14 @@ http:
         "name": "jOSESITO",
         "franchise": "Marvel",
         "number": 123,
-        "supplierId": "6aeb8b948f171298f54dd73c",
-        "categoryId": "6mdoLOgLln5",
+        "supplierId": "6aee3ce4035ea0d4b4a44432",
+        "categoryId": "e823IW7x_iC",
         "exclusive": false,
         "price": 14.99
       }
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDkzYTJkZTktYjgwMC00Y2YxLTk1OTMtY2EyOWNlNjcyZGMyIiwiaWF0IjoxNzkzODIxNjc4LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzODIyNTc4LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.HPzxvqLWPBOAus4q1jjwnuiM4TRHQVeHR3e2bgVP2Qg
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiYmYwYTFiZGEtNTI1OS00MmZhLTg1ODQtNDFkMDJlOWYzMjk3IiwiaWF0IjoxNzkzOTk1OTg1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzOTk2ODg1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.MejsDBZmKlMdE98jGaZ0KqXy8HkPd90XwrE0MjWj0zE
 
 settings:
   encodeUrl: true

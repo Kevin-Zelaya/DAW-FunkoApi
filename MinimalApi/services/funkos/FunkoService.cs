@@ -9,7 +9,7 @@ public class FunkoService(
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
     ICache _cache,
-    IFunkoPriceHistoryRepository _priceHistoryRepository
+    IFunkoPriceHistoryService _historyService
 ) : IFunkoService, IScoped
 {
     // =========================================================
@@ -36,20 +36,13 @@ public class FunkoService(
         // Crear funko
         var response = await _repository.CreateFunkoAsync(
             funko.ToModel(), ct);
-        try
-        {
-            await _priceHistoryRepository.InsertarHistorialAsync(
-                funkoId: response.Id,
-                precioNuevo: (decimal)response.Price, 
-                precioAnterior: (decimal)0
-            );
-            _logger.LogInformation("[SERVICE-UPDATE] Historial de precios de Cassandra actualizado para el Funko {Id}.", response.Id);
-        }
-        catch (Exception ex)
-        {
-            // Protegemos el flujo por si Cassandra falla puntualmente, para que no tumbe la petición principal
-            _logger.LogWarning(ex, "[SERVICE-UPDATE] No se pudo registrar el historial de precios en Cassandra para el Funko {Id}.", response.Id);
-        }
+        // Agregamos al historia, este retornar un mensaje pero no es necesario para la respuesta
+        await _historyService.AddHistoryAsync(
+            response.Id,
+            (decimal)response.Price, 
+            0,
+            ct
+        );
         // Retornar como dto
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
             .Tap(f => _logger.LogInformation(
@@ -135,7 +128,7 @@ public class FunkoService(
                 toReturn.Count));
     }
 
-    /// <inheritdoc cref="IFunkoService.GetPaginatedFunkos(string, string, CancellationToken)"/>
+    /// <inheritdoc cref="IFunkoService.GetPaginatedFunkos(int, int, CancellationToken)"/>
     public async Task<Result<PaginatedResouce<FunkoDto>, DomainError>> GetPaginatedFunkos(
         int pageNumber,
         int pageSize,
@@ -214,9 +207,6 @@ public class FunkoService(
                     "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
                     id));
 
-        double precioAnterior = funkoActual.Price;
-        bool haCambiadoElPrecio = precioAnterior != request.Price;
-
         // Actualizar en la base de datos principal (Postgre/Mongo)
         var response = await _repository.UpdateFunkoAsync(id, request, ct);
         if(response is null)
@@ -226,25 +216,7 @@ public class FunkoService(
                     "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
                     id));
 
-        // Si el precio cambió, lo registramos en Cassandra de forma segura
-        if (haCambiadoElPrecio)
-        {
-            try
-            {
-                await _priceHistoryRepository.InsertarHistorialAsync(
-                    funkoId: id,
-                    precioNuevo: (decimal)request.Price, 
-                    precioAnterior: (decimal)precioAnterior
-                );
-                _logger.LogInformation("[SERVICE-UPDATE] Historial de precios de Cassandra actualizado para el Funko {Id}.", id);
-            }
-            catch (Exception ex)
-            {
-                // Protegemos el flujo por si Cassandra falla puntualmente, para que no tumbe la petición principal
-                _logger.LogWarning(ex, "[SERVICE-UPDATE] No se pudo registrar el historial de precios en Cassandra para el Funko {Id}.", id);
-            }
-        }
-
+       
         var supplier = await _supplierService.GetSupplierByIdAsync(response.SupplierId); 
         
         // Invalidar en caché
@@ -257,7 +229,60 @@ public class FunkoService(
                     "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
                     f.Id));
     }
-    /// <inheritdoc cref="IFunkoService.UpdateCategoryFromAsync(long, CategoryUpdateRequestDto, CancellationToken)"/>
+    /// <inheritdoc cref="IFunkoService.UpdatePriceAsync(long, FunkoUpdatePriceRequestDto, CancellationToken)"/>
+    public async Task<Result<FunkoPriceUpdatedResponseDto, DomainError>> UpdatePriceAsync(
+        long Id,
+        FunkoUpdatePriceRequestDto request,
+        CancellationToken ct = default)
+    {
+        string key = $"FUNKO:{Id}";
+        // Obtenemos el Funko actual antes de actualizar para conocer su precio previo
+        var funkoActual = await _repository.GetFunkoByIdAsync(Id, ct);
+        if(funkoActual is null)
+            return Result.Failure<FunkoPriceUpdatedResponseDto, DomainError>(
+                FunkoError.NotFound(Id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
+                    Id));
+        // Comprobar si el precio ha cambiando
+        double precioAnterior = funkoActual.Price;
+        bool haCambiadoElPrecio = precioAnterior != request.Price;
+        // =====================================
+
+        // Actualizar en la base de dATOS
+        var response = await _repository.UpdatePriceFromFunkoAsync(Id, request, ct);
+
+        // Si el precio no cambio no hace falta llamar al historial de precios
+        if (!haCambiadoElPrecio)
+            return Result.Success<FunkoPriceUpdatedResponseDto, DomainError>(
+                new FunkoPriceUpdatedResponseDto(
+                    funkoActual.Price,
+                    new PriceHistoryModifiedResponse("No ha sido necesario agregar el precio al historial ya que no ha cambiado.")
+                )
+            );
+            
+        var phResponse = await _historyService.AddHistoryAsync(
+            Id, 
+            (decimal)request.Price,
+            (decimal)precioAnterior,
+            ct
+        );        
+        // Invalidar en caché
+        await _cache.RemoveAsync(key);
+        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar paginación cacheada
+
+        // Retornar respuesta exitosa
+        return Result.Success<FunkoPriceUpdatedResponseDto, DomainError>(
+            new FunkoPriceUpdatedResponseDto(
+                funkoActual.Price,
+                phResponse.Value
+            )
+        )
+        .Tap(f => _logger.LogInformation(
+                "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
+                Id));
+    }
+    /// <inheritdoc cref="IFunkoService.UpdateCategoryFromAsync(long, FunkoUpdateCategoryRequestDto, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> UpdateCategoryFromAsync(
         long id,
         FunkoUpdateCategoryRequestDto request,
@@ -328,7 +353,7 @@ public class FunkoService(
     // =========================================================
 
     /// <inheritdoc cref="IFunkoService.DeleteFunkoAsync(long, CancellationToken)"/>
-    public async Task<Result<bool, DomainError>> DeleteFunkoAsync(
+    public async Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(
         long id,
         CancellationToken ct = default)
     {
@@ -339,7 +364,7 @@ public class FunkoService(
         // Comprobar y obtener el funko
         var exist = await _repository.GetFunkoByIdAsync(id, ct);
         if(exist is null)
-            return Result.Failure<bool, DomainError>(
+            return Result.Failure<FunkoDeletedResponseDto, DomainError>(
                 FunkoError.NotFound(id))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-DELETE] No se encontró el Funko con ID {Id}.",
@@ -354,12 +379,19 @@ public class FunkoService(
         // Eliminar imaegen en el storage service
         if(exist.Imagen is not null && exist.Imagen != "/uploads/funkos/default.png")
             await _storageService.DeleteFileAsync(exist.Imagen);
-        
+        // Eliminado lógico del historial
+        var phResponse = await _historyService.DeleteHistoryAsync(id, ct);
         // Retornar según si es verdadero o false la eliminación
-        return Result.Success<bool, DomainError>(true)
-                .Tap(_ => _logger.LogInformation(
-                    "[SERVICE-DELETE] Funko con ID {Id} eliminado correctamente.",
-                    id));
+        return Result.Success<FunkoDeletedResponseDto, DomainError>(
+            new FunkoDeletedResponseDto(
+
+            "Funko eliminado correctamente",
+            phResponse.Value
+            )
+        )
+        .Tap(_ => _logger.LogInformation(
+            "[SERVICE-DELETE] Funko con ID {Id} eliminado correctamente.",
+            id));
     }
 
     /// <inheritdoc cref="IFunkoService.RestoreDeletedFunkoAsync(long, CancellationToken)"/>

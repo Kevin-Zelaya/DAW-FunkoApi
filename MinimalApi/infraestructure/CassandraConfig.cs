@@ -30,7 +30,7 @@ public static class CassandraConfig
         {
             try
             {
-                session = cluster.Connect();
+                session = cluster.Connect(settings.Keyspace);
                 break;
             }
             catch (NoHostAvailableException) when (intento < 30)

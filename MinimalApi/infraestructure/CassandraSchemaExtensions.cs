@@ -28,7 +28,6 @@ public static class CassandraSchemaExtensions
             $"CREATE KEYSPACE IF NOT EXISTS {keyspace} " +
             "WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1}"));
         
-        session.ChangeKeyspace(keyspace);
         Log.Information("[CASSANDRA] Eliminando y recreando las tablas.");
         // Eliminar la tabla existente: se puede separar para futuras consultas
         await session.ExecuteAsync(new SimpleStatement(
@@ -41,7 +40,7 @@ public static class CassandraSchemaExtensions
                 price decimal,
                 old_price decimal,
                 deleted BOOLEAN,
-                PRIMARY KEY (funko_id, fecha)
+                PRIMARY KEY (funko_id, date)
             ) WITH CLUSTERING ORDER BY (date DESC);"));
 
         Log.Information("Esquema de Cassandra listo en el keyspace {Keyspace}", keyspace);
