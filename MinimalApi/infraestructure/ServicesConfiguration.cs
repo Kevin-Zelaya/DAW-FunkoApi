@@ -14,6 +14,7 @@ public static class ServicesConfiguration
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IFunkoPriceHistoryService, FunkoPriceHistoryService>();
+        services.AddScoped<INotificationService, NotificationService>();
         Log.Information("Servicios configurados correctamente.");
         return services;
     }

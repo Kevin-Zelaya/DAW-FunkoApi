@@ -5,13 +5,13 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/funkos?pageNumeber=1&pageSize=5
+  url: http://localhost:5205/api/funkos?pageNumber=1&pageSize=1
   params:
-    - name: pageNumeber
+    - name: pageNumber
       value: "1"
       type: query
     - name: pageSize
-      value: "5"
+      value: "1"
       type: query
   body:
     type: json

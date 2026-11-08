@@ -1,6 +1,8 @@
 
+using System.Drawing;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using MinimalApi.repositories;
 using MinimalApi.Services.Email;
 
@@ -11,8 +13,7 @@ public class FunkoService(
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
     ICache _cache,
-    IFunkoPriceHistoryService _historyService,
-    IEmailService _emailService
+    IFunkoPriceHistoryService _historyService
 ) : IFunkoService, IScoped
 {
     // =========================================================
@@ -65,11 +66,16 @@ public class FunkoService(
         Console.WriteLine("=========== Final =========== ");
 
         // Retornar como dto
+        response.Category = category.Value!.ToEntity();
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
-            .Tap(f => _logger.LogInformation(
-                "[SERVICE-CREATE] Funko creado correctamente con ID {Id}.",
-                f.Id));
-        }
+            .Tap(f => _logger.LogInformation("[SERVICE-CREATE] Funko creado correctamente con ID {Id}.", f.Id))
+            .Tap(f => {_ = 
+            _notificationService.NotifyResourceChangedAsync(
+                new ResourceNotification<long>(
+                    f.Id, "Funko", 
+                    MethodsHttp.POST.ToString(), 
+                    $"Funko creado correctamente con el id {f.Id}"));}); // notificar del cambio en el recurso
+    }
 
     // =========================================================
     // READ
@@ -156,7 +162,7 @@ public class FunkoService(
         CancellationToken ct = default)
     {
         // Llave para paginación
-        string key = $"FUNKO:ALL-PAGINATED:{pageNumber}";
+        string key = $"FUNKO:ALL-PAGINATED:{pageSize}";
         _logger.LogDebug(
             "[SERVICE-GETPAGINATED] Recuperando página {PageNumber} con tamaño {PageSize}.",
             pageNumber, pageSize);
@@ -179,7 +185,7 @@ public class FunkoService(
         var dictionary = suppliers.Result.Value.ToDictionary(s => s.Id); // a diccionario
         var response = await frepository; // obtener valor
         // Por cada funko asignar su proveedor y convertir a dto
-        var toReturn = response.items.AsParallel().Select(f => {
+        var toReturn = response.items.Select(f => {
             if(dictionary.TryGetValue(f.SupplierId, out var supplier))
             {
                 return f.ToDto(supplier);
@@ -196,7 +202,7 @@ public class FunkoService(
             );
         // Guardar en caché solo si es la página 1 y contiene elementos
         if(response.count > 0 && pageNumber == 1)
-            await _cache.SetAsync(key, paginatedResponse);
+            await _cache.SetAsync(key, paginatedResponse, TimeSpan.FromSeconds(60));
         return Result.Success<PaginatedResouce<FunkoDto>, DomainError>(
                 paginatedResponse)
             .Tap(_ => _logger.LogInformation(
@@ -242,13 +248,17 @@ public class FunkoService(
         
         // Invalidar en caché
         await _cache.RemoveAsync(key);
-        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar paginación cacheada
-
         // Retornar respuesta exitosa
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
-                    f.Id));
+                    f.Id))
+                    .Tap(f => {_ = 
+                        _notificationService.NotifyResourceChangedAsync(
+                            new ResourceNotification<long>(
+                                f.Id, "Funko", 
+                                MethodsHttp.PUT.ToString(), 
+                                $"Funko actualizado correctamente con el id {f.Id}"));});
     }
     /// <inheritdoc cref="IFunkoService.UpdatePriceAsync(long, FunkoUpdatePriceRequestDto, CancellationToken)"/>
     public async Task<Result<FunkoPriceUpdatedResponseDto, DomainError>> UpdatePriceAsync(
@@ -290,18 +300,21 @@ public class FunkoService(
         );        
         // Invalidar en caché
         await _cache.RemoveAsync(key);
-        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar paginación cacheada
-
         // Retornar respuesta exitosa
         return Result.Success<FunkoPriceUpdatedResponseDto, DomainError>(
             new FunkoPriceUpdatedResponseDto(
                 funkoActual.Price,
-                phResponse.Value
-            )
-        )
+                phResponse.Value))
         .Tap(f => _logger.LogInformation(
-                "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
-                Id));
+            "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
+            Id))
+            .Tap(f => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<long>(
+                            Id, 
+                            "Funko", 
+                            MethodsHttp.PATCH.ToString(), 
+                            $"Precio del funko actualizado correctamente con el id {Id}"));});
     }
     /// <inheritdoc cref="IFunkoService.UpdateCategoryFromAsync(long, FunkoUpdateCategoryRequestDto, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> UpdateCategoryFromAsync(
@@ -326,12 +339,17 @@ public class FunkoService(
             var supplier = await _supplierService.GetSupplierByIdAsync(response.SupplierId); // ejecutar si el anterior funciona
             // Invalidar en caché
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        
+    
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-UPDATECATEGORY] Funko con ID {Id} actualizado correctamente.",
-                    f.Id));
+                    f.Id))
+                .Tap(f => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<long>(
+                            f.Id, "Funko", 
+                            MethodsHttp.PATCH.ToString(), 
+                            $"Categoria del funko con id {f.Id} actualizada correctamente"));});
     }
     /// <inheritdoc cref="IFunkoService.UpdateSupplierFromFunko(long, FunkoUpdateSupplierDto, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> UpdateSupplierFromFunko(
@@ -350,25 +368,25 @@ public class FunkoService(
                 NotFoundError.FromResource("Supplier", request.SupplierId));
         // Actualizar en la base de datos
         var response = await _repository.UpdateSuplierFromFunkoAsync(id, request, ct);
-        if(response is not null) // solo si lo encontró
-        {// Invalidar en caché
+        if(response is not null) // solo si lo encontró invalidar en caché
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        }
         return response is not null
             ? Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-UPDATESUPPLIER] Funko con ID {Id} actualizado correctamente.",
                     f.Id))
+                    .Tap(f => {_ = 
+                        _notificationService.NotifyResourceChangedAsync(
+                            new ResourceNotification<long>(
+                                f.Id, "Funko", 
+                                MethodsHttp.PATCH.ToString(), 
+                                $"Proveedor del funko con id {f.Id} actualizado correctamente"));})
             : Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-UPDATESUPPLIER] No se encontró el Funko con ID {Id}.",
                     id));
     }
-
-
-
     // =========================================================
     // DELETE / RESTORE
     // =========================================================
@@ -393,10 +411,8 @@ public class FunkoService(
         // Eliminar en la base de datos
         var response = await _repository.DeleteFunkoAsync(id, ct);
         // Eliminar en la caché
-        if(response) {
+        if(response)
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        }
         // Eliminar imaegen en el storage service
         if(exist.Imagen is not null && exist.Imagen != "/uploads/funkos/default.png")
             await _storageService.DeleteFileAsync(exist.Imagen);
@@ -416,14 +432,19 @@ public class FunkoService(
         // Retornar según si es verdadero o false la eliminación
         return Result.Success<FunkoDeletedResponseDto, DomainError>(
             new FunkoDeletedResponseDto(
-
-            "Funko eliminado correctamente",
-            phResponse.Value
+                "Funko eliminado correctamente",
+                phResponse.Value
             )
         )
         .Tap(_ => _logger.LogInformation(
             "[SERVICE-DELETE] Funko con ID {Id} eliminado correctamente.",
-            id));
+            id))
+        .Tap(f => {_ = 
+            _notificationService.NotifyResourceChangedAsync(
+                new ResourceNotification<long>(
+                    id, "Funko", 
+                    MethodsHttp.DELETE.ToString(), 
+                    $"Funko eliminado correctamente con el id {id}"));});
     }
 
     /// <inheritdoc cref="IFunkoService.RestoreDeletedFunkoAsync(long, CancellationToken)"/>
@@ -436,17 +457,29 @@ public class FunkoService(
             id);
 
         var response = await _repository.RestoreFunkoAsync(id, ct);
+        if(response is null)
+            return Result.Failure<FunkoDto, DomainError>(
+                FunkoError.NotFound(id))
+                .Tap(_ => _logger.LogWarning(
+                    "[SERVICE-Restore] No se encontró el Funko con ID {Id}.",
+                    id));
         var supplier = await _supplierService.GetSupplierByIdAsync(response!.SupplierId, ct);
+        Console.WriteLine(supplier.Value.Name+"--------------------------");
         return response is not null
             ? Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-RESTORE] Funko con ID {Id} restaurado correctamente.",
                     f.Id))
+                    .Tap(f => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<long>(
+                            id, "Funko", 
+                            MethodsHttp.PATCH.ToString(), 
+                            $"Funko restaurado correctamente con el id {id}"));})
             : Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
-                .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-RESTORE] No se encontró un Funko eliminado con ID {Id}.",
-                    id));
+                .Tap(_ => _logger.LogWarning("[SERVICE-RESTORE] No se encontró un Funko eliminado con ID {Id}.", id));
+                
     }
 
     // =========================================================
@@ -500,11 +533,16 @@ public class FunkoService(
         var supplier = await _supplierService.GetSupplierByIdAsync(exist.SupplierId); // ejecutar si el anterior 
         // Invalidar en caché
         await _cache.RemoveAsync(key);
-        await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
         // retornar según si es nulo o no
         return Result.Success<FunkoDto, DomainError>(exist.ToDto(supplier.Value)) // se le pasa el proveedor para convertir
                 .Tap(f => _logger.LogInformation(
                     "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
-                    f.Id));
+                    f.Id))
+                .Tap(f => {_ = 
+                _notificationService.NotifyResourceChangedAsync(
+                    new ResourceNotification<long>(
+                        f.Id, "Funko", 
+                        MethodsHttp.PATCH.ToString(), 
+                        $"Imagen del funko con id {f.Id} actualizada correctamente"));});
     }
 }

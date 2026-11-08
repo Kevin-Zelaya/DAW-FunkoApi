@@ -3,8 +3,7 @@ using CSharpFunctionalExtensions;
 
 public class AuthService(
     IUserRepository _userRepository,
-    IJwtService _jwtService,
-    ILogger<AuthService> logger
+    IJwtService _jwtService
 ) : IAuthService
 {
     // =========================================================
