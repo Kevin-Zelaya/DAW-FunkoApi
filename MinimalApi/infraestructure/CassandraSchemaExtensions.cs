@@ -23,9 +23,11 @@ public static class CassandraSchemaExtensions
                 await Task.Delay(TimeSpan.FromSeconds(2));
             }
         }
+
         await session.ExecuteAsync(new SimpleStatement(
             $"CREATE KEYSPACE IF NOT EXISTS {keyspace} " +
             "WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1}"));
+
         session.ChangeKeyspace(keyspace);
         Log.Information("[CASSANDRA] Eliminando y recreando las tablas.");
         // Eliminar la tabla existente: se puede separar para futuras consultas

@@ -16,7 +16,8 @@ public static class CassandraConfig
         var settings = configuration
             .GetSection(CassandraSettings.SectionName)
             .Get<CassandraSettings>() ?? new CassandraSettings();
-        
+        services.AddSingleton(settings);
+
         Log.Information("Conectando a cassandra: {Host}:{Port}",
         settings.Hosts, settings.Port);
 
@@ -25,23 +26,11 @@ public static class CassandraConfig
             .WithPort(settings.Port)
             .Build();
 
-        ISession session;
-        for (var intento = 1; ; intento++)
-        {
-            try
-            {
-                session = cluster.Connect(settings.Keyspace);
-                break;
-            }
-            catch (NoHostAvailableException) when (intento < 30)
-            {
-                Log.Information("Cassandra aun no acepta conexiones (intento {Intento}/30)...", intento);
-                Thread.Sleep(TimeSpan.FromSeconds(2));
-            }
-        }
-        // configuración de cassandra, vive durante toda la ejecución
-        services.AddSingleton(settings);
+        var session = cluster.Connect();
+
         services.AddSingleton<ISession>(session);
+        services.AddSingleton(cluster);
+
         return services;
     }
 }
