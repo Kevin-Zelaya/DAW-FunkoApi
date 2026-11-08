@@ -13,7 +13,9 @@ public class FunkoService(
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
     ICache _cache,
-    IFunkoPriceHistoryService _historyService
+    IFunkoPriceHistoryService _historyService,
+    IEmailService _emailService,
+    INotificationService _notificationService
 ) : IFunkoService, IScoped
 {
     // =========================================================
@@ -52,7 +54,6 @@ public class FunkoService(
             ct
         );
         // Enviar correo de creación
-        Console.WriteLine("=========== Inicio =========== ");
         await _emailService.SendEmailAsync(new EmailMessage
         {
             To = "admin@funkoapi.com",
@@ -63,7 +64,6 @@ public class FunkoService(
             ),
             IsHtml = true
         });
-        Console.WriteLine("=========== Final =========== ");
 
         // Retornar como dto
         response.Category = category.Value!.ToEntity();
@@ -74,6 +74,7 @@ public class FunkoService(
                 new ResourceNotification<long>(
                     f.Id, "Funko", 
                     MethodsHttp.POST.ToString(), 
+                    NotificationStatus.Ok.ToString(),
                     $"Funko creado correctamente con el id {f.Id}"));}); // notificar del cambio en el recurso
     }
 
@@ -257,7 +258,8 @@ public class FunkoService(
                         _notificationService.NotifyResourceChangedAsync(
                             new ResourceNotification<long>(
                                 f.Id, "Funko", 
-                                MethodsHttp.PUT.ToString(), 
+                                MethodsHttp.PUT.ToString(),
+                                NotificationStatus.Ok.ToString(), 
                                 $"Funko actualizado correctamente con el id {f.Id}"));});
     }
     /// <inheritdoc cref="IFunkoService.UpdatePriceAsync(long, FunkoUpdatePriceRequestDto, CancellationToken)"/>
@@ -314,6 +316,7 @@ public class FunkoService(
                             Id, 
                             "Funko", 
                             MethodsHttp.PATCH.ToString(), 
+                            NotificationStatus.Ok.ToString(),
                             $"Precio del funko actualizado correctamente con el id {Id}"));});
     }
     /// <inheritdoc cref="IFunkoService.UpdateCategoryFromAsync(long, FunkoUpdateCategoryRequestDto, CancellationToken)"/>
@@ -349,6 +352,7 @@ public class FunkoService(
                         new ResourceNotification<long>(
                             f.Id, "Funko", 
                             MethodsHttp.PATCH.ToString(), 
+                            NotificationStatus.Ok.ToString(),
                             $"Categoria del funko con id {f.Id} actualizada correctamente"));});
     }
     /// <inheritdoc cref="IFunkoService.UpdateSupplierFromFunko(long, FunkoUpdateSupplierDto, CancellationToken)"/>
@@ -380,6 +384,7 @@ public class FunkoService(
                             new ResourceNotification<long>(
                                 f.Id, "Funko", 
                                 MethodsHttp.PATCH.ToString(), 
+                                NotificationStatus.Ok.ToString(),
                                 $"Proveedor del funko con id {f.Id} actualizado correctamente"));})
             : Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
@@ -444,6 +449,7 @@ public class FunkoService(
                 new ResourceNotification<long>(
                     id, "Funko", 
                     MethodsHttp.DELETE.ToString(), 
+                    NotificationStatus.Ok.ToString(),
                     $"Funko eliminado correctamente con el id {id}"));});
     }
 
@@ -475,6 +481,7 @@ public class FunkoService(
                         new ResourceNotification<long>(
                             id, "Funko", 
                             MethodsHttp.PATCH.ToString(), 
+                            NotificationStatus.Ok.ToString(),
                             $"Funko restaurado correctamente con el id {id}"));})
             : Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
@@ -543,6 +550,7 @@ public class FunkoService(
                     new ResourceNotification<long>(
                         f.Id, "Funko", 
                         MethodsHttp.PATCH.ToString(), 
+                        NotificationStatus.Ok.ToString(),
                         $"Imagen del funko con id {f.Id} actualizada correctamente"));});
     }
 }

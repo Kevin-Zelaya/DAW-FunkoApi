@@ -173,3 +173,100 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: Conflicts were detec
 2026-11-08 17:30:41.700 [INF] [REDIS] Vaciando la caché
 2026-11-08 17:30:41.766 [INF] [CASSANDRA] Eliminando y recreando las tablas.
 2026-11-08 17:30:43.004 [INF] Esquema de Cassandra listo en el keyspace funko_store
+2026-11-08 17:58:57.261 [INF] Iniciando aplicación...
+2026-11-08 17:58:57.356 [INF] Registrando repositorios...
+2026-11-08 17:58:57.357 [INF] Repositorios registrados correctamente.
+2026-11-08 17:58:57.363 [INF] Configurando la base de datos...
+2026-11-08 17:58:57.381 [INF] Bases de datos configurada correctamente.
+2026-11-08 17:58:57.386 [INF] Configurando la conexión a Redis...
+2026-11-08 17:58:57.595 [INF] Conexión a Redis configurada correctamente.
+2026-11-08 17:58:57.600 [INF] Conectando a cassandra: localhost:9042
+2026-11-08 17:58:57.967 [INF] Configurando servicios...
+2026-11-08 17:58:57.968 [INF] Servicios configurados correctamente.
+2026-11-08 17:58:57.981 [INF] Configurando el almacenamiento de archivos...
+2026-11-08 17:58:57.982 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-08 18:01:19.864 [INF] Iniciando aplicación...
+2026-11-08 18:01:19.963 [INF] Registrando repositorios...
+2026-11-08 18:01:19.965 [INF] Repositorios registrados correctamente.
+2026-11-08 18:01:19.970 [INF] Configurando la base de datos...
+2026-11-08 18:01:19.992 [INF] Bases de datos configurada correctamente.
+2026-11-08 18:01:19.998 [INF] Configurando la conexión a Redis...
+2026-11-08 18:01:20.319 [INF] Conexión a Redis configurada correctamente.
+2026-11-08 18:01:20.327 [INF] Conectando a cassandra: localhost:9042
+2026-11-08 18:01:20.760 [INF] Configurando servicios...
+2026-11-08 18:01:20.762 [INF] Servicios configurados correctamente.
+2026-11-08 18:01:20.772 [INF] Configurando el almacenamiento de archivos...
+2026-11-08 18:01:20.774 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-08 18:02:01.212 [INF] Iniciando aplicación...
+2026-11-08 18:02:01.304 [INF] Registrando repositorios...
+2026-11-08 18:02:01.306 [INF] Repositorios registrados correctamente.
+2026-11-08 18:02:01.310 [INF] Configurando la base de datos...
+2026-11-08 18:02:01.327 [INF] Bases de datos configurada correctamente.
+2026-11-08 18:02:01.335 [INF] Configurando la conexión a Redis...
+2026-11-08 18:02:01.571 [INF] Conexión a Redis configurada correctamente.
+2026-11-08 18:02:01.576 [INF] Conectando a cassandra: localhost:9042
+2026-11-08 18:02:01.917 [INF] Configurando servicios...
+2026-11-08 18:02:01.918 [INF] Servicios configurados correctamente.
+2026-11-08 18:02:01.927 [INF] Configurando el almacenamiento de archivos...
+2026-11-08 18:02:01.928 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-08 18:03:58.173 [INF] Iniciando aplicación...
+2026-11-08 18:03:58.277 [INF] Registrando repositorios...
+2026-11-08 18:03:58.279 [INF] Repositorios registrados correctamente.
+2026-11-08 18:03:58.285 [INF] Configurando la base de datos...
+2026-11-08 18:03:58.309 [INF] Bases de datos configurada correctamente.
+2026-11-08 18:03:58.317 [INF] Configurando la conexión a Redis...
+2026-11-08 18:03:58.611 [INF] Conexión a Redis configurada correctamente.
+2026-11-08 18:03:58.617 [INF] Conectando a cassandra: localhost:9042
+2026-11-08 18:03:59.018 [INF] Configurando servicios...
+2026-11-08 18:03:59.020 [INF] Servicios configurados correctamente.
+2026-11-08 18:03:59.033 [INF] Configurando el almacenamiento de archivos...
+2026-11-08 18:03:59.036 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-08 18:03:59.139 [INF] [DESARROLLO] Preparando directorio de almacenamiento: D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\wwwroot\uploads
+2026-11-08 18:03:59.142 [INF] Contenido del directorio borrado
+2026-11-08 18:04:01.964 [INF] [POSGRE] Eliminando y recreando la base de datos
+2026-11-08 18:04:03.041 [INF] [MONGO] Eliminando y recreando la base de datos
+2026-11-08 18:04:03.068 [INF] [REDIS] Vaciando la caché
+2026-11-08 18:04:03.136 [INF] [CASSANDRA] Eliminando y recreando las tablas.
+2026-11-08 18:04:04.670 [INF] Esquema de Cassandra listo en el keyspace funko_store
+2026-11-08 18:05:42.283 [INF] Notification sent: Funko updated successfully
+2026-11-08 18:08:25.497 [INF] Iniciando aplicación...
+2026-11-08 18:08:25.575 [INF] Registrando repositorios...
+2026-11-08 18:08:25.576 [INF] Repositorios registrados correctamente.
+2026-11-08 18:08:25.580 [INF] Configurando la base de datos...
+2026-11-08 18:08:25.595 [INF] Bases de datos configurada correctamente.
+2026-11-08 18:08:25.600 [INF] Configurando la conexión a Redis...
+2026-11-08 18:08:25.822 [INF] Conexión a Redis configurada correctamente.
+2026-11-08 18:08:25.827 [INF] Conectando a cassandra: localhost:9042
+2026-11-08 18:08:26.153 [INF] Configurando servicios...
+2026-11-08 18:08:26.155 [INF] Servicios configurados correctamente.
+2026-11-08 18:08:26.164 [INF] Configurando el almacenamiento de archivos...
+2026-11-08 18:08:26.166 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-08 18:08:26.260 [INF] [DESARROLLO] Preparando directorio de almacenamiento: D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\wwwroot\uploads
+2026-11-08 18:08:26.263 [INF] Contenido del directorio borrado
+2026-11-08 18:08:28.539 [INF] [POSGRE] Eliminando y recreando la base de datos
+2026-11-08 18:08:29.533 [INF] [MONGO] Eliminando y recreando la base de datos
+2026-11-08 18:08:29.548 [INF] [REDIS] Vaciando la caché
+2026-11-08 18:08:29.612 [INF] [CASSANDRA] Eliminando y recreando las tablas.
+2026-11-08 18:08:30.956 [INF] Esquema de Cassandra listo en el keyspace funko_store
+2026-11-08 18:08:45.578 [INF] === EMAIL SENT ===
+2026-11-08 18:08:45.580 [INF] Para: admin@funkoapi.com
+2026-11-08 18:08:45.583 [INF] Asunto: Nuevo Funko Creado: jssr
+2026-11-08 18:08:45.585 [INF] Tipo: HTML
+2026-11-08 18:08:45.593 [INF] ======================
+2026-11-08 18:08:45.600 [INF] Notification sent: Funko updated successfully
+2026-11-08 18:09:49.701 [INF] Usuario conectado: null (ID: null)
+2026-11-08 18:09:49.713 [INF] Usuario desconectado: null
+2026-11-08 18:10:00.210 [INF] Usuario conectado: null (ID: null)
+2026-11-08 18:10:52.859 [INF] === EMAIL SENT ===
+2026-11-08 18:10:52.872 [INF] Para: admin@funkoapi.com
+2026-11-08 18:10:52.874 [INF] Asunto: Nuevo Funko Creado: pedro
+2026-11-08 18:10:52.876 [INF] Tipo: HTML
+2026-11-08 18:10:52.878 [INF] ======================
+2026-11-08 18:10:52.888 [INF] Notification sent: Funko updated successfully
+2026-11-08 18:11:48.554 [INF] === EMAIL SENT ===
+2026-11-08 18:11:48.556 [INF] Para: admin@funkoapi.com
+2026-11-08 18:11:48.557 [INF] Asunto: Funko Eliminado: pedro
+2026-11-08 18:11:48.559 [INF] Tipo: HTML
+2026-11-08 18:11:48.560 [INF] ======================
+2026-11-08 18:11:48.563 [INF] Notification sent: Funko updated successfully
+2026-11-08 18:28:08.832 [INF] Usuario desconectado: null

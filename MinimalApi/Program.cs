@@ -30,7 +30,7 @@ builder.Services.Configure<ApiConfig>(
 // ======= Configuración de swgger ==========
 builder.Services.AddEndpointsApiExplorer();
 
-builder.AddCustomSwagger(); // separación de configuración de swagger
+builder.AddCustomSwagger(); // separación de configuración de swagger 
 // ======= Registrando contoladores ========== 
 builder.Services.AddControllers(options =>
 {
@@ -59,7 +59,7 @@ builder.Services
     .AddServices()
     .AddAuthenticationJwt(builder.Configuration)
     .AddStorage()
-    .AddScoped<IEmailService, MemoryEmailService>();
+    .AddSignalR();
 
 
 

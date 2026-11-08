@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace MinimalApi.Services.Email;
 
@@ -28,11 +29,11 @@ public class MemoryEmailService : IEmailService
 
     private void LogEmail(EmailMessage message, string status)
     {
-        _logger.LogInformation("=== EMAIL {Status} ===", status);
-        _logger.LogInformation("Para: {To}", message.To);
-        _logger.LogInformation("Asunto: {Subject}", message.Subject);
-        _logger.LogInformation("Tipo: {Type}", message.IsHtml ? "HTML" : "Texto plano");
-        _logger.LogDebug("Cuerpo: {Body}", message.Body);
-        _logger.LogInformation("======================");
+        Log.Information("=== EMAIL {Status} ===", status);
+        Log.Information("Para: {To}", message.To);
+        Log.Information("Asunto: {Subject}", message.Subject);
+        Log.Information("Tipo: {Type}", message.IsHtml ? "HTML" : "Texto plano");
+        Log.Debug("Cuerpo: {Body}", message.Body);
+        Log.Information("======================");
     }
 }

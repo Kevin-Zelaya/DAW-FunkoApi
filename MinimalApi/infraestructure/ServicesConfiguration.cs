@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using MinimalApi.Services.Email;
 using Serilog;
 
 public static class ServicesConfiguration
@@ -15,6 +16,7 @@ public static class ServicesConfiguration
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IFunkoPriceHistoryService, FunkoPriceHistoryService>();
         services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IEmailService, MemoryEmailService>();
         Log.Information("Servicios configurados correctamente.");
         return services;
     }
