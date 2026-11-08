@@ -11,16 +11,12 @@ http:
     data: |-
       {
         "id": 1,
-        "name": "CÜirrhaa",
+        "name": "Gata sapo",
         "franchise": "Marvel",
         "number": 123,
         "exclusive": false,
-        "price": 14.99,
-        "supplier": {
-          "id": "2Sa4oQYAk6w",
-          "name": "Funko Europe"
-        },
-        "rowVersion": 1002
+        "price": 15.99,
+        "rowVersion": 776
       }
   auth: inherit
 
