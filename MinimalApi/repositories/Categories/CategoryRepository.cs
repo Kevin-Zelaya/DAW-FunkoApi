@@ -12,7 +12,7 @@ public class CategoryRepository(
     /// <inheritdoc cref="ICategoryRepository.CreateCategoryAsync(CategoryCreateRequestDto, CancellationToken)"/>
     public async Task<Category> CreateCategoryAsync(
         CategoryCreateRequestDto request, 
-        CancellationToken ct)
+        CancellationToken ct = default)
     {
         var entidad = request.ToEntity();
         _context.Categories.Add(entidad);
@@ -26,7 +26,7 @@ public class CategoryRepository(
 
     /// <inheritdoc cref="ICategoryRepository.GetAllCategoriesAsync(CancellationToken)"/>
     public async Task<List<Category>> GetAllCategoriesAsync(
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         return await _context.Categories
@@ -43,7 +43,7 @@ public class CategoryRepository(
         )> GetPaginatedCategoriesAsync(
         int pageNumber,
         int pageSize,
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         var response =  await _context.Categories
@@ -71,7 +71,7 @@ public class CategoryRepository(
     /// <inheritdoc cref="ICategoryRepository.GetCategoryByName(string, CancellationToken)"/>
     public async Task<Category?> GetCategoryByName(
         string name,
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         return await _context.Categories
@@ -81,7 +81,7 @@ public class CategoryRepository(
     /// <inheritdoc cref="ICategoryRepository.GetCategoryById(string, CancellationToken)"/>
     public async Task<Category?> GetCategoryById(
         string id,
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         return await _context.Categories
@@ -91,7 +91,7 @@ public class CategoryRepository(
     /// <inheritdoc cref="ICategoryRepository.GetCategoryByName(string, CancellationToken)"/>
     public async Task<bool> ExistByName(
         string name,
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         return await _context.Categories
@@ -108,7 +108,7 @@ public class CategoryRepository(
     public async Task<Category?> UpdateCategoryAsync(
         string id,
         CategoryUpdateRequestDto request,
-        CancellationToken ct
+        CancellationToken ct = default
     )
     {
         var response = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
@@ -137,7 +137,7 @@ public class CategoryRepository(
     /// <inheritdoc cref="ICategoryRepository.DeleteCategoryAsync(string, CancellationToken)"/>
     public async Task<bool> DeleteCategoryAsync(
         string id,
-        CancellationToken ct)
+        CancellationToken ct = default)
     {
         var entidad = await _context.Categories
             .AsNoTracking()
@@ -150,7 +150,7 @@ public class CategoryRepository(
     /// <inheritdoc cref="ICategoryRepository.RestoreCategoryAsync(string, CancellationToken)"/>
     public async Task<bool> RestoreCategoryAsync(
         string id,
-        CancellationToken ct)
+        CancellationToken ct = default)
     {
         var entidad = await _context.Categories
             .AsNoTracking()

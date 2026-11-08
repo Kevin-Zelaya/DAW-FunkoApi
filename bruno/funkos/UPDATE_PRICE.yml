@@ -1,0 +1,25 @@
+info:
+  name: UPDATE_PRICE
+  type: http
+  seq: 10
+
+http:
+  method: PATCH
+  url: http://localhost:5205/api/funkos/1/price
+  body:
+    type: json
+    data: |-
+      {
+        "price": 15.99,
+        "rowVersion": 893
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiYmYwYTFiZGEtNTI1OS00MmZhLTg1ODQtNDFkMDJlOWYzMjk3IiwiaWF0IjoxNzkzOTk1OTg1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzOTk2ODg1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.MejsDBZmKlMdE98jGaZ0KqXy8HkPd90XwrE0MjWj0zE
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

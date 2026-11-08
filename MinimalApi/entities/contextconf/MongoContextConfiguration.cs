@@ -41,10 +41,9 @@ public abstract class MongoContextConfiguration
                 .IsRowVersion(); // cuando se agreguen el resto de metodos
             ///<summary> Filtro para no mostrar eliminado </summary>
             entity.HasQueryFilter(s => !s.IsDeleted);
-
-            if(!AppConfig.shouldRecreateDb) return;
+            
             entity.HasData(
-                new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Funko Europe", IsDeleted = false },
+                new Supplier { Id = "6aee3ce4035ea0d4b4a44432", Name = "Funko Europe", IsDeleted = false },
                 new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Collector Store", IsDeleted = false },
                 new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Pop In A Box", IsDeleted = false },
                 new Supplier { Id = ObjectId.GenerateNewId().ToString(), Name = "Entertainment Earth", IsDeleted = false },

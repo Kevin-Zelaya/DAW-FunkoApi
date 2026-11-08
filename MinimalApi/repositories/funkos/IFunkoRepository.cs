@@ -90,6 +90,15 @@ public interface IFunkoRepository
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Funko actualizado</returns>
     public Task<bool> UpdateImageFromFunkoAsync(long id, string image, CancellationToken ct = default);
+    /// <summary>
+    /// Actualizacion parcial, solo
+    /// precio
+    /// </summary>
+    /// <param name="id">Id del funko a actualizar</param>
+    /// <param name="SupplierId">Id del proveedor</param>
+    /// <param name="ct">Token de cancelación</param>
+    /// <returns>Funko actualizado</returns>
+    public Task<bool> UpdatePriceFromFunkoAsync(long id, FunkoUpdatePriceRequestDto request, CancellationToken ct = default);
 
     // =========================================================
     // DELETE / RESTORE

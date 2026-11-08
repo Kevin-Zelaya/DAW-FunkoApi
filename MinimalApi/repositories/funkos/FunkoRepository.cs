@@ -26,11 +26,6 @@ public class FunkoRepository(
         _context.Funkos.Add(funko);
 
         await _context.SaveChangesAsync(ct);
-
-        await _context.Entry(funko) // Obtener el proveedor al que hace referencia
-            .Reference(f => f.Category)
-            .LoadAsync(ct);
-
         return funko;
     }
 
@@ -74,17 +69,23 @@ public class FunkoRepository(
         int pageSize,
         CancellationToken ct = default)
     {
-        // 1. Cargar colecciones founkos/Proveedores
-        List<Funko> funkos= await _context.Funkos
-            .AsNoTracking()
+        // Obtener todos los registros disponibles
+        var query = _context.Funkos.AsNoTracking();
+
+        // Calcular el total de registros
+        int count = await query.CountAsync(ct);
+
+        // Calcular el número total de páginas
+        int totalPages = (int)Math.Ceiling(
+            (double)count / pageSize);
+
+        // Obtener los Funkos de la página solicitada
+        List<Funko> funkos = await query
             .OrderBy(f => f.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync(ct);
-        // 3. Calcular metadatos
-        int count = funkos.Count;
-        int totalPages = (int)Math.Ceiling(
-            (double)count / pageSize);
+
         bool hasPreviousPage = pageNumber > 1;
         bool hasNextPage = pageNumber < totalPages;
 
@@ -215,6 +216,29 @@ public class FunkoRepository(
         response.Imagen = image;
         await _context.SaveChangesAsync(ct);
 
+        return true;
+    }
+    /// <inheritdoc cref="IFunkoRepository.UpdatePriceFromFunkoAsync(long, FunkoUpdatePriceRequestDto, CancellationToken)"/>
+    public async Task<bool> UpdatePriceFromFunkoAsync(
+        long id,
+        FunkoUpdatePriceRequestDto request,
+        CancellationToken ct = default
+    )
+    {
+        var old = await _context.Funkos.FirstOrDefaultAsync(f => f.Id == id);
+        if(old is null ) return false;
+        old.Price = request.Price;
+        try
+        {
+            _context.Entry(old)
+                .Property(f => f.RowVersion)
+                .OriginalValue = request.RowVersion;
+            await _context.SaveChangesAsync(ct);
+        } catch(DbUpdateConcurrencyException)
+        {
+            Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
+            throw;
+        }
         return true;
     }
 

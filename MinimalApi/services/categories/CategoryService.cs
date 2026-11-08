@@ -1,4 +1,3 @@
-
 using CSharpFunctionalExtensions;
 
 public class CategoryService(
@@ -20,7 +19,7 @@ public class CategoryService(
             "[SERVICE-CREATECATEGORY] Intentando crear una categoría.");
         // Comporbar si existe categoría con ese nombre
         var exist = await _repository.ExistByName(request.Name, ct);
-        if(!exist)
+        if(exist)
             return Result.Failure<CategoryDto, DomainError>(
                 ConflictError.Duplicate("Categoria", request.Name));
         // Crear categoría

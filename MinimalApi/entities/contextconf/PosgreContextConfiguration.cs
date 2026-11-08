@@ -82,7 +82,7 @@ public abstract class PosgreContextConfiguration
                 },
                 new Category
                 {
-                    Id = YoutubeIdValueGenerator.GenerateId(),
+                    Id = "e823IW7x_iC", // para crear desde consulta más rapido
                     Name = "DC Comics",
                     Description = "Figuras Funko de héroes y villanos de DC Comics."
                 },

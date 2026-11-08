@@ -1,24 +1,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using MinimalApi.config;
 using MinimalApi.repositories;
 
 [ApiController]
 [Route("api/funkos")]
-public class FunkoController : ControllerBase
-{
-    private readonly IFunkoService _service;
-    private readonly IFunkoPriceHistoryRepository _priceHistoryRepository;
-
-    
-    public FunkoController(
-        IFunkoService service,
-        IFunkoPriceHistoryRepository priceHistoryRepository)
-    {
-        _service = service;
-        _priceHistoryRepository = priceHistoryRepository;
-    }
+public class FunkoController(
+    IFunkoService _service,
+    IFunkoPriceHistoryService _historyService
+) : ControllerBase
+{ 
     // =========================================================
     // CREATE
     // =========================== 
@@ -32,7 +23,7 @@ public class FunkoController : ControllerBase
         return response.IsSuccess
             ? CreatedAtAction(nameof(GetFunkoById),
                 new { id = response.Value.Id }, response.Value)
-            : BadRequest(response.Error);
+            : response.Error.ToHttpResult<FunkoDto>();
     }
 
     // =========================================================
@@ -43,7 +34,7 @@ public class FunkoController : ControllerBase
     /// Get a Funko by its ID.
     /// </summary>
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetFunkoById(
+    public async Task<ActionResult<FunkoDto>> GetFunkoById(
         long id,
         CancellationToken ct)
     {
@@ -51,28 +42,28 @@ public class FunkoController : ControllerBase
 
         return funko.IsSuccess
             ? Ok(funko.Value)
-            : NotFound(funko.Error);
+            : funko.Error.ToHttpResult<FunkoDto>();
     }
 
     /// <summary>
     /// Get all Funkos.
     /// </summary>
     [HttpGet("all")]
-    public async Task<ActionResult> GetAllFunkos(
+    public async Task<ActionResult<List<FunkoDto>>> GetAllFunkos(
         CancellationToken ct)
     {
         var funkos = await _service.GetAllFunkos(ct);
 
         return funkos.IsSuccess
             ? Ok(funkos.Value)
-            : BadRequest(funkos.Error);
+            : funkos.Error.ToHttpResult<List<FunkoDto>>();
     }
 
     /// <summary>
     /// Get paginated Funkos.
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult> GetPaginatedFunkos(
+    public async Task<ActionResult<PaginatedResouce<FunkoDto>>> GetPaginatedFunkos(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 5,
         CancellationToken ct = default)
@@ -85,7 +76,7 @@ public class FunkoController : ControllerBase
 
         return funkos.IsSuccess
             ? Ok(funkos.Value)
-            : BadRequest(funkos.Error);
+            : funkos.Error.ToHttpResult<PaginatedResouce<FunkoDto>>();
     } // implemntar la páginación en todos los endpoints, terminar de probar endpoints de suppliers y hacer los de category
     // testear lo que se tenga y meter el middlerware de excepciones
 
@@ -107,7 +98,7 @@ public class FunkoController : ControllerBase
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<FunkoDto>();
     }
 
     /// <summary>
@@ -124,7 +115,7 @@ public class FunkoController : ControllerBase
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<FunkoDto>();
     }
 
     /// <summary>
@@ -142,7 +133,24 @@ public class FunkoController : ControllerBase
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<FunkoDto>();
+    }
+    /// <summary>
+    /// Update a Funko's price.
+    /// </summary>
+    [Authorize(Roles = "ADMIN")]
+    [HttpPatch("{id}/price")] // QUITAR ID
+    public async Task<ActionResult<FunkoDto>> UpdatePriceFromFunko(
+        long id,
+        FunkoUpdatePriceRequestDto request,
+        CancellationToken ct)
+    {
+        var response = await _service.UpdatePriceAsync(
+            id, request, ct);
+
+        return response.IsSuccess
+            ? Ok(response.Value)
+            : response.Error.ToHttpResult<FunkoDto>();
     }
 
     // =========================================================
@@ -154,15 +162,15 @@ public class FunkoController : ControllerBase
     /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteFunko(
+    public async Task<ActionResult<FunkoDeletedResponseDto>> DeleteFunko(
         long id,
         CancellationToken ct)
     {
         var response = await _service.DeleteFunkoAsync(id, ct);
 
         return response.IsSuccess
-            ? NoContent()
-            : NotFound(response.Error);
+            ? Ok(response)
+            : response.Error.ToHttpResult<FunkoDeletedResponseDto>();
     }
 
     /// <summary>
@@ -178,7 +186,7 @@ public class FunkoController : ControllerBase
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : NotFound(response.Error);
+            : response.Error.ToHttpResult<FunkoDto>();
     }
 
     // =========================================================
@@ -186,7 +194,7 @@ public class FunkoController : ControllerBase
     // =========================================================
     [HttpPost("{id}/image")]
     [Authorize(Roles = "ADMIN")]
-    public async Task<ActionResult> UploadFunkoImage(
+    public async Task<ActionResult<FunkoDto>> UploadFunkoImage(
         long id,
         IFormFile file,
         CancellationToken ct)
@@ -195,7 +203,7 @@ public class FunkoController : ControllerBase
 
         return response.IsSuccess
             ? Ok(response.Value)
-            : BadRequest(response.Error);
+            : response.Error.ToHttpResult<FunkoDto>();
     }
     // =========================================================
     // HISTORIAL DE PRECIOS (CASSANDRA) - SOLO ADMINS
@@ -204,17 +212,43 @@ public class FunkoController : ControllerBase
     /// <summary>
     /// Obtiene el historial de cambios de precio de un Funko desde Cassandra (Exclusivo para Admins).
     /// </summary>
-    [HttpGet("{id}/historial-precios")]
-    public async Task<ActionResult> GetFunkoPriceHistory(long id)
+    [Authorize(Roles = "ADMIN")]
+    [HttpGet("{id}/price-history")]
+    public async Task<ActionResult<FunkoPrieceHistoryResponsesDto>> GetFunkoPriceHistory(long id, CancellationToken ct)
     {
-        var historial = await _priceHistoryRepository.ObtenerHistorialPorFunkoAsync(id);
+        var response = await _historyService.GetHistoryAsync(id,ct);
 
-        if (historial == null || !historial.Any())
-        {
-            return NotFound(new { mensaje = $"No se encontró historial de precios para el Funko con ID {id}." });
-        }
 
-        return Ok(historial);
+        return response.IsSuccess
+            ? Ok(response.Value)
+            : response.Error.ToHttpResult<FunkoPrieceHistoryResponsesDto>();
     }
- // <--- Esta es la ÚLTIMA llave del archivo (cierra la clase FunkoController)
+    /// <summary>
+    /// Eliminar historial de precios
+    /// </summary>
+    [Authorize(Roles = "ADMIN")]
+    [HttpDelete("{id}/historial-precios")]
+    public async Task<ActionResult<PriceHistoryModifiedResponse>> DeleteFunkoPriceHistoryById(long id, CancellationToken ct)
+    {
+        var response = await _historyService.DeleteHistoryAsync(id, ct);
+
+
+        return response.IsSuccess
+            ? Ok(response.Value)
+            : response.Error.ToHttpResult<PriceHistoryModifiedResponse>();
+    }
+    /// <summary>
+    /// Restablece el historial de precios
+    /// </summary>
+    [Authorize(Roles = "ADMIN")]
+    [HttpPatch("{id}/historial-precios")]
+    public async Task<ActionResult<PriceHistoryModifiedResponse>> RestoreFunkoPriceHistoryById(long id, CancellationToken ct)
+    {
+        var response = await _historyService.RestoreHistoryAsync(id, ct);
+
+
+        return response.IsSuccess
+            ? Ok(response.Value)
+            : response.Error.ToHttpResult<PriceHistoryModifiedResponse>();
+    }
 }

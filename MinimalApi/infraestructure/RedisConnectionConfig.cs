@@ -9,15 +9,23 @@ public static class RedisConnectionConfig
     )
     {
         Log.Information("Configurando la conexión a Redis...");
+
         var redisConfig = configuration
             .GetSection("Redis")
             .Get<RedisConfig>();
 
-        var redis = ConnectionMultiplexer.Connect(
-            AppConfig.RedisConnection
+        var options = ConfigurationOptions.Parse(
+            redisConfig!.ConnectionString
         );
+
+        options.AllowAdmin = true;
+
+        var redis = ConnectionMultiplexer.Connect(options);
+
         services.AddSingleton<IConnectionMultiplexer>(redis);
+
         Log.Information("Conexión a Redis configurada correctamente.");
+
         return services;
     }
     

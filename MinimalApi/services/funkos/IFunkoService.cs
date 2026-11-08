@@ -50,13 +50,15 @@ public interface IFunkoService
     /// <returns>Funko actualizado</returns>
     public Task<Result<FunkoDto, DomainError>> UpdateSupplierFromFunko(long id, FunkoUpdateSupplierDto SupplierId, CancellationToken ct = default);
     /// <summary>
-    /// Obtener lista completa de funkos
-    /// se utiliza para pruebas, en producción
-    /// no es lo mejor
+    /// Actualizar precio de un funko,
+    /// además agrega su precio al historial de precios si
+    /// cambió
     /// </summary>
-    /// <param name="ct">Token de cancelación</param>
-    /// <returns>Lista de funkos sin páginar</returns>
-    
+    /// <param name="Id"></param>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    public Task<Result<FunkoPriceUpdatedResponseDto, DomainError>> UpdatePriceAsync(long Id, FunkoUpdatePriceRequestDto request, CancellationToken ct = default);
     public Task<Result<List<FunkoDto>, DomainError>> GetAllFunkos(CancellationToken ct = default);
     /// <summary>
     /// Obtener lista páginada de funkos
@@ -70,7 +72,7 @@ public interface IFunkoService
     /// <param name="id">id del funko a eliminar</param>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>True o false dependiendo del resultado</returns>
-    public Task<Result<bool, DomainError>> DeleteFunkoAsync(long id, CancellationToken ct);
+    public Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(long id, CancellationToken ct);
     /// <summary>
     /// Restaurar funko eliminado a partir de su id
     /// </summary>
