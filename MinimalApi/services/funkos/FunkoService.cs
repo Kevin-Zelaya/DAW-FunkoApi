@@ -2,6 +2,7 @@
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MinimalApi.repositories;
+using MinimalApi.Services.Email;
 
 public class FunkoService(
     IFunkoRepository _repository,
@@ -10,7 +11,8 @@ public class FunkoService(
     IStorageService _storageService,
     ILogger<FunkoService> _logger,
     ICache _cache,
-    IFunkoPriceHistoryService _historyService
+    IFunkoPriceHistoryService _historyService,
+    IEmailService _emailService
 ) : IFunkoService, IScoped
 {
     // =========================================================
@@ -48,6 +50,20 @@ public class FunkoService(
             0,
             ct
         );
+        // Enviar correo de creación
+        Console.WriteLine("=========== Inicio =========== ");
+        await _emailService.SendEmailAsync(new EmailMessage
+        {
+            To = "admin@funkoapi.com",
+            Subject = $"Nuevo Funko Creado: {response.Name}",
+            Body = EmailTemplates.CreateBase(
+                "Funko Creado Exitosamente",
+                EmailTemplates.FunkoCreado(response.Name, (decimal)response.Price, response.Id)
+            ),
+            IsHtml = true
+        });
+        Console.WriteLine("=========== Final =========== ");
+
         // Retornar como dto
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
             .Tap(f => _logger.LogInformation(
@@ -386,6 +402,17 @@ public class FunkoService(
             await _storageService.DeleteFileAsync(exist.Imagen);
         // Eliminado lógico del historial
         var phResponse = await _historyService.DeleteHistoryAsync(id, ct);
+        // Enviar correo de eliminación
+        await _emailService.SendEmailAsync(new EmailMessage
+        {
+            To = "admin@funkoapi.com",
+            Subject = $"Funko Eliminado: {exist.Name}",
+            Body = EmailTemplates.CreateBase(
+                "Funko Eliminado del Sistema",
+                EmailTemplates.FunkoEliminado(exist.Name, exist.Id)
+            ),
+            IsHtml = true
+        });
         // Retornar según si es verdadero o false la eliminación
         return Result.Success<FunkoDeletedResponseDto, DomainError>(
             new FunkoDeletedResponseDto(

@@ -2,6 +2,7 @@ using Serilog;
 using ISession = Cassandra.ISession;
 using MinimalApi.config;
 using Microsoft.Extensions.Options;
+using MinimalApi.Services.Email;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -36,8 +37,17 @@ builder.Services.AddControllers(options =>
 })
 .AddXmlDataContractSerializerFormatters();
 
-// proximamente validadores
 
+// proximamente validadores
+Console.WriteLine("========== CONFIGURACIÓN ==========");
+
+Console.WriteLine($"Entorno: {builder.Environment.EnvironmentName}");
+
+Console.WriteLine($"Keyspace directo: {builder.Configuration["DbConnections:Cassandra:Keyspace"]}");
+
+Console.WriteLine($"Keyspace sección Cassandra: {builder.Configuration["Cassandra:Keyspace"]}");
+
+Console.WriteLine("===================================");
 // ======= Infraestructura ========== 
 builder.Services
     .AddRepositories()
@@ -46,7 +56,9 @@ builder.Services
     .AddCassandra(builder.Configuration)
     .AddServices()
     .AddAuthenticationJwt(builder.Configuration)
-    .AddStorage();
+    .AddStorage()
+    .AddScoped<IEmailService, MemoryEmailService>();
+
 
 
 // ======= MIDLEWARES ========== 
