@@ -39,16 +39,14 @@ builder.Services.AddControllers(options =>
 
 
 // proximamente validadores
-Console.WriteLine("========== CONFIGURACIÓN ==========");
+// ======= Servicios de email ==========
+builder.Services.AddSingleton<EmailQueueService>();
 
-Console.WriteLine($"Entorno: {builder.Environment.EnvironmentName}");
+builder.Services.AddScoped<IEmailService, MemoryEmailService>();
 
-Console.WriteLine($"Keyspace directo: {builder.Configuration["DbConnections:Cassandra:Keyspace"]}");
+builder.Services.AddHostedService<EmailBackgroundWorker>();
 
-Console.WriteLine($"Keyspace sección Cassandra: {builder.Configuration["Cassandra:Keyspace"]}");
-
-Console.WriteLine("===================================");
-// ======= Infraestructura ========== 
+// ======= Infraestructura ==========
 builder.Services
     .AddRepositories()
     .AddDatabases(builder.Configuration)
@@ -56,8 +54,7 @@ builder.Services
     .AddCassandra(builder.Configuration)
     .AddServices()
     .AddAuthenticationJwt(builder.Configuration)
-    .AddStorage()
-    .AddScoped<IEmailService, MemoryEmailService>();
+    .AddStorage();
 
 
 

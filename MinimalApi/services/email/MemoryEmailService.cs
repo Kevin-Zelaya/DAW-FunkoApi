@@ -1,38 +1,109 @@
-using Microsoft.Extensions.Logging;
+
+using System.Collections.Concurrent;
 
 namespace MinimalApi.Services.Email;
 
 /// <summary>
-/// Implementación de IEmailService para desarrollo que solo loguea los emails.
+/// Servicio de email que simula el envío y almacena
+/// los mensajes en memoria.
 /// </summary>
 public class MemoryEmailService : IEmailService
 {
     private readonly ILogger<MemoryEmailService> _logger;
 
-    public MemoryEmailService(ILogger<MemoryEmailService> logger)
+    public static ConcurrentBag<EmailMessage> SentEmails { get; }
+        = new();
+
+    public MemoryEmailService(
+        ILogger<MemoryEmailService> logger)
     {
         _logger = logger;
     }
 
-    public Task EnqueueEmailAsync(EmailMessage message)
+    /// <summary>
+    /// Envía y almacena un correo.
+    /// </summary>
+    public Task SendAsync(
+        EmailMessage message,
+        CancellationToken cancellationToken = default)
     {
-        LogEmail(message, "ENQUEUED");
+        cancellationToken.ThrowIfCancellationRequested();
+
+        SentEmails.Add(message);
+
+        _logger.LogInformation(
+            "Correo enviado a {To}. Asunto: {Subject}",
+            message.To,
+            message.Subject);
+
         return Task.CompletedTask;
     }
 
-    public Task SendEmailAsync(EmailMessage message)
+    /// <summary>
+    /// Envía un correo HTML.
+    /// </summary>
+    public Task SendHtmlEmailAsync(
+        string to,
+        string subject,
+        string htmlBody,
+        CancellationToken cancellationToken = default)
     {
-        LogEmail(message, "SENT");
-        return Task.CompletedTask;
+        var message = new EmailMessage
+        {
+            To = to,
+            Subject = subject,
+            Body = htmlBody,
+            IsHtml = true
+        };
+
+        return SendAsync(message, cancellationToken);
     }
 
-    private void LogEmail(EmailMessage message, string status)
+    /// <summary>
+    /// Envía varios correos.
+    /// </summary>
+    public async Task SendBatchAsync(
+        IEnumerable<EmailMessage> messages,
+        CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("=== EMAIL {Status} ===", status);
-        _logger.LogInformation("Para: {To}", message.To);
-        _logger.LogInformation("Asunto: {Subject}", message.Subject);
-        _logger.LogInformation("Tipo: {Type}", message.IsHtml ? "HTML" : "Texto plano");
-        _logger.LogDebug("Cuerpo: {Body}", message.Body);
-        _logger.LogInformation("======================");
+        foreach (var message in messages)
+        {
+            await SendAsync(message, cancellationToken);
+        }
+    }
+
+    /// <summary>
+    /// Recupera una plantilla por su nombre.
+    /// </summary>
+    public Task<EmailTemplate?> GetTemplateAsync(
+        string templateName,
+        CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        // No utilizamos plantillas almacenadas en archivos todavía.
+        return Task.FromResult<EmailTemplate?>(null);
+    }
+
+    /// <summary>
+    /// Limpia los correos almacenados.
+    /// </summary>
+    public static void Clear()
+    {
+        while (SentEmails.TryTake(out _))
+        {
+        }
+    }
+
+    /// <summary>
+    /// Recupera el último correo encontrado para un destinatario.
+    /// </summary>
+    public static EmailMessage? GetLastEmail(string to)
+    {
+        return SentEmails
+            .LastOrDefault(email =>
+                email.To.Equals(
+                    to,
+                    StringComparison.OrdinalIgnoreCase));
     }
 }

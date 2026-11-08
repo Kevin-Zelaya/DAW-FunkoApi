@@ -12,7 +12,7 @@ public class FunkoService(
     ILogger<FunkoService> _logger,
     ICache _cache,
     IFunkoPriceHistoryService _historyService,
-    IEmailService _emailService
+    EmailQueueService _emailQueue
 ) : IFunkoService, IScoped
 {
     // =========================================================
@@ -50,19 +50,26 @@ public class FunkoService(
             0,
             ct
         );
-        // Enviar correo de creación
-        Console.WriteLine("=========== Inicio =========== ");
-        await _emailService.SendEmailAsync(new EmailMessage
+        // Encolar correo de creación
+        _emailQueue.Enqueue(new EmailMessage
         {
             To = "admin@funkoapi.com",
             Subject = $"Nuevo Funko Creado: {response.Name}",
             Body = EmailTemplates.CreateBase(
                 "Funko Creado Exitosamente",
-                EmailTemplates.FunkoCreado(response.Name, (decimal)response.Price, response.Id)
+                EmailTemplates.FunkoCreado(
+                    response.Name,
+                    (decimal)response.Price,
+                    response.Id
+                )
             ),
             IsHtml = true
         });
-        Console.WriteLine("=========== Final =========== ");
+
+        _logger.LogInformation(
+            "[SERVICE-CREATE] Correo de creación del Funko {Id} añadido a la cola.",
+            response.Id
+        );
 
         // Retornar como dto
         return Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))
@@ -373,58 +380,79 @@ public class FunkoService(
     // DELETE / RESTORE
     // =========================================================
 
-    /// <inheritdoc cref="IFunkoService.DeleteFunkoAsync(long, CancellationToken)"/>
-    public async Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(
-        long id,
-        CancellationToken ct = default)
-    {
-        string key = $"FUNKO:{id}";
-        _logger.LogDebug(
-            "[SERVICE-DELETE] Intentando eliminar el Funko con ID {Id}.",
-            id);
-        // Comprobar y obtener el funko
-        var exist = await _repository.GetFunkoByIdAsync(id, ct);
-        if(exist is null)
-            return Result.Failure<FunkoDeletedResponseDto, DomainError>(
-                FunkoError.NotFound(id))
-                .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-DELETE] No se encontró el Funko con ID {Id}.",
-                    id));
-        // Eliminar en la base de datos
-        var response = await _repository.DeleteFunkoAsync(id, ct);
-        // Eliminar en la caché
-        if(response) {
-            await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1"); // Eliminar páginación cacheada
-        }
-        // Eliminar imaegen en el storage service
-        if(exist.Imagen is not null && exist.Imagen != "/uploads/funkos/default.png")
-            await _storageService.DeleteFileAsync(exist.Imagen);
-        // Eliminado lógico del historial
-        var phResponse = await _historyService.DeleteHistoryAsync(id, ct);
-        // Enviar correo de eliminación
-        await _emailService.SendEmailAsync(new EmailMessage
-        {
-            To = "admin@funkoapi.com",
-            Subject = $"Funko Eliminado: {exist.Name}",
-            Body = EmailTemplates.CreateBase(
-                "Funko Eliminado del Sistema",
-                EmailTemplates.FunkoEliminado(exist.Name, exist.Id)
-            ),
-            IsHtml = true
-        });
-        // Retornar según si es verdadero o false la eliminación
-        return Result.Success<FunkoDeletedResponseDto, DomainError>(
-            new FunkoDeletedResponseDto(
+  /// <inheritdoc cref="IFunkoService.DeleteFunkoAsync(long, CancellationToken)"/>
+public async Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(
+    long id,
+    CancellationToken ct = default)
+{
+    string key = $"FUNKO:{id}";
 
+    _logger.LogDebug(
+        "[SERVICE-DELETE] Intentando eliminar el Funko con ID {Id}.",
+        id);
+
+    // Comprobar y obtener el funko
+    var exist = await _repository.GetFunkoByIdAsync(id, ct);
+
+    if (exist is null)
+        return Result.Failure<FunkoDeletedResponseDto, DomainError>(
+            FunkoError.NotFound(id))
+            .Tap(_ => _logger.LogWarning(
+                "[SERVICE-DELETE] No se encontró el Funko con ID {Id}.",
+                id));
+
+    // Eliminar en la base de datos
+    var response = await _repository.DeleteFunkoAsync(id, ct);
+
+    // Comprobar si se ha podido eliminar
+    if (!response)
+    {
+        _logger.LogWarning(
+            "[SERVICE-DELETE] No se pudo eliminar el Funko con ID {Id}.",
+            id);
+
+        return Result.Failure<FunkoDeletedResponseDto, DomainError>(
+            FunkoError.NotFound(id));
+    }
+
+    // Eliminar en la caché
+    await _cache.RemoveAsync(key);
+    await _cache.RemoveAsync("FUNKO:ALL-PAGINATED:1");
+
+    // Eliminar imagen en el storage service
+    if (exist.Imagen is not null && exist.Imagen != "/uploads/funkos/default.png")
+        await _storageService.DeleteFileAsync(exist.Imagen);
+
+    // Eliminado lógico del historial
+    var phResponse = await _historyService.DeleteHistoryAsync(id, ct);
+
+    // Encolar correo de eliminación
+    _emailQueue.Enqueue(new EmailMessage
+    {
+        To = "admin@funkoapi.com",
+        Subject = $"Funko Eliminado: {exist.Name}",
+        Body = EmailTemplates.CreateBase(
+            "Funko Eliminado del Sistema",
+            EmailTemplates.FunkoEliminado(exist.Name, exist.Id)
+        ),
+        IsHtml = true
+    });
+
+    _logger.LogInformation(
+        "[SERVICE-DELETE] Correo de eliminación del Funko {Id} añadido a la cola.",
+        id);
+
+    // Retornar resultado satisfactorio
+    return Result.Success<FunkoDeletedResponseDto, DomainError>(
+        new FunkoDeletedResponseDto(
             "Funko eliminado correctamente",
             phResponse.Value
-            )
         )
-        .Tap(_ => _logger.LogInformation(
-            "[SERVICE-DELETE] Funko con ID {Id} eliminado correctamente.",
-            id));
-    }
+    )
+    .Tap(_ => _logger.LogInformation(
+        "[SERVICE-DELETE] Funko con ID {Id} eliminado correctamente.",
+        id));
+}
 
     /// <inheritdoc cref="IFunkoService.RestoreDeletedFunkoAsync(long, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> RestoreDeletedFunkoAsync(

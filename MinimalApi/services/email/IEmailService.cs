@@ -1,31 +1,26 @@
+
 namespace MinimalApi.Services.Email;
-
-/// <summary>
-/// Mensaje de correo electrónico.
-/// </summary>
-public class EmailMessage
-{
-    /// <summary>Destinatario.</summary>
-    public string To { get; set; } = string.Empty;
-
-    /// <summary>Asunto.</summary>
-    public string Subject { get; set; } = string.Empty;
-
-    /// <summary>Cuerpo del mensaje.</summary>
-    public string Body { get; set; } = string.Empty;
-
-    /// <summary>Indica si el cuerpo es HTML.</summary>
-    public bool IsHtml { get; set; } = true;
-}
 
 /// <summary>
 /// Contrato del servicio de email.
 /// </summary>
 public interface IEmailService
 {
-    /// <summary>Envía un email de forma inmediata.</summary>
-    Task SendEmailAsync(EmailMessage message);
+    Task SendAsync(
+        EmailMessage message,
+        CancellationToken cancellationToken = default);
 
-    /// <summary>Encola un email para envío posterior.</summary>
-    Task EnqueueEmailAsync(EmailMessage message);
+    Task SendHtmlEmailAsync(
+        string to,
+        string subject,
+        string htmlBody,
+        CancellationToken cancellationToken = default);
+
+    Task SendBatchAsync(
+        IEnumerable<EmailMessage> messages,
+        CancellationToken cancellationToken = default);
+
+    Task<EmailTemplate?> GetTemplateAsync(
+        string templateName,
+        CancellationToken cancellationToken = default);
 }
