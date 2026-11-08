@@ -30,7 +30,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageReference Include="StackExchange.Redis" Version="3.4.5" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
   </ItemGroup>
 
@@ -39,7 +39,7 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.postgre.json">
+    <None Update="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="appsettings.mongo.json">

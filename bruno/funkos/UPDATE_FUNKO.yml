@@ -1,7 +1,7 @@
 info:
   name: UPDATE_FUNKO
   type: http
-  seq: 6
+  seq: 7
 
 http:
   method: PUT
@@ -15,11 +15,6 @@ http:
         "franchise": "Marvel",
         "number": 123,
         "exclusive": false,
-        "price": 14.99,
-        "supplier": {
-          "id": "2Sa4oQYAk6w",
-          "name": "Funko Europe"
-        },
         "rowVersion": 1002
       }
   auth: inherit

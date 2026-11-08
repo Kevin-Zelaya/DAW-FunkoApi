@@ -36,18 +36,23 @@ public class FunkoPriceHistoryService(
             toReturn
         );
     }
-    public async Task<Result<PriceHistoryModifiedResponse, DomainError>> DeleteHistoryAsync(long funkoId, CancellationToken ct)
+    public async Task<Result<PriceHistoryModifiedResponse>> DeleteHistoryAsync(long funkoId, CancellationToken ct)
     {
         try { await _repository.DeleteHistoryByFunkoId(funkoId, ct); }
         catch (Exception ex)
         {
             Log.Error(ex, "[CASSANDRA-DELETE] Error al eliminar el historial de precios del funko con el id {id}", funkoId);
-            return new PriceHistoryModifiedResponse("Error al eliminar el historial de precio vinculado al usuario");
+            return Result.Success<PriceHistoryModifiedResponse>(
+                new PriceHistoryModifiedResponse("Error al eliminar el historial de precio vinculado al usuario")
+            );
         }
-        return new PriceHistoryModifiedResponse("Eliminado el historial de precios vinculado al funko.");
+        return Result.Success<PriceHistoryModifiedResponse>(
+
+            new PriceHistoryModifiedResponse("Eliminado el historial de precios vinculado al funko.")
+        ); 
 
     }
-    public async Task<Result<PriceHistoryModifiedResponse, DomainError>> RestoreHistoryAsync(long funkoId, CancellationToken ct)
+    public async Task<Result<PriceHistoryModifiedResponse>> RestoreHistoryAsync(long funkoId, CancellationToken ct)
     {
         try { await _repository.RestoreHistoryByFunkoId(funkoId, ct); }
         catch (Exception ex)

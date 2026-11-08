@@ -70,7 +70,7 @@ public class FunkoRepository(
         CancellationToken ct = default)
     {
         // Obtener todos los registros disponibles
-        var query = _context.Funkos.AsNoTracking();
+        var query = _context.Funkos.AsNoTracking().Include(f => f.Category);
 
         // Calcular el total de registros
         int count = await query.CountAsync(ct);
@@ -172,7 +172,9 @@ public class FunkoRepository(
             Log.Error("[REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id {id}", id);
             throw;
         }
-
+        await _context.Entry(response)
+            .Reference(f => f.Category)
+            .LoadAsync();
         return response;
     }
     /// <inheritdoc cref="IFunkoRepository.UpdateSuplierFromFunkoAsync(long, FunkoUpdateSupplierDto, CancellationToken)"/>
@@ -183,6 +185,7 @@ public class FunkoRepository(
     )
     {
         var response = await _context.Funkos
+            .Include(f => f.Category)
             .FirstOrDefaultAsync(f => f.Id == id, ct);
 
         if (response is null)
@@ -274,6 +277,7 @@ public class FunkoRepository(
     {
         var response = await _context.Funkos
             .IgnoreQueryFilters()
+            .Include(f => f.Category)
             .FirstOrDefaultAsync(f => f.Id == id && f.IsDelete, ct);
 
         if (response is null)
@@ -282,7 +286,8 @@ public class FunkoRepository(
         response.IsDelete = false;
         response.DeleteAT = null;
         response.UpdatedAt = DateTime.UtcNow;
-
+        response.Imagen = "/uploads/funkos/default.png";
+        // agregar default imagen por defecto
         await _context.SaveChangesAsync(ct);
 
         return response;
