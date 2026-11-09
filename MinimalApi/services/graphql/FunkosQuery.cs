@@ -1,6 +1,7 @@
+using HotChocolate.Authorization;
 using MinimalApi.models;
 using MinimalApi.repositories;
-
+[Authorize]
 public class FunkosQuery
 {
     [UsePaging(MaxPageSize = 50, DefaultPageSize = 10)]
@@ -26,6 +27,7 @@ public class FunkosQuery
         var response = await repository.GetAllCategoriesAsync();
         return response.AsQueryable();
     }
+    [Authorize(Policy = "AdminOnly")]
     [UsePaging]
     public async Task<IQueryable<Supplier>> GetSuppliers(
         [Service] ISupplierRepository repository) 
@@ -33,6 +35,7 @@ public class FunkosQuery
         var response = await repository.GetAllSuppliersAsync();
         return response.AsQueryable();
     }
+    [Authorize(Policy = "AdminOnly")]
     [UsePaging]
     public async Task<IQueryable<PriceHistoryDto>> GetPricesHistory(
         long id,
