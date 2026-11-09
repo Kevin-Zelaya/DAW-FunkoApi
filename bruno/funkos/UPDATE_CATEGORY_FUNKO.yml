@@ -1,7 +1,7 @@
 info:
   name: UPDATE_CATEGORY_FUNKO
   type: http
-  seq: 8
+  seq: 9
 
 http:
   method: PATCH
@@ -10,11 +10,12 @@ http:
     type: json
     data: |-
       {
-        "id": 1,
-        "name": "Superhéroes",
-        "description": "Personajes heroicos de Marvel y otras franquicias"
+        "CategoryId": "e823IW7x_iC",
+        "rowversion": 921
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDc0YmQxMmMtOWRiYS00Mjc0LTgwYmItMDkyM2M5OTA2N2FiIiwiaWF0IjoxNzk0MTQyNzcxLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTQ1NzcxLCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.yLucxYnCXi94lkpOUmTmHAnvz6FZN0GDV_AtyqNt-_g
 
 settings:
   encodeUrl: true

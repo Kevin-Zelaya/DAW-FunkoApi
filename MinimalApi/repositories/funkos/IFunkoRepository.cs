@@ -23,14 +23,14 @@ public interface IFunkoRepository
     // READ
     // =========================================================
 
-    Task<List<Funko>> GetAllFunkosAsync(CancellationToken ct);
+    Task<List<Funko>> GetAllFunkosAsync(CancellationToken ct = default);
     /// <summary>
     /// Obtener un funko por id
     /// </summary>
     /// <param name="id">id del usuario a buscar</param>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Funko encontrado o null</returns>
-    Task<Funko?> GetFunkoByIdAsync(long id, CancellationToken ct);
+    Task<Funko?> GetFunkoByIdAsync(long id, CancellationToken ct = default);
     /// <summary>
     /// Comprobar si existe alguno con el username
     /// </summary>

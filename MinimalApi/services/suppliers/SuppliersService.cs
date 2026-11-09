@@ -3,7 +3,8 @@ using CSharpFunctionalExtensions;
 public class SupplierService(
     ISupplierRepository _repository,
     ILogger<SupplierService> _logger,
-    ICache _cache
+    ICache _cache,
+    INotificationService _notificationService
 ) : ISupplierService, IScoped
 {
     // =========================================================
@@ -29,7 +30,18 @@ public class SupplierService(
         return Result.Success<SupplierDto, DomainError>(response.ToDto())
             .Tap(s => _logger.LogInformation(
                 "[SERVICE-CREATESUPPLIER] Proveedor creado correctamente con ID {Id}.",
-                s.Id));
+                s.Id))
+            .Tap(s => {_ = 
+                _notificationService.NotifyResourceChangedAsync(
+                    new ResourceNotification<String>(
+                        s.Id,
+                        "Supplier",
+                        MethodsHttp.POST.ToString(),
+                        NotificationStatus.Ok.ToString(),
+                        $"Creada un nuevo proveedor con id {s.Id}"
+                    )
+                );
+            });
     }
 
     // =========================================================
@@ -58,7 +70,7 @@ public class SupplierService(
         int pageSize,
         CancellationToken ct = default)
     {
-        string key = $"SUPPLIER:ALL-PAGED:{pageNumber}";
+        string key = $"SUPPLIER:ALL-PAGED:{pageSize}";
 
         _logger.LogDebug(
             "[SERVICE-GETPAGINATEDSUPPLIERS] Recuperando página {PageNumber} con tamaño {PageSize}.",
@@ -84,7 +96,7 @@ public class SupplierService(
             response.HasNextPage);
 
         if (response.count > 0 && pageNumber == 1)
-            await _cache.SetAsync(key, paginatedResponse);
+            await _cache.SetAsync(key, paginatedResponse, TimeSpan.FromSeconds(60));
 
         return Result.Success<PaginatedResouce<SupplierDto>, DomainError>(
             paginatedResponse)
@@ -147,16 +159,24 @@ public class SupplierService(
         var response = await _repository.UpdateSupplierAsync(id, request, ct);
 
         if (response is not null)
-        {
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("SUPPLIER:ALL-PAGED:1");
-        }
 
         return response is not null
             ? Result.Success<SupplierDto, DomainError>(response.ToDto())
                 .Tap(s => _logger.LogInformation(
                     "[SERVICE-UPDATESUPPLIER] Proveedor con ID {Id} actualizado correctamente.",
                     s.Id))
+                .Tap(s => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<String>(
+                            s.Id,
+                            "Supplier",
+                            MethodsHttp.PUT.ToString(),
+                            NotificationStatus.Ok.ToString(),
+                            $"Actualizado proveedor con id {s.Id}"
+                        )
+                    );
+                })
             : Result.Failure<SupplierDto, DomainError>(
                 NotFoundError.FromResource("Supplier", id))
                 .Tap(_ => _logger.LogWarning(
@@ -182,16 +202,24 @@ public class SupplierService(
         var response = await _repository.DeleteSupplierAsync(id, ct);
 
         if (response)
-        {
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("SUPPLIER:ALL-PAGED:1");
-        }
 
         return response
             ? Result.Success<bool, DomainError>(true)
                 .Tap(_ => _logger.LogInformation(
                     "[SERVICE-DELETESUPPLIER] Proveedor con ID {Id} eliminado correctamente.",
                     id))
+                .Tap(s => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<String>(
+                            id,
+                            "Supplier",
+                            MethodsHttp.DELETE.ToString(),
+                            NotificationStatus.Ok.ToString(),
+                            $"Eliminado proveedor con id {id}"
+                        )
+                    );
+                })
             : Result.Failure<bool, DomainError>(
                 NotFoundError.FromResource("Supplier", id))
                 .Tap(_ => _logger.LogWarning(
@@ -219,6 +247,17 @@ public class SupplierService(
                 .Tap(_ => _logger.LogInformation(
                     "[SERVICE-RESTORESUPPLIER] Proveedor con ID {Id} restaurado correctamente.",
                     id))
+                .Tap(s => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<String>(
+                            id,
+                            "Supplier",
+                            MethodsHttp.PATCH.ToString(),
+                            NotificationStatus.Ok.ToString(),
+                            $"Restaurado proveedor con id {id}"
+                        )
+                    );
+                })
             : Result.Failure<bool, DomainError>(
                 NotFoundError.FromResource("Supplier", id))
                 .Tap(_ => _logger.LogWarning(

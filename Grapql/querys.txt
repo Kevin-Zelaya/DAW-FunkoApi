@@ -1,0 +1,35 @@
+// Obtener todos 
+query { 
+    categories{ // se puede cambiar por el modelo
+        edges{
+            node{
+                name
+            }
+        }
+    }
+}
+
+// con 
+query GetFunko($id: Long!) {
+  funko(id: $id) {
+    id
+    name
+    price
+  }
+}
+
+query GetFunko($id: Long!) {
+  funko(id: $id) {
+    id
+    name
+    price
+    priceHistory {
+      edges{
+        node{
+          price
+          date
+        }
+      }
+    }
+  }
+}

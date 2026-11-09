@@ -10,9 +10,9 @@ http:
     type: json
     data: |-
       {
-        "name": "jOSESITO",
+        "name": "pedro",
         "franchise": "Marvel",
-        "number": 123,
+        "number": 1,
         "supplierId": "6aee3ce4035ea0d4b4a44432",
         "categoryId": "e823IW7x_iC",
         "exclusive": false,
@@ -20,7 +20,7 @@ http:
       }
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiYmYwYTFiZGEtNTI1OS00MmZhLTg1ODQtNDFkMDJlOWYzMjk3IiwiaWF0IjoxNzkzOTk1OTg1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzOTk2ODg1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.MejsDBZmKlMdE98jGaZ0KqXy8HkPd90XwrE0MjWj0zE
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiMTJlZjhlODctODEwOS00OGY0LWJkMTUtNTE5NTE2NWIzODk4IiwiaWF0IjoxNzk0MTU3NTI1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTYwNTI1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.qOQ-IQfcJK5uUdkIgAM1MINqOle0y9u_KMynvokJzD4
 
 settings:
   encodeUrl: true

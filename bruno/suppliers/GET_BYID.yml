@@ -5,13 +5,13 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/suppliers/6ae7142afe68043f4c0160fa
+  url: http://localhost:5205/api/suppliers/6aee3ce4035ea0d4b4a44432
   body:
     type: json
     data: ""
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDkzYTJkZTktYjgwMC00Y2YxLTk1OTMtY2EyOWNlNjcyZGMyIiwiaWF0IjoxNzkzODIxNjc4LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzODIyNTc4LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.HPzxvqLWPBOAus4q1jjwnuiM4TRHQVeHR3e2bgVP2Qg
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDc0YmQxMmMtOWRiYS00Mjc0LTgwYmItMDkyM2M5OTA2N2FiIiwiaWF0IjoxNzk0MTQyNzcxLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTQ1NzcxLCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.yLucxYnCXi94lkpOUmTmHAnvz6FZN0GDV_AtyqNt-_g
 
 settings:
   encodeUrl: true

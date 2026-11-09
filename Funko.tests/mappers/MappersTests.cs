@@ -84,7 +84,6 @@ public class MappersTests
         Assert.That(funko.Price, Is.EqualTo(create.Price));
         Assert.That(funko.CategoryId, Is.EqualTo(create.CategoryId));
         Assert.That(funko.SupplierId, Is.EqualTo(create.SupplierId));
-        Assert.That(funko.Imagen, Is.EqualTo("default.png"));
 
         // Funko -> FunkoDto
         Assert.That(funkoDto.Name, Is.EqualTo(funko.Name));

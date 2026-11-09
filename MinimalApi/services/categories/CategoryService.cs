@@ -3,7 +3,8 @@ using CSharpFunctionalExtensions;
 public class CategoryService(
     ICategoryRepository _repository,
     ILogger<CategoryService> _logger,
-    ICache _cache
+    ICache _cache,
+    INotificationService _notificationService
 ) : ICategoryService, IScoped
 {
     // =========================================================
@@ -28,7 +29,19 @@ public class CategoryService(
         return Result.Success<CategoryDto, DomainError>(response.ToDto())
             .Tap(c => _logger.LogInformation(
                 "[SERVICE-CREATECATEGORY] Categoría creada correctamente con ID {Id}.",
-                c.Id));
+                c.Id))
+            .Tap(c => {_ = 
+                _notificationService.NotifyResourceChangedAsync(
+                    new ResourceNotification<String>(
+                        c.Id,
+                        "Category",
+                        MethodsHttp.POST.ToString(),
+                        
+                            NotificationStatus.Ok.ToString(),
+                        $"Creada una nueva categoria con id {c.Id}"
+                    )
+                );
+            });
     }
 
     // =========================================================
@@ -59,7 +72,7 @@ public class CategoryService(
             CancellationToken ct = default)
     {
         // Llave para paginación
-        string key = $"CATEGORY:ALL-PAGINATED:{pageNumber}";
+        string key = $"CATEGORY:ALL-PAGINATED:{pageSize}";
 
         _logger.LogDebug(
             "[SERVICE-GETPAGINATEDCATEGORIES] Recuperando página {PageNumber} con tamaño {PageSize}.",
@@ -94,7 +107,7 @@ public class CategoryService(
 
         // Guardar en caché solo si es la página 1 y contiene elementos
         if (response.count > 0 && pageNumber == 1)
-            await _cache.SetAsync(key, paginatedResponse);
+            await _cache.SetAsync(key, paginatedResponse, TimeSpan.FromSeconds(60));
 
         return Result.Success<PaginatedResouce<CategoryDto>, DomainError>(
             paginatedResponse)
@@ -168,12 +181,8 @@ public class CategoryService(
         // Actualizar en la base de datos
         var response = await _repository.UpdateCategoryAsync(id, request, ct);
 
-        if (response is not null)
-        {
-            // Invalidar en caché
+        if (response is not null) // Invalidar en caché
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("CATEGORY:ALL-PAGINATED:1");
-        }
 
         return response is not null
             ? Result.Success<CategoryDto, DomainError>(response.ToDto())
@@ -183,8 +192,20 @@ public class CategoryService(
             : Result.Failure<CategoryDto, DomainError>(
                 NotFoundError.FromResource("Category", id.ToString()))
                 .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-UPDATECATEGORY] No se encontró la categoría con ID {Id}.",
-                    id));
+                        "[SERVICE-UPDATECATEGORY] No se encontró la categoría con ID {Id}.",
+                        id))
+                        .Tap(c => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<String>(
+                            c.Id,
+                            "Category",
+                            MethodsHttp.PUT.ToString(),
+                            
+                            NotificationStatus.Ok.ToString(),
+                            $"Actualizada una nueva categoria con id {c.Id}"
+                        )
+                    );
+                });
     }
 
     // =========================================================
@@ -205,18 +226,25 @@ public class CategoryService(
         // Eliminar lógicamente en la base de datos
         var response = await _repository.DeleteCategoryAsync(id, ct);
 
-        if (response)
-        {
-            // Invalidar en caché
+        if (response) // Invalidar en caché
             await _cache.RemoveAsync(key);
-            await _cache.RemoveAsync("CATEGORY:ALL-PAGINATED:1");
-        }
 
         return response
             ? Result.Success<bool, DomainError>(true)
                 .Tap(_ => _logger.LogInformation(
                     "[SERVICE-DELETECATEGORY] Categoría con ID {Id} eliminada correctamente.",
                     id))
+                .Tap(c => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<String>(
+                            id,
+                            "Category",
+                            MethodsHttp.DELETE.ToString(),
+                            NotificationStatus.Ok.ToString(),
+                            $"Eliminada una nueva categoria con id {id}"
+                        )
+                    );
+                })
             : Result.Failure<bool, DomainError>(
                 NotFoundError.FromResource("Category", id.ToString()))
                 .Tap(_ => _logger.LogWarning(
@@ -244,6 +272,17 @@ public class CategoryService(
                 .Tap(_ => _logger.LogInformation(
                     "[SERVICE-RESTORECATEGORY] Categoría con ID {Id} restaurada correctamente.",
                     id))
+                .Tap(c => {_ = 
+                    _notificationService.NotifyResourceChangedAsync(
+                        new ResourceNotification<String>(
+                            id,
+                            "Category",
+                            MethodsHttp.PATCH.ToString(),
+                            NotificationStatus.Ok.ToString(),
+                            $"Restaurada una nueva categoria con id {id}"
+                        )
+                    );
+                })
             : Result.Failure<bool, DomainError>(
                 NotFoundError.FromResource("Category", id.ToString()))
                 .Tap(_ => _logger.LogWarning(

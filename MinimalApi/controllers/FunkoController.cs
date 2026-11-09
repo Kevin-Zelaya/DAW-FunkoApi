@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MinimalApi.config;
 using MinimalApi.repositories;
+using Serilog;
 
 [ApiController]
 [Route("api/funkos")]
@@ -68,6 +69,9 @@ public class FunkoController(
         [FromQuery] int pageSize = 5,
         CancellationToken ct = default)
     {
+        Log.Information(
+    "PageNumber: {PageNumber}, PageSize: {PageSize}",
+    pageNumber, pageSize);
         if (pageNumber < 1 || pageSize < 1)
             return BadRequest("La página y el tamaño deben ser mayores que 0.");
 
@@ -122,7 +126,7 @@ public class FunkoController(
     /// Update a Funko's supplier.
     /// </summary>
     [Authorize(Roles = "ADMIN")]
-    [HttpPatch("{id}/supplier/{supplierId}")] // QUITAR ID
+    [HttpPatch("{id}/supplier")] // QUITAR ID
     public async Task<ActionResult<FunkoDto>> UpdateSupplierFromFunko(
         long id,
         FunkoUpdateSupplierDto request,
@@ -169,7 +173,7 @@ public class FunkoController(
         var response = await _service.DeleteFunkoAsync(id, ct);
 
         return response.IsSuccess
-            ? Ok(response)
+            ? Ok(response.Value)
             : response.Error.ToHttpResult<FunkoDeletedResponseDto>();
     }
 
@@ -233,9 +237,7 @@ public class FunkoController(
         var response = await _historyService.DeleteHistoryAsync(id, ct);
 
 
-        return response.IsSuccess
-            ? Ok(response.Value)
-            : response.Error.ToHttpResult<PriceHistoryModifiedResponse>();
+        return Ok(response.Value);
     }
     /// <summary>
     /// Restablece el historial de precios
@@ -247,8 +249,6 @@ public class FunkoController(
         var response = await _historyService.RestoreHistoryAsync(id, ct);
 
 
-        return response.IsSuccess
-            ? Ok(response.Value)
-            : response.Error.ToHttpResult<PriceHistoryModifiedResponse>();
+        return Ok(response.Value);
     }
 }

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using MinimalApi.Services.Email;
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
 
 // ======= Logger de Serilog =============
 Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -28,7 +27,10 @@ Log.Information("Iniciando aplicación...");
 builder.Services.Configure<ApiConfig>(
     builder.Configuration.GetSection("Api")); 
 
+// ======= Configuración de swgger ==========
+builder.Services.AddEndpointsApiExplorer();
 
+builder.AddCustomSwagger(); // separación de configuración de swagger 
 // ======= Registrando contoladores ========== 
 builder.Services.AddControllers(options =>
 {
@@ -54,7 +56,10 @@ builder.Services
     .AddCassandra(builder.Configuration)
     .AddServices()
     .AddAuthenticationJwt(builder.Configuration)
-    .AddStorage();
+    .AddStorage()
+    .AddSignalR();
+builder.Services.AddGraphQL(builder.Environment);
+
 
 
 
@@ -63,47 +68,71 @@ var app = builder.Build();
 var apiConfig = app.Services
     .GetRequiredService<IOptions<ApiConfig>>()
     .Value;
+// ======= Configuración de cassandra ========== 
+var cassandraSettings = app.Services
+    .GetRequiredService<CassandraSettings>();
 
-    
-app.UseHttpsRedirection();
+var cassandraSession = app.Services
+    .GetRequiredService<ISession>();
 
-// inicializar datos en desarrollos
-if (apiConfig.shouldRecreateDb &&
-    app.Environment.IsDevelopment())
+// Inicializar keyspace
+await cassandraSession.InitializeKeyspaceAsync(
+    cassandraSettings.Keyspace);
+// Recrear base de dato si requiere el appsettings
+var recreateCassandra =
+    app.Environment.IsDevelopment() && apiConfig.shouldRecreateDb;
+
+await cassandraSession.InitializeTablesAsync(recreateCassandra);
+// Inicializar bases de datos
+await app.InitializeDatabasesAsync();
+if (apiConfig.shouldRecreateDb)
 {
-    await app.InitializationDatabaseAsync();
-    var settings = app.Services.GetRequiredService<CassandraSettings>();
-    await app.Services.GetRequiredService<ISession>().InitializeSchemaAsync(settings.Keyspace);
+    // inicialización del servicio storage
+    app.InitializeStorage(true);
+    // Inicialización de mongo y postgre
+    await app.RecreateDatabasesAsync();
 }
 
-app.UseStaticFiles();
-app.MapOpenApi();
+app.UseHttpsRedirection();
 
+
+
+// Permite lectura de archiovs estaticos
+app.UseStaticFiles();
 app.UseGlobalExceptionHandler();
 
 // ======= AUTHENTICATION - AUTHORIZATION ========== 
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 // ======= Configuración de Swagger ==========
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
-});
-
+if (app.Environment.IsDevelopment())
+{       
+    app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
+    });
+}
+// ======= Mapear endpoints de GraphQL ========== 
+app.MapGraphQL();
 // ======= Buscar todos los controladores ========== 
 app.MapControllers();
+// ======= SignalR hubs ========== 
+app.MapHub<FunkoHub>("/hubs/funkos").RequireAuthorization();
 
 // Falta vaciar la bd en el caso de mongo
-Console.WriteLine("======================================================");
-Console.WriteLine("=================     FUNKO API     ==================");
-Console.WriteLine("======================================================");
-Console.WriteLine("");
-Console.WriteLine("+===================+================================== ");
-Console.WriteLine($"| api_environment   |      {app.Environment}    |");
-Console.WriteLine($"|  swagger_route    |localhost:5205/swagger/index.html|");
-Console.WriteLine($"|   Recreate_db     |                {(apiConfig.shouldRecreateDb ? "true " : "false")}            |");
-Console.WriteLine($"+===================+=================================+");
+Console.ForegroundColor = ConsoleColor.Cyan;
+Console.WriteLine("==============================================");
+Console.WriteLine("              FUNKO API                      ");
+Console.WriteLine("==============================================");
+Console.ResetColor();
+Console.WriteLine($"  Entorno:          {app.Environment.EnvironmentName}");
+Console.WriteLine($"  Swagger:          http://localhost:5205/swagger");
+Console.WriteLine($"  Reconstruir BD:   {(apiConfig.shouldRecreateDb ? "Sí" : "No")}");
+Console.ForegroundColor = ConsoleColor.Cyan;
+Console.WriteLine("==============================================");
+Console.ResetColor();
+Console.WriteLine();
 
 app.Run();

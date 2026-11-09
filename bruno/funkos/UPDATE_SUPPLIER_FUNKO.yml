@@ -1,24 +1,21 @@
 info:
   name: UPDATE_SUPPLIER_FUNKO
   type: http
-  seq: 7
+  seq: 8
 
 http:
-  method: POST
-  url: http://localhost:5205/api/funkos
+  method: PATCH
+  url: http://localhost:5205/api/funkos/1/supplier
   body:
     type: json
     data: |-
       {
-        "id": 1,
-        "name": "Gata sapo",
-        "franchise": "Marvel",
-        "number": 123,
-        "exclusive": false,
-        "price": 15.99,
-        "rowVersion": 776
+        "supplierid": "6aefac6f9b680ccabd59b06b",
+        "rowversion": 924
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDc0YmQxMmMtOWRiYS00Mjc0LTgwYmItMDkyM2M5OTA2N2FiIiwiaWF0IjoxNzk0MTQyNzcxLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTQ1NzcxLCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.yLucxYnCXi94lkpOUmTmHAnvz6FZN0GDV_AtyqNt-_g
 
 settings:
   encodeUrl: true

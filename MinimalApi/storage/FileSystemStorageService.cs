@@ -20,7 +20,7 @@ public class FileSystemStorageService : IStorageService, IScoped
         _allowedContentTypes = configuration.GetSection("Storage:AllowedContentTypes").Get<string[]>() ?? new[] { "image/jpeg", "image/png", "image/gif" };
 
         var webRoot = env.WebRootPath ?? env.ContentRootPath;
-        _rootPath = Path.Combine(webRoot, _uploadPath);
+        _rootPath = System.IO.Path.Combine(webRoot, _uploadPath);
 
         if (!Directory.Exists(_rootPath))
             Directory.CreateDirectory(_rootPath);
@@ -44,7 +44,7 @@ public class FileSystemStorageService : IStorageService, IScoped
         if(file.Length > _maxFileSize)
             return UnitResult.Failure<DomainError>(new DomainError($"El archivo excede el tamaño máximo permitido de {_maxFileSize} bytes.", HttpStatusCode.BadRequest));
 
-        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        var extension = System.IO.Path.GetExtension(file.FileName).ToLowerInvariant();
         if(!_allowedExtensions.Contains(extension))
             return UnitResult.Failure<DomainError>(new DomainError($"Extensión de archivo no permitida. Permitidas: {string.Join(", ", _allowedExtensions)}", HttpStatusCode.BadRequest));
 
@@ -67,10 +67,10 @@ public class FileSystemStorageService : IStorageService, IScoped
         try
         {
             var filename = GenerateUniqueFileName(file.FileName);
-            var folderPath = Path.Combine(_rootPath, folder);
+            var folderPath = System.IO.Path.Combine(_rootPath, folder);
             Directory.CreateDirectory(folderPath);
 
-            var filePath = Path.Combine(folderPath, filename);
+            var filePath = System.IO.Path.Combine(folderPath, filename);
             var relatePath = GetRelativePath(filename, folder);
 
             using var stream = new FileStream(filePath, FileMode.Create);

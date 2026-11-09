@@ -3,7 +3,8 @@ using MinimalApi.repositories;
 using Serilog;
 
 public class FunkoPriceHistoryService(
-    IFunkoPriceHistoryRepository _repository
+    IFunkoPriceHistoryRepository _repository,
+    INotificationService _notificationService
 ) : IFunkoPriceHistoryService
 {
 
@@ -36,24 +37,51 @@ public class FunkoPriceHistoryService(
             toReturn
         );
     }
-    public async Task<Result<PriceHistoryModifiedResponse, DomainError>> DeleteHistoryAsync(long funkoId, CancellationToken ct)
+    public async Task<CSharpFunctionalExtensions.Result<PriceHistoryModifiedResponse>> DeleteHistoryAsync(long funkoId, CancellationToken ct)
     {
         try { await _repository.DeleteHistoryByFunkoId(funkoId, ct); }
         catch (Exception ex)
         {
             Log.Error(ex, "[CASSANDRA-DELETE] Error al eliminar el historial de precios del funko con el id {id}", funkoId);
-            return new PriceHistoryModifiedResponse("Error al eliminar el historial de precio vinculado al usuario");
+            return Result.Success(
+                new PriceHistoryModifiedResponse("Error al eliminar el historial de precio vinculado al usuario")
+            ).Tap(f => {_ = 
+            _notificationService.NotifyResourceChangedAsync(
+                new ResourceNotification<long>(
+                    funkoId,
+                    "Historial de precios",
+                    MethodsHttp.DELETE.ToString(),
+                    NotificationStatus.Error.ToString(),
+                    $"Error al eliminar el historial de precios vinculado al funko con id {funkoId}"
+                )
+            );
+        });
         }
-        return new PriceHistoryModifiedResponse("Eliminado el historial de precios vinculado al funko.");
+        return Result.Success(
+
+            new PriceHistoryModifiedResponse("Eliminado el historial de precios vinculado al funko.")
+        ); 
 
     }
-    public async Task<Result<PriceHistoryModifiedResponse, DomainError>> RestoreHistoryAsync(long funkoId, CancellationToken ct)
+    public async Task<CSharpFunctionalExtensions.Result<PriceHistoryModifiedResponse>> RestoreHistoryAsync(long funkoId, CancellationToken ct)
     {
         try { await _repository.RestoreHistoryByFunkoId(funkoId, ct); }
         catch (Exception ex)
         {
             Log.Error(ex, "[CASSANDRA-RESTORE] Error al restaurar el historial de precios del funko con el id {id}", funkoId);
-            return new PriceHistoryModifiedResponse("Error al restaurar el historial de precio vinculado al usuario");
+            return Result.Success(
+                new PriceHistoryModifiedResponse("Error al eliminar el historial de precio vinculado al usuario")
+            ).Tap(f => {_ = 
+                _notificationService.NotifyResourceChangedAsync(
+                    new ResourceNotification<long>(
+                        funkoId,
+                        "Historial de precios",
+                        MethodsHttp.PATCH.ToString(),
+                        NotificationStatus.Error.ToString(),
+                        $"Error al restaurar el historial de precios vinculado al funko con id {funkoId}"
+                    )
+                );
+            });
         }
         return new PriceHistoryModifiedResponse("Restaurado el historial de precios vinculado al funko.");
     }

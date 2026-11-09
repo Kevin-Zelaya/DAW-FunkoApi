@@ -4,8 +4,8 @@ info:
   seq: 5
 
 http:
-  method: DELETE
-  url: http://localhost:5205/api/funkos/1
+  method: PATCH
+  url: http://localhost:5205/api/funkos/5/restore
   body:
     type: json
     data: |-
@@ -22,7 +22,9 @@ http:
         "exclusive": false,
         "price": 14.99
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiY2Y5NTZhMWItMmI0YS00NWRlLTk4MzgtNjE1MDM4MmMwYmI4IiwiaWF0IjoxNzk0MDg3MDE0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MDg3OTE0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.Xbyh9BQFboi9boq1po4vs4S1aiGm82iaEu2K7hiWKfk
 
 settings:
   encodeUrl: true

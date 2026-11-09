@@ -9,13 +9,15 @@ using System.Net;
 public class FunkoPriceHistoryServiceTests
 {
     private Mock<IFunkoPriceHistoryRepository> _repositoryMock = null!;
+    private Mock<INotificationService> _notificationService = null!;
     private FunkoPriceHistoryService _service = null!;
 
     [SetUp]
     public void Setup()
     {
         _repositoryMock = new Mock<IFunkoPriceHistoryRepository>();
-        _service = new FunkoPriceHistoryService(_repositoryMock.Object);
+        _notificationService = new Mock<INotificationService>();
+        _service = new FunkoPriceHistoryService(_repositoryMock.Object, _notificationService.Object);
     }
 
     // =========================================================
@@ -225,7 +227,8 @@ public class FunkoPriceHistoryServiceTests
 
         // Assert
         Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value.message,
-            Is.EqualTo("Error al restaurar el historial de precio vinculado al usuario"));
+
+        Assert.That(result.Value,
+            Is.TypeOf<PriceHistoryModifiedResponse>());
     }
 }

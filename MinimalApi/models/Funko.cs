@@ -6,7 +6,7 @@ public class Funko
     public int Number { get; set; }
     public string SupplierId {get; set;} = string.Empty;
     public string? CategoryId {get; set;}
-    public Category? Category { get; set; }
+    public Category? Category { get; set; } 
     public bool Exclusive { get; set; }
     public double Price { get; set; }
     public string? Imagen { get; set; }

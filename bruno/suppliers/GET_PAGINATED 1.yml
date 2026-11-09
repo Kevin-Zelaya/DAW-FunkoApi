@@ -16,7 +16,9 @@ http:
   body:
     type: json
     data: ""
-  auth: inherit
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiYjJhNzFhYjQtOGEwOC00M2I5LWIzOGItZThmYjVlNjZiMzExIiwiaWF0IjoxNzk0MDkxOTcxLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MDk0OTcxLCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.mXFwhgc4sCkIfJJfrzE5LHEYhDz-S4g_OygZq0rMxdo
 
 settings:
   encodeUrl: true

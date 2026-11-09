@@ -8,14 +8,13 @@ http:
   url: http://localhost:5205/api/funkos/1/price
   body:
     type: json
-    data: |-
+    data: |
       {
         "price": 15.99,
-        "rowVersion": 893
-      }
+        "rowVersion": 918}
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiYmYwYTFiZGEtNTI1OS00MmZhLTg1ODQtNDFkMDJlOWYzMjk3IiwiaWF0IjoxNzkzOTk1OTg1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzkzOTk2ODg1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.MejsDBZmKlMdE98jGaZ0KqXy8HkPd90XwrE0MjWj0zE
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZjAwYzc4MGEtMjY4Mi00MzMyLWIwZDEtMDZkNWY0ZjgzNmU4IiwiaWF0IjoxNzk0MTI1NDU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTI4NDU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.1vb29LXRDiDnOsmPQIKaU59d4vxDnrDuKPazgPcevKg
 
 settings:
   encodeUrl: true

@@ -5,7 +5,7 @@ public class Supplier
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id {get; set;} = null!;
+    public string Id {get; set;} 
     public string Name {get; set;} = string.Empty;
     public bool IsDeleted {get; set;}
     public DateTime CreateAt {get; set;}
