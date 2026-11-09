@@ -1,5 +1,6 @@
 
 using System.Collections.Concurrent;
+using Serilog;
 
 namespace MinimalApi.Services.Email;
 
@@ -23,6 +24,7 @@ public class MemoryEmailService : IEmailService
     /// <summary>
     /// Envía y almacena un correo.
     /// </summary>
+    
     public Task SendAsync(
         EmailMessage message,
         CancellationToken cancellationToken = default)
@@ -31,13 +33,25 @@ public class MemoryEmailService : IEmailService
 
         SentEmails.Add(message);
 
-        _logger.LogInformation(
-            "Correo enviado a {To}. Asunto: {Subject}",
-            message.To,
-            message.Subject);
+        Console.WriteLine();
+        Console.WriteLine("========== EMAIL ENVIADO ==========");
+        Console.WriteLine($"De:      {message.From ?? "noreply@funkoapi.com"}");
+        Console.WriteLine($"Para:    {message.To}");
+        Console.WriteLine($"Asunto:  {message.Subject}");
+        Console.WriteLine("-----------------------------------");
+
+        // Mostrar el contenido sin HTML
+        var body = System.Text.RegularExpressions.Regex.Replace(
+            message.Body, "<.*?>", string.Empty);
+
+        Console.WriteLine(body);
+
+        Console.WriteLine("===================================");
+        Console.WriteLine();
 
         return Task.CompletedTask;
     }
+
 
     /// <summary>
     /// Envía un correo HTML.
@@ -87,6 +101,7 @@ public class MemoryEmailService : IEmailService
 
     /// <summary>
     /// Limpia los correos almacenados.
+    /// 
     /// </summary>
     public static void Clear()
     {
