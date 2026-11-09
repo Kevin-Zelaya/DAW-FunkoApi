@@ -4,24 +4,59 @@ using StackExchange.Redis;
 
 public static class InitializationDb
 {
-    public static async Task InitializationDatabaseAsync(
+    // Inicialización normal: conservar datos
+    public static async Task InitializeDatabasesAsync(
         this WebApplication app)
     {
-        
         using var scope = app.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var mongoContext = scope.ServiceProvider.GetRequiredService<AppDbMongoContext>();
-        var redis = scope.ServiceProvider.GetRequiredService<IConnectionMultiplexer>();
+
+        var context = scope.ServiceProvider
+            .GetRequiredService<AppDbContext>();
+
+        var mongoContext = scope.ServiceProvider
+            .GetRequiredService<AppDbMongoContext>();
+
+        // PostgreSQL
+        await context.Database.EnsureCreatedAsync();
+
+        // MongoDB
+        await mongoContext.Database.EnsureCreatedAsync();
+
+        Log.Information("[DATABASES] Bases de datos inicializadas.");
+    }
+
+    // Reconstrucción: eliminar datos
+    public static async Task RecreateDatabasesAsync(
+        this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+
+        var context = scope.ServiceProvider
+            .GetRequiredService<AppDbContext>();
+
+        var mongoContext = scope.ServiceProvider
+            .GetRequiredService<AppDbMongoContext>();
+
+        var redis = scope.ServiceProvider
+            .GetRequiredService<IConnectionMultiplexer>();
+
         var server = redis.GetServer(redis.GetEndPoints().First());
-        ///<summary> Eliminar base de datos <summary>
+
+        // PostgreSQL
         await context.Database.EnsureDeletedAsync();
         await context.Database.EnsureCreatedAsync();
-        Log.Information("[POSGRE] Eliminando y recreando la base de datos");
+
+        Log.Information("[POSTGRES] Base de datos recreada.");
+
+        // MongoDB
         await mongoContext.Database.EnsureDeletedAsync();
         await mongoContext.Database.EnsureCreatedAsync();
-        Log.Information("[MONGO] Eliminando y recreando la base de datos");
-        await server.FlushAllDatabasesAsync(); // vaciar caché
-        Log.Information("[REDIS] Vaciando la caché");
 
+        Log.Information("[MONGO] Base de datos recreada.");
+
+        // Redis
+        await server.FlushAllDatabasesAsync();
+
+        Log.Information("[REDIS] Caché vaciada");
     }
 }

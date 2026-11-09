@@ -10,6 +10,9 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
     <PackageReference Include="CassandraCSharpDriver" Version="3.23.0" />
     <PackageReference Include="CSharpFunctionalExtensions" Version="3.7.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="16.6.6" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="16.6.6" />
+    <PackageReference Include="HotChocolate.Data" Version="16.6.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />

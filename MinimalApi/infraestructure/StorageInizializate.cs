@@ -5,7 +5,7 @@ public static class StorageInitializationExtensions
     public static void InitializeStorage(this WebApplication app, bool isDevelopment)
     {
         var rootPath = app.Environment.WebRootPath ?? app.Environment.ContentRootPath;
-        var storagePath = Path.Combine(rootPath, "uploads");
+        var storagePath = System.IO.Path.Combine(rootPath, "uploads");
         var storageDirectory = new DirectoryInfo(storagePath);
 
         if (isDevelopment)

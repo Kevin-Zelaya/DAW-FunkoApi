@@ -60,6 +60,8 @@ builder.Services
     .AddAuthenticationJwt(builder.Configuration)
     .AddStorage()
     .AddSignalR();
+builder.Services.AddGraphQL(builder.Environment);
+
 
 
 
@@ -68,26 +70,35 @@ var app = builder.Build();
 var apiConfig = app.Services
     .GetRequiredService<IOptions<ApiConfig>>()
     .Value;
+// ======= Configuración de cassandra ========== 
+var cassandraSettings = app.Services
+    .GetRequiredService<CassandraSettings>();
 
-    
+var cassandraSession = app.Services
+    .GetRequiredService<ISession>();
+
+// Inicializar keyspace
+await cassandraSession.InitializeKeyspaceAsync(
+    cassandraSettings.Keyspace);
+// Recrear base de dato si requiere el appsettings
+var recreateCassandra =
+    app.Environment.IsDevelopment() && apiConfig.shouldRecreateDb;
+
+await cassandraSession.InitializeTablesAsync(recreateCassandra);
+// Inicializar bases de datos
+await app.InitializeDatabasesAsync();
+if (apiConfig.shouldRecreateDb)
+{
+    // inicialización del servicio storage
+    app.InitializeStorage(true);
+    // Inicialización de mongo y postgre
+    await app.RecreateDatabasesAsync();
+}
+
 app.UseHttpsRedirection();
 
-// Configuración condicional en desarrollo
-if (app.Environment.IsDevelopment())
-{   
-    
-    // inicialización en el caso de bases de datos, redis siempre se limpia
-    if (apiConfig.shouldRecreateDb)
-    {
-        // inicialización del servicio storage
-        app.InitializeStorage(true);
-        // Inicialización de mongo y postgre
-        await app.InitializationDatabaseAsync();
-        // Inicializació de casandra, reconstruye llaves y tablas
-        var settings = app.Services.GetRequiredService<CassandraSettings>();
-        await app.Services.GetRequiredService<ISession>().InitializeSchemaAsync(settings.Keyspace);
-    }
-}
+
+
 // Permite lectura de archiovs estaticos
 app.UseStaticFiles();
 app.UseGlobalExceptionHandler();
@@ -97,12 +108,16 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // ======= Configuración de Swagger ==========
-app.MapOpenApi();
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
-});
-
+if (app.Environment.IsDevelopment())
+{       
+    app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
+    });
+}
+// ======= Mapear endpoints de GraphQL ========== 
+app.MapGraphQL();
 // ======= Buscar todos los controladores ========== 
 app.MapControllers();
 // ======= SignalR hubs ========== 

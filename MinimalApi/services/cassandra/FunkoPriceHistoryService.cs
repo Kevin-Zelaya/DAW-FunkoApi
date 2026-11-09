@@ -37,7 +37,7 @@ public class FunkoPriceHistoryService(
             toReturn
         );
     }
-    public async Task<Result<PriceHistoryModifiedResponse>> DeleteHistoryAsync(long funkoId, CancellationToken ct)
+    public async Task<CSharpFunctionalExtensions.Result<PriceHistoryModifiedResponse>> DeleteHistoryAsync(long funkoId, CancellationToken ct)
     {
         try { await _repository.DeleteHistoryByFunkoId(funkoId, ct); }
         catch (Exception ex)
@@ -63,7 +63,7 @@ public class FunkoPriceHistoryService(
         ); 
 
     }
-    public async Task<Result<PriceHistoryModifiedResponse>> RestoreHistoryAsync(long funkoId, CancellationToken ct)
+    public async Task<CSharpFunctionalExtensions.Result<PriceHistoryModifiedResponse>> RestoreHistoryAsync(long funkoId, CancellationToken ct)
     {
         try { await _repository.RestoreHistoryByFunkoId(funkoId, ct); }
         catch (Exception ex)

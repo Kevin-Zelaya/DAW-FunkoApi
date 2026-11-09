@@ -37,6 +37,7 @@ public class SupplierService(
                         s.Id,
                         "Supplier",
                         MethodsHttp.POST.ToString(),
+                        NotificationStatus.Ok.ToString(),
                         $"Creada un nuevo proveedor con id {s.Id}"
                     )
                 );
@@ -171,6 +172,7 @@ public class SupplierService(
                             s.Id,
                             "Supplier",
                             MethodsHttp.PUT.ToString(),
+                            NotificationStatus.Ok.ToString(),
                             $"Actualizado proveedor con id {s.Id}"
                         )
                     );
@@ -213,6 +215,7 @@ public class SupplierService(
                             id,
                             "Supplier",
                             MethodsHttp.DELETE.ToString(),
+                            NotificationStatus.Ok.ToString(),
                             $"Eliminado proveedor con id {id}"
                         )
                     );
@@ -250,6 +253,7 @@ public class SupplierService(
                             id,
                             "Supplier",
                             MethodsHttp.PATCH.ToString(),
+                            NotificationStatus.Ok.ToString(),
                             $"Restaurado proveedor con id {id}"
                         )
                     );

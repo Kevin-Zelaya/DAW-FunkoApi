@@ -29,7 +29,7 @@ public interface ICategoryRepository
     /// <param name="ct">Token de cancelación de la operación.</param>
     /// <returns>Lista con todas las categorías.</returns>
     Task<List<Category>> GetAllCategoriesAsync(
-        CancellationToken ct
+        CancellationToken ct = default
     );
 
     /// <summary>

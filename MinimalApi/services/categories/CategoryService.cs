@@ -36,6 +36,8 @@ public class CategoryService(
                         c.Id,
                         "Category",
                         MethodsHttp.POST.ToString(),
+                        
+                            NotificationStatus.Ok.ToString(),
                         $"Creada una nueva categoria con id {c.Id}"
                     )
                 );
@@ -198,6 +200,8 @@ public class CategoryService(
                             c.Id,
                             "Category",
                             MethodsHttp.PUT.ToString(),
+                            
+                            NotificationStatus.Ok.ToString(),
                             $"Actualizada una nueva categoria con id {c.Id}"
                         )
                     );
@@ -236,6 +240,7 @@ public class CategoryService(
                             id,
                             "Category",
                             MethodsHttp.DELETE.ToString(),
+                            NotificationStatus.Ok.ToString(),
                             $"Eliminada una nueva categoria con id {id}"
                         )
                     );
@@ -273,6 +278,7 @@ public class CategoryService(
                             id,
                             "Category",
                             MethodsHttp.PATCH.ToString(),
+                            NotificationStatus.Ok.ToString(),
                             $"Restaurada una nueva categoria con id {id}"
                         )
                     );
