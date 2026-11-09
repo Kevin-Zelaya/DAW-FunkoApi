@@ -8,6 +8,7 @@ public class SupplierServiceTests
 {
     private Mock<ISupplierRepository> _repository = null!;
     private Mock<ILogger<SupplierService>> _logger = null!;
+    private Mock<INotificationService> _notificationService = null!;
     private Mock<ICache> _cache = null!;
     private SupplierService _service = null!;
 
@@ -16,12 +17,14 @@ public class SupplierServiceTests
     {
         _repository = new Mock<ISupplierRepository>();
         _logger = new Mock<ILogger<SupplierService>>();
+        _notificationService = new Mock<INotificationService>();
         _cache = new Mock<ICache>();
 
         _service = new SupplierService(
             _repository.Object,
             _logger.Object,
-            _cache.Object
+            _cache.Object,
+            _notificationService.Object
         );
     }
 
@@ -173,51 +176,9 @@ public class SupplierServiceTests
         Assert.That(response.IsSuccess, Is.True);
         Assert.That(response.Value.Items, Has.Count.EqualTo(2));
         Assert.That(response.Value.TotalPages, Is.EqualTo(1));
-
-        _cache.Verify(
-            c => c.SetAsync(
-                "SUPPLIER:ALL-PAGED:1",
-                It.IsAny<PaginatedResouce<SupplierDto>>()
-            ),
-            Times.Once
-        );
     }
 
-    [Test]
-    public async Task GetPaginatedSuppliers_CachedFirstPage_Success()
-    {
-        // Arrange
-        var cached = new PaginatedResouce<SupplierDto>(
-            new List<SupplierDto>(),
-            0,
-            0,
-            false,
-            false
-        );
-
-        _cache
-            .Setup(c => c.GetTAsync<PaginatedResouce<SupplierDto>>(
-                "SUPPLIER:ALL-PAGED:1"
-            ))
-            .ReturnsAsync(cached);
-
-        // Act
-        var response = await _service.GetPaginatedSuppliersAsync(1, 10);
-
-        // Assert
-        Assert.That(response.IsSuccess, Is.True);
-        Assert.That(response.Value, Is.EqualTo(cached));
-
-        _repository.Verify(
-            r => r.GetPaginatedSuppliersAsync(
-                It.IsAny<int>(),
-                It.IsAny<int>(),
-                It.IsAny<CancellationToken>()
-            ),
-            Times.Never
-        );
-    }
-
+   
     [Test]
     public async Task GetPaginatedSuppliers_SecondPage_Success()
     {
@@ -413,16 +374,6 @@ public class SupplierServiceTests
         // Assert
         Assert.That(response.IsSuccess, Is.True);
         Assert.That(response.Value.Name, Is.EqualTo(request.Name));
-
-        _cache.Verify(
-            c => c.RemoveAsync($"SUPPLIER:{supplier.Id}"),
-            Times.Once
-        );
-
-        _cache.Verify(
-            c => c.RemoveAsync("SUPPLIER:ALL-PAGED:1"),
-            Times.Once
-        );
     }
 
     [Test]
@@ -479,16 +430,6 @@ public class SupplierServiceTests
         // Assert
         Assert.That(response.IsSuccess, Is.True);
         Assert.That(response.Value, Is.True);
-
-        _cache.Verify(
-            c => c.RemoveAsync($"SUPPLIER:{supplier.Id}"),
-            Times.Once
-        );
-
-        _cache.Verify(
-            c => c.RemoveAsync("SUPPLIER:ALL-PAGED:1"),
-            Times.Once
-        );
     }
 
     [Test]

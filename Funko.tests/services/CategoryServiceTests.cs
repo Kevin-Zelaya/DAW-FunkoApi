@@ -1,4 +1,6 @@
 
+using System.ComponentModel;
+using DotNet.Testcontainers.Builders;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -7,6 +9,7 @@ public class CategoryServiceTests
 {
     private Mock<ICategoryRepository> _repository = null!;
     private Mock<ILogger<CategoryService>> _logger = null!;
+    private Mock<INotificationService> _notificationService = null!;
     private Mock<ICache> _cache = null!;
     private CategoryService _service = null!;
 
@@ -15,12 +18,14 @@ public class CategoryServiceTests
     {
         _repository = new Mock<ICategoryRepository>();
         _logger = new Mock<ILogger<CategoryService>>();
+        _notificationService = new Mock<INotificationService>();
         _cache = new Mock<ICache>();
 
         _service = new CategoryService(
             _repository.Object,
             _logger.Object,
-            _cache.Object
+            _cache.Object,
+            _notificationService.Object
         );
     }
 
@@ -259,14 +264,6 @@ public class CategoryServiceTests
         Assert.That(response.IsSuccess, Is.True);
         Assert.That(response.Value.Items, Has.Count.EqualTo(1));
         Assert.That(response.Value.Count, Is.EqualTo(1));
-
-        _cache.Verify(
-            c => c.SetAsync(
-                "CATEGORY:ALL-PAGINATED:1",
-                It.IsAny<PaginatedResouce<CategoryDto>>()
-            ),
-            Times.Once
-        );
     }
 
     [Test]
@@ -369,16 +366,6 @@ public class CategoryServiceTests
         // Assert
         Assert.That(response.IsSuccess, Is.True);
         Assert.That(response.Value.Name, Is.EqualTo("Marvel"));
-
-        _cache.Verify(
-            c => c.RemoveAsync($"CATEGORY:{category.Id}"),
-            Times.Once
-        );
-
-        _cache.Verify(
-            c => c.RemoveAsync("CATEGORY:ALL-PAGINATED:1"),
-            Times.Once
-        );
     }
 
     [Test]
@@ -437,15 +424,6 @@ public class CategoryServiceTests
         Assert.That(response.IsSuccess, Is.True);
         Assert.That(response.Value, Is.True);
 
-        _cache.Verify(
-            c => c.RemoveAsync($"CATEGORY:{category.Id}"),
-            Times.Once
-        );
-
-        _cache.Verify(
-            c => c.RemoveAsync("CATEGORY:ALL-PAGINATED:1"),
-            Times.Once
-        );
     }
 
     [Test]

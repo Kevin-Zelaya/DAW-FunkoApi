@@ -1,19 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Testcontainers.PostgreSql;
 
 [TestFixture]
+[NonParallelizable]
 public class CategoryRepositoryTests
 {
     private PostgreSqlContainer _container = null!;
     private AppDbContext _context = null!;
     private CategoryRepository _repository = null!;
 
-    /// <summary>
-    /// Configuración de la conexión
-    /// con la base de datos
-    /// </summary>
-    /// <returns></returns>
+    // =========================================================
+    // CONFIGURACIÓN
+    // =========================================================
+
     [OneTimeSetUp]
     public async Task OneTimeSetup()
     {
@@ -23,20 +22,25 @@ public class CategoryRepositoryTests
             .WithUsername("test")
             .WithPassword("test")
             .Build();
+
         await _container.StartAsync();
     }
+
     [SetUp]
     public async Task Setup()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseNpgsql(_container.GetConnectionString())
             .Options;
+
         _context = new AppDbContext(options);
+
         await _context.Database.EnsureDeletedAsync();
         await _context.Database.EnsureCreatedAsync();
-        // inyectamos el contexto
+
         _repository = new CategoryRepository(_context);
     }
+
     [TearDown]
     public async Task TearDown()
     {
@@ -48,240 +52,233 @@ public class CategoryRepositoryTests
     {
         await _container.DisposeAsync();
     }
-    // Auxiliar para obtener una categoria valida
-    public Category CreateCategoryValid()
+
+    // =========================================================
+    // MÉTODOS AUXILIARES
+    // =========================================================
+
+    private Category CreateCategoryValid(string? name = null)
     {
         return new Category
-                {
-                    Id = YoutubeIdValueGenerator.GenerateId(), // para crear desde consulta más rapido
-                    Name = "DC Comics",
-                    Description = "Figuras Funko de héroes y villanos de DC Comics."
-                };
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = name ?? $"Categoría-{Guid.NewGuid()}",
+            Description = "Figuras Funko de prueba."
+        };
     }
-    /// <summary>
-    /// Crear categoría
-    /// </summary>
+
+    private async Task<Category> InsertCategory(string? name = null)
+    {
+        var category = CreateCategoryValid(name);
+
+        return await _repository.CreateCategoryAsync(
+            new CategoryCreateRequestDto(
+                category.Name,
+                category.Description
+            ));
+    }
+
+    // =========================================================
+    // CREATE
+    // =========================================================
+
     [Test]
-    public async Task CreateCategoy_exist_returnCategory()
+    public async Task CreateCategory_Valid_ReturnCategory()
     {
         // Arrange
         var category = CreateCategoryValid();
 
-        // Arc
-        var exist = await _repository.ExistByName(category.Name); // comprobación de si existe
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            category.Name,
-            category.Description
-        ));
+        // Act
+        var exist = await _repository.ExistByName(category.Name);
+
+        var created = await _repository.CreateCategoryAsync(
+            new CategoryCreateRequestDto(
+                category.Name,
+                category.Description
+            ));
+
         // Assert
-        Assert.That(category.Id, Is.Not.Null); // id asignado
-        Assert.That(category.Name, Is.EqualTo(created.Name));
-        Assert.That(category.Description , Is.EqualTo(created.Description));
-        Assert.That(exist , Is.True);
+        Assert.That(exist, Is.False);
+        Assert.That(created.Id, Is.Not.Null.And.Not.Empty);
+        Assert.That(created.Name, Is.EqualTo(category.Name));
+        Assert.That(created.Description, Is.EqualTo(category.Description));
     }
-    /// <summary>
-    /// Buscar una categoria creada
-    /// </summary>
+
+    // =========================================================
+    // GET BY ID
+    // =========================================================
+
     [Test]
-    public async Task GetCategoryById_exist_returnCategory()
+    public async Task GetCategoryById_Exist_ReturnCategory()
     {
         // Arrange
-        var category = CreateCategoryValid();
+        var created = await InsertCategory();
 
-        // Arc
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            category.Name,
-            category.Description
-        ));
+        // Act
         var response = await _repository.GetCategoryById(created.Id);
+
         // Assert
-        Assert.That(response!.Id, Is.EqualTo(created.Id)); // id asignado
-        Assert.That(category.Name, Is.EqualTo(response.Name));
-        Assert.That(category.Description , Is.EqualTo(response.Description));
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response!.Id, Is.EqualTo(created.Id));
+        Assert.That(response.Name, Is.EqualTo(created.Name));
+        Assert.That(response.Description, Is.EqualTo(created.Description));
     }
-    /// <summary>
-    /// Buscar una categoria creada por su nombre
-    /// </summary>
+
     [Test]
-    public async Task GetCategoryByName_exist_returnCategory()
+    public async Task GetCategoryById_NotExist_ReturnNull()
+    {
+        // Act
+        var response = await _repository.GetCategoryById("id-inexistente");
+
+        // Assert
+        Assert.That(response, Is.Null);
+    }
+
+    // =========================================================
+    // GET BY NAME
+    // =========================================================
+
+    [Test]
+    public async Task GetCategoryByName_Exist_ReturnCategory()
     {
         // Arrange
-        var category = CreateCategoryValid();
+        var created = await InsertCategory("Josemanuel");
 
-        // Arc
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            "Josemanuel",
-            category.Description
-        ));
+        // Act
         var response = await _repository.GetCategoryByName(created.Name);
+
         // Assert
-        Assert.That(response!.Id, Is.EqualTo(created.Id)); // id asignado
-        Assert.That(created.Name, Is.EqualTo(response.Name));
-        Assert.That(category.Description , Is.EqualTo(response.Description));
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response!.Id, Is.EqualTo(created.Id));
+        Assert.That(response.Name, Is.EqualTo(created.Name));
+        Assert.That(response.Description, Is.EqualTo(created.Description));
     }
-    /// <summary>
-    /// Buscar una categoria no existente
-    /// </summary>
+
+    // =========================================================
+    // UPDATE
+    // =========================================================
+
     [Test]
-    public async Task GetCategoryById_Notexist_returnNull()
+    public async Task UpdateCategory_Exist_ReturnUpdatedCategory()
     {
         // Arrange
-        var category = CreateCategoryValid();
+        var created = await InsertCategory();
 
-        // Arc
-        var response = await _repository.GetCategoryById("e823Ie7x_iC");
-        // Assert
-        Assert.That(response, Is.Null); // null
-        
-    }
-    /// <summary>
-    /// actualizar categoría
-    /// </summary>
-    [Test]
-    public async Task UpdateCategory_exist_UpdatedCategory()
-    {
-        // Arrange
-        var category = CreateCategoryValid();
-
-        // Arc
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            category.Name,
-            category.Description
-        ));
+        // Act
         var updated = await _repository.UpdateCategoryAsync(
             created.Id,
-            new CategoryUpdateRequestDto("Prueba", "Para probar", created.RowVersion)
-        );
-        // Assert
-        Assert.That(updated!.Id, Is.EqualTo(created.Id)); // id asignado
-        Assert.That(category.Name, Is.Not.EqualTo(updated.Name));
-        Assert.That(category.Description , Is.Not.EqualTo(updated.Description));
-    }
-    /// <summary>
-    /// actualizar categoría error de concurrencia
-    /// </summary>
-    [Test]
-    public async Task UpdateCategory_alredyUpdated_DbUpdateConcurrencyException()
-    {
-        // Arrange
-        var category = CreateCategoryValid();
-
-        // Arc
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            category.Name,
-            category.Description
-        ));
-        Assert.ThrowsAsync<DbUpdateConcurrencyException>( async () =>
-             await _repository.UpdateCategoryAsync( 
-                        created.Id,
-                        new CategoryUpdateRequestDto("Prueba", "Para probar", created.RowVersion-1) // Version anterior
-                    )
-        );
-        // Assert
-    }
-    /// <summary>
-    /// Eliminar categoria
-    /// </summary>
-    [Test]
-    public async Task DeleteCategory_exist_returntru()
-    {
-        // Arrange
-        var category = CreateCategoryValid();
-
-        // Arc
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            category.Name,
-            category.Description
-        ));
-        var deleted = await _repository.DeleteCategoryAsync(
-            created.Id
-        );
-        // Assert
-        Assert.That(deleted!, Is.True); // id asignado
-    }
-    /// <summary>
-    /// Restaurar categoria eliminada
-    /// </summary>
-    [Test]
-    public async Task RestoreCategory_exist_returntru()
-    {
-        // Arrange
-        var category = CreateCategoryValid();
-
-        // Arc
-        var created = await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-        (
-            category.Name,
-            category.Description
-        ));
-        var restore = await _repository.RestoreCategoryAsync( // se puede restaurar aunque no este eliminado ya que es eliminado lógico
-            created.Id
-        );
-        // Assert
-        Assert.That(restore!, Is.True); // id asignado
-    }
-    /// <summary>
-    /// Restaurar categoria eliminada
-    /// </summary>
-    [Test]
-    public async Task GetAllCtegories_returnlist()
-    {
-        // Arrange
-        Category[] categories = new Category[5];
-        for (int i = 0; i < categories.Length; i++)
-        {
-            categories[i] = CreateCategoryValid();
-        }
-
-        // Arc
-        foreach(var cat in categories)
-        {    
-            await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-            (
-                cat.Name,
-                cat.Description
+            new CategoryUpdateRequestDto(
+                "Prueba",
+                "Para probar",
+                created.RowVersion
             ));
+
+        // Assert
+        Assert.That(updated, Is.Not.Null);
+        Assert.That(updated!.Id, Is.EqualTo(created.Id));
+        Assert.That(updated.Name, Is.EqualTo("Prueba"));
+        Assert.That(updated.Description, Is.EqualTo("Para probar"));
+    }
+
+    [Test]
+    public async Task UpdateCategory_WrongVersion_ThrowsConcurrencyException()
+    {
+        // Arrange
+        var created = await InsertCategory();
+
+        var wrongVersion = created.RowVersion == 0
+            ? 1u
+            : created.RowVersion - 1;
+
+        // Act y Assert
+        Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await _repository.UpdateCategoryAsync(
+                created.Id,
+                new CategoryUpdateRequestDto(
+                    "Prueba",
+                    "Para probar",
+                    wrongVersion
+                )
+            ));
+    }
+
+    // =========================================================
+    // DELETE
+    // =========================================================
+
+    [Test]
+    public async Task DeleteCategory_Exist_ReturnTrue()
+    {
+        // Arrange
+        var created = await InsertCategory();
+
+        // Act
+        var deleted = await _repository.DeleteCategoryAsync(created.Id);
+
+        // Assert
+        Assert.That(deleted, Is.True);
+    }
+
+    // =========================================================
+    // RESTORE
+    // =========================================================
+
+    [Test]
+    public async Task RestoreCategory_Deleted_ReturnTrue()
+    {
+        // Arrange
+        var created = await InsertCategory();
+
+        await _repository.DeleteCategoryAsync(created.Id);
+
+        // Act
+        var restored = await _repository.RestoreCategoryAsync(created.Id);
+
+        // Assert
+        Assert.That(restored, Is.True);
+    }
+
+    // =========================================================
+    // GET ALL
+    // =========================================================
+
+    [Test]
+    public async Task GetAllCategories_ReturnList()
+    {
+        // Arrange
+        for (int i = 1; i <= 5; i++)
+        {
+            await InsertCategory($"Categoría-{i}");
         }
+
+        // Act
         var response = await _repository.GetAllCategoriesAsync();
+
         // Assert
-        Assert.That(response, Is.Not.Empty); // id asignado
+        Assert.That(response, Is.Not.Empty);
     }
-    /// <summary>
-    /// Obtener lista páginada de categorias
-    /// </summary>
+
+    // =========================================================
+    // PAGINATION
+    // =========================================================
+
     [Test]
-    public async Task GetPáginateCategory_returnlist()
+    public async Task GetPaginateCategory_ReturnList()
     {
         // Arrange
-        Category[] categories = new Category[5];
-        for (int i = 0; i < categories.Length; i++)
+        for (int i = 1; i <= 5; i++)
         {
-            categories[i] = CreateCategoryValid();
+            await InsertCategory($"Categoría-{i}");
         }
 
-        // Arc
-        foreach(var cat in categories)
-        {    
-            await _repository.CreateCategoryAsync(new CategoryCreateRequestDto
-            (
-                cat.Name,
-                cat.Description
-            ));
-        }
+        // Act
         var response = await _repository.GetPaginatedCategoriesAsync(1, 5);
+
         // Assert
-        Assert.That(response.items, Is.Not.Empty); 
-        Assert.That(response.count, Is.EqualTo(5)); 
-        Assert.That(response.totalPages, Is.EqualTo(1)); 
-        Assert.That(response.HasPreviousPage, Is.False); 
-        Assert.That(response.HasNextPage, Is.False); 
+        Assert.That(response.items, Is.Not.Empty);
+        Assert.That(response.count, Is.EqualTo(5));
+        Assert.That(response.totalPages, Is.EqualTo(1));
+        Assert.That(response.HasPreviousPage, Is.False);
+        Assert.That(response.HasNextPage, Is.False);
     }
-
-
 }
