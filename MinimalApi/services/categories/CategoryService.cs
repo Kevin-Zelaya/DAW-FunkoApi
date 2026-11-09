@@ -140,26 +140,36 @@ public class CategoryService(
     }
     
     /// <inheritdoc cref="ICategoryService.GetCategoryByIdAsync(string, CancellationToken)"/>
-    public async Task<Result<CategoryDto?, DomainError>> GetCategoryByIdAsync(
+    public async Task<Result<CategoryDto, DomainError>> GetCategoryByIdAsync(
         string id,
         CancellationToken ct)
     {
+        string key = $"CATEGORY:{id}";
+
         _logger.LogDebug(
             "[SERVICE-GETCATEGORYBYID] Buscando categoría con ID {Id}.",
             id);
-
+        // buscar en caché
+        var cached = await _cache.GetTAsync<CategoryDto>(key);
+        if (cached is not null)
+            return Result.Success<CategoryDto, DomainError>(cached)
+                .Tap(_ => _logger.LogInformation(
+                    "[SERVICE-GETCATEGORY] Categoria con ID {Id} recuperado desde la caché.", id));
+        // buscar en el repositorio, si es null retorna un notfound
         var response = await _repository.GetCategoryById(id, ct);
-
-        return response is not null
-            ? Result.Success<CategoryDto?, DomainError>(response.ToDto())
-                .Tap(c => _logger.LogInformation(
-                    "[SERVICE-GETCATEGORYBYID] Categoría con ID {Id} recuperada correctamente.",
-                    c!.Id))
-            : Result.Failure<CategoryDto?, DomainError>(
+        if(response is null)
+            return Result.Failure<CategoryDto, DomainError>(
                 NotFoundError.FromResource("Category", id))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-GETCATEGORYBYID] No se encontró la categoría con ID {Id}.",
                     id));
+        var toReturn = response!.ToDto();
+        try{await _cache.SetAsync(key, toReturn);}
+        catch(Exception ex){_logger.LogWarning(ex, "No se pudo guardar el funko {id} en la cache", id);}
+        return Result.Success<CategoryDto, DomainError>(toReturn)
+                .Tap(c => _logger.LogInformation(
+                    "[SERVICE-GETCATEGORYBYID] Categoría con ID {Id} recuperada correctamente.",
+                    c!.Id));
     }
 
     // =========================================================

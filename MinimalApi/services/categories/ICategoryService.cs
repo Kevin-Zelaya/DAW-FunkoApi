@@ -30,7 +30,7 @@ public interface ICategoryService
     /// <param name="id">ID de la categoría.</param>
     /// <param name="ct">Token de cancelación.</param>
     /// <returns>Categoría encontrada o error de dominio.</returns>
-    Task<Result<CategoryDto?, DomainError>> GetCategoryByIdAsync(
+    Task<Result<CategoryDto, DomainError>> GetCategoryByIdAsync(
         string id,
         CancellationToken ct);
 
