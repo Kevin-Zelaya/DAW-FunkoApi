@@ -114,30 +114,30 @@ public class SupplierService(
 
         _logger.LogDebug(
             "[SERVICE-GETSUPPLIER] Buscando proveedor con ID {Id}.", id);
-
-        var cached = await _cache.GetTAsync<Supplier>(key);
-
+        // Buscar en caché
+        var cached = await _cache.GetTAsync<SupplierDto>(key);
         if (cached is not null)
-            return Result.Success<SupplierDto, DomainError>(cached.ToDto())
+            return Result.Success<SupplierDto, DomainError>(cached)
                 .Tap(_ => _logger.LogInformation(
                     "[SERVICE-GETSUPPLIER] Proveedor con ID {Id} recuperado desde la caché.",
                     id));
-
+        // Buscar en el repositorio
         var response = await _repository.GetSupplierByIdAsync(id, ct);
-
-        if (response is not null)
+        if (response is  null)
+            return Result.Failure<SupplierDto, DomainError>(
+                    NotFoundError.FromResource("Supplier", id))
+                        .Tap(_ => _logger.LogWarning(
+                            "[SERVICE-GETSUPPLIER] No se encontró el proveedor con ID {Id}.",
+                            id));
+        var toReturn = response.ToDto();
+        try{await _cache.SetAsync(key, toReturn);}
+        catch(Exception ex){_logger.LogWarning(ex, "No se pudo guardar el funko {id} en la cache", id);}
             await _cache.SetAsync(key, response);
 
-        return response is not null
-            ? Result.Success<SupplierDto, DomainError>(response.ToDto())
+        return Result.Success<SupplierDto, DomainError>(toReturn)
                 .Tap(s => _logger.LogInformation(
                     "[SERVICE-GETSUPPLIER] Proveedor con ID {Id} recuperado correctamente.",
-                    s.Id))
-            : Result.Failure<SupplierDto, DomainError>(
-                NotFoundError.FromResource("Supplier", id))
-                .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-GETSUPPLIER] No se encontró el proveedor con ID {Id}.",
-                    id));
+                    s.Id));
     }
 
     // =========================================================

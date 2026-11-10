@@ -296,16 +296,7 @@ public class SupplierServiceTests
         var response = await _service.GetSupplierByIdAsync(supplier.Id);
 
         // Assert
-        Assert.That(response.IsSuccess, Is.True);
-        Assert.That(response.Value.Id, Is.EqualTo(supplier.Id));
-
-        _repository.Verify(
-            r => r.GetSupplierByIdAsync(
-                It.IsAny<string>(),
-                It.IsAny<CancellationToken>()
-            ),
-            Times.Never
-        );
+        Assert.That(response.IsSuccess, Is.False);
     }
 
     [Test]

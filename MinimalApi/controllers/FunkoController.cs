@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MinimalApi.config;
 using MinimalApi.repositories;
 using Serilog;
+using Swashbuckle.AspNetCore.Annotations;
 
 [ApiController]
 [Route("api/funkos")]
@@ -10,12 +11,22 @@ public class FunkoController(
     IFunkoService _service,
     IFunkoPriceHistoryService _historyService
 ) : ControllerBase
-{ 
+{
     // =========================================================
     // CREATE
-    // =========================== 
+    // =========================================================
+
     [Authorize(Roles = "ADMIN")]
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Crear un Funko",
+        Description = "Crea un nuevo Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(201, "Funko creado correctamente.", typeof(FunkoDto))]
+    [SwaggerResponse(400, "Los datos proporcionados no son válidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(409, "Conflicto al crear el Funko.")]
     public async Task<ActionResult<FunkoDto>> CreateFunko(
         [FromBody] FunkoCreateRequestDto dto)
     {
@@ -31,11 +42,15 @@ public class FunkoController(
     // READ
     // =========================================================
 
-    /// <summary>
-    /// Get a Funko by its ID.
-    /// </summary>
     [HttpGet("{id}")]
+    [SwaggerOperation(
+        Summary = "Obtener un Funko por ID",
+        Description = "Devuelve los datos de un Funko identificado por su ID."
+    )]
+    [SwaggerResponse(200, "Funko encontrado.", typeof(FunkoDto))]
+    [SwaggerResponse(404, "No se ha encontrado el Funko.")]
     public async Task<ActionResult<FunkoDto>> GetFunkoById(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
         CancellationToken ct)
     {
@@ -46,10 +61,12 @@ public class FunkoController(
             : funko.Error.ToHttpResult<FunkoDto>();
     }
 
-    /// <summary>
-    /// Get all Funkos.
-    /// </summary>
     [HttpGet("all")]
+    [SwaggerOperation(
+        Summary = "Obtener todos los Funkos",
+        Description = "Devuelve el listado completo de Funkos."
+    )]
+    [SwaggerResponse(200, "Listado de Funkos obtenido correctamente.", typeof(List<FunkoDto>))]
     public async Task<ActionResult<List<FunkoDto>>> GetAllFunkos(
         CancellationToken ct)
     {
@@ -60,18 +77,26 @@ public class FunkoController(
             : funkos.Error.ToHttpResult<List<FunkoDto>>();
     }
 
-    /// <summary>
-    /// Get paginated Funkos.
-    /// </summary>
     [HttpGet]
+    [SwaggerOperation(
+        Summary = "Obtener Funkos paginados",
+        Description = "Devuelve una página de Funkos según el número de página y el tamaño solicitado."
+    )]
+    [SwaggerResponse(200, "Página obtenida correctamente.", typeof(PaginatedResouce<FunkoDto>))]
+    [SwaggerResponse(400, "El número de página o el tamaño son inválidos.")]
     public async Task<ActionResult<PaginatedResouce<FunkoDto>>> GetPaginatedFunkos(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 5,
+        [FromQuery, SwaggerParameter("Número de página (mínimo 1).")]
+        int pageNumber = 1,
+
+        [FromQuery, SwaggerParameter("Cantidad de elementos por página (mínimo 1).")]
+        int pageSize = 5,
+
         CancellationToken ct = default)
     {
         Log.Information(
-    "PageNumber: {PageNumber}, PageSize: {PageSize}",
-    pageNumber, pageSize);
+            "PageNumber: {PageNumber}, PageSize: {PageSize}",
+            pageNumber, pageSize);
+
         if (pageNumber < 1 || pageSize < 1)
             return BadRequest("La página y el tamaño deben ser mayores que 0.");
 
@@ -81,19 +106,25 @@ public class FunkoController(
         return funkos.IsSuccess
             ? Ok(funkos.Value)
             : funkos.Error.ToHttpResult<PaginatedResouce<FunkoDto>>();
-    } // implemntar la páginación en todos los endpoints, terminar de probar endpoints de suppliers y hacer los de category
-    // testear lo que se tenga y meter el middlerware de excepciones
+    }
 
     // =========================================================
     // UPDATE
     // =========================================================
 
-    /// <summary>
-    /// Update a Funko.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
+    [SwaggerOperation(
+        Summary = "Actualizar un Funko",
+        Description = "Actualiza los datos de un Funko existente. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Funko actualizado correctamente.", typeof(FunkoDto))]
+    [SwaggerResponse(400, "Los datos proporcionados no son válidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko no encontrado.")]
     public async Task<ActionResult<FunkoDto>> UpdateFunko(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
         [FromBody] FunkoUpdateRequestDto dto,
         CancellationToken ct)
@@ -105,12 +136,19 @@ public class FunkoController(
             : response.Error.ToHttpResult<FunkoDto>();
     }
 
-    /// <summary>
-    /// Update a Funko's category.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/category")]
+    [SwaggerOperation(
+        Summary = "Cambiar la categoría de un Funko",
+        Description = "Modifica la categoría asociada a un Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Categoría actualizada correctamente.", typeof(FunkoDto))]
+    [SwaggerResponse(400, "Datos inválidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko o categoría no encontrados.")]
     public async Task<ActionResult<FunkoDto>> UpdateCategoryFromFunko(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
         [FromBody] FunkoUpdateCategoryRequestDto dto,
         CancellationToken ct)
@@ -122,14 +160,21 @@ public class FunkoController(
             : response.Error.ToHttpResult<FunkoDto>();
     }
 
-    /// <summary>
-    /// Update a Funko's supplier.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
-    [HttpPatch("{id}/supplier")] // QUITAR ID
+    [HttpPatch("{id}/supplier")]
+    [SwaggerOperation(
+        Summary = "Cambiar el proveedor de un Funko",
+        Description = "Modifica el proveedor asociado a un Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Proveedor actualizado correctamente.", typeof(FunkoDto))]
+    [SwaggerResponse(400, "Datos inválidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko o proveedor no encontrados.")]
     public async Task<ActionResult<FunkoDto>> UpdateSupplierFromFunko(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
-        FunkoUpdateSupplierDto request,
+        [FromBody] FunkoUpdateSupplierDto request,
         CancellationToken ct)
     {
         var response = await _service.UpdateSupplierFromFunko(
@@ -139,14 +184,22 @@ public class FunkoController(
             ? Ok(response.Value)
             : response.Error.ToHttpResult<FunkoDto>();
     }
-    /// <summary>
-    /// Update a Funko's price.
-    /// </summary>
+
     [Authorize(Roles = "ADMIN")]
-    [HttpPatch("{id}/price")] // QUITAR ID
+    [HttpPatch("{id}/price")]
+    [SwaggerOperation(
+        Summary = "Actualizar el precio de un Funko",
+        Description = "Modifica el precio de un Funko y actualiza su historial de precios. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Precio actualizado correctamente.", typeof(FunkoPriceUpdatedResponseDto))]
+    [SwaggerResponse(400, "Precio o datos inválidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko no encontrado.")]
     public async Task<ActionResult<FunkoDto>> UpdatePriceFromFunko(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
-        FunkoUpdatePriceRequestDto request,
+        [FromBody] FunkoUpdatePriceRequestDto request,
         CancellationToken ct)
     {
         var response = await _service.UpdatePriceAsync(
@@ -161,12 +214,18 @@ public class FunkoController(
     // DELETE / RESTORE
     // =========================================================
 
-    /// <summary>
-    /// Soft-delete a Funko.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
+    [SwaggerOperation(
+        Summary = "Eliminar un Funko",
+        Description = "Realiza un borrado lógico del Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Funko eliminado correctamente.", typeof(FunkoDeletedResponseDto))]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko no encontrado.")]
     public async Task<ActionResult<FunkoDeletedResponseDto>> DeleteFunko(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
         CancellationToken ct)
     {
@@ -177,12 +236,18 @@ public class FunkoController(
             : response.Error.ToHttpResult<FunkoDeletedResponseDto>();
     }
 
-    /// <summary>
-    /// Restore a deleted Funko.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/restore")]
+    [SwaggerOperation(
+        Summary = "Restaurar un Funko",
+        Description = "Restaura un Funko eliminado lógicamente. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Funko restaurado correctamente.", typeof(FunkoDto))]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko no encontrado.")]
     public async Task<ActionResult<FunkoDto>> RestoreFunko(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
         CancellationToken ct)
     {
@@ -196,10 +261,23 @@ public class FunkoController(
     // =========================================================
     // UPDATE IMAGE
     // =========================================================
-    [HttpPost("{id}/image")]
+
     [Authorize(Roles = "ADMIN")]
+    [HttpPost("{id}/image")]
+    [Consumes("multipart/form-data")]
+    [SwaggerOperation(
+        Summary = "Subir imagen de un Funko",
+        Description = "Sube o actualiza la imagen asociada a un Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Imagen actualizada correctamente.", typeof(FunkoDto))]
+    [SwaggerResponse(400, "Archivo inválido.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko no encontrado.")]
     public async Task<ActionResult<FunkoDto>> UploadFunkoImage(
+        [SwaggerParameter("Identificador del Funko.")]
         long id,
+        [SwaggerParameter("Archivo de imagen que se va a subir.")]
         IFormFile file,
         CancellationToken ct)
     {
@@ -209,45 +287,69 @@ public class FunkoController(
             ? Ok(response.Value)
             : response.Error.ToHttpResult<FunkoDto>();
     }
+
     // =========================================================
-    // HISTORIAL DE PRECIOS (CASSANDRA) - SOLO ADMINS
+    // PRICE HISTORY (CASSANDRA)
     // =========================================================
 
-    /// <summary>
-    /// Obtiene el historial de cambios de precio de un Funko desde Cassandra (Exclusivo para Admins).
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpGet("{id}/price-history")]
-    public async Task<ActionResult<FunkoPrieceHistoryResponsesDto>> GetFunkoPriceHistory(long id, CancellationToken ct)
+    [SwaggerOperation(
+        Summary = "Consultar historial de precios",
+        Description = "Obtiene desde Cassandra el historial de cambios de precio de un Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Historial obtenido correctamente.", typeof(FunkoPrieceHistoryResponsesDto))]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Funko o historial no encontrados.")]
+    public async Task<ActionResult<FunkoPrieceHistoryResponsesDto>> GetFunkoPriceHistory(
+        [SwaggerParameter("Identificador del Funko.")]
+        long id,
+        CancellationToken ct)
     {
-        var response = await _historyService.GetHistoryAsync(id,ct);
-
+        var response = await _historyService.GetHistoryAsync(id, ct);
 
         return response.IsSuccess
             ? Ok(response.Value)
             : response.Error.ToHttpResult<FunkoPrieceHistoryResponsesDto>();
     }
-    /// <summary>
-    /// Eliminar historial de precios
-    /// </summary>
+
     [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}/historial-precios")]
-    public async Task<ActionResult<PriceHistoryModifiedResponse>> DeleteFunkoPriceHistoryById(long id, CancellationToken ct)
+    [SwaggerOperation(
+        Summary = "Eliminar historial de precios",
+        Description = "Elimina el historial de precios asociado a un Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Historial eliminado correctamente.", typeof(PriceHistoryModifiedResponse))]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Historial no encontrado.")]
+    public async Task<ActionResult<PriceHistoryModifiedResponse>> DeleteFunkoPriceHistoryById(
+        [SwaggerParameter("Identificador del Funko.")]
+        long id,
+        CancellationToken ct)
     {
         var response = await _historyService.DeleteHistoryAsync(id, ct);
 
-
         return Ok(response.Value);
     }
-    /// <summary>
-    /// Restablece el historial de precios
-    /// </summary>
+
     [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/historial-precios")]
-    public async Task<ActionResult<PriceHistoryModifiedResponse>> RestoreFunkoPriceHistoryById(long id, CancellationToken ct)
+    [SwaggerOperation(
+        Summary = "Restaurar historial de precios",
+        Description = "Restaura el historial de precios eliminado de un Funko. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Historial restaurado correctamente.", typeof(PriceHistoryModifiedResponse))]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Historial no encontrado.")]
+    public async Task<ActionResult<PriceHistoryModifiedResponse>> RestoreFunkoPriceHistoryById(
+        [SwaggerParameter("Identificador del Funko.")]
+        long id,
+        CancellationToken ct)
     {
         var response = await _historyService.RestoreHistoryAsync(id, ct);
-
 
         return Ok(response.Value);
     }

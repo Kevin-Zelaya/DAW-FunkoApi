@@ -8,7 +8,8 @@ public static class SwaggerBuilderConfig
     {
         builder.Services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new()
+            options.EnableAnnotations(); // Para activar documentación en los controladores
+            options.SwaggerDoc("v1", new() // TODO: Doucmentar controladores con anotations
             {
                 Title = "Funko API",
                 Version = "v1",

@@ -34,19 +34,21 @@ public class MemoryEmailService : IEmailService
         SentEmails.Add(message);
 
         Console.WriteLine();
-        Console.WriteLine("========== EMAIL ENVIADO ==========");
-        Console.WriteLine($"De:      {message.From ?? "noreply@funkoapi.com"}");
-        Console.WriteLine($"Para:    {message.To}");
-        Console.WriteLine($"Asunto:  {message.Subject}");
-        Console.WriteLine("-----------------------------------");
+        Console.WriteLine("========== EMAIL ==========");
+        Console.WriteLine($"Para:   {message.To}");
+        Console.WriteLine($"Asunto: {message.Subject}");
 
-        // Mostrar el contenido sin HTML
+        // Eliminar HTML y espacios innecesarios
         var body = System.Text.RegularExpressions.Regex.Replace(
-            message.Body, "<.*?>", string.Empty);
+            message.Body, "<[^>]*>", " ");
 
-        Console.WriteLine(body);
+        body = System.Net.WebUtility.HtmlDecode(body);
 
-        Console.WriteLine("===================================");
+        body = System.Text.RegularExpressions.Regex.Replace(
+            body, @"\s+", " ").Trim();
+
+        Console.WriteLine($"Mensaje: {body}");
+        Console.WriteLine("===========================");
         Console.WriteLine();
 
         return Task.CompletedTask;
