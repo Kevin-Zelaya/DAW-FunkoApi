@@ -9,7 +9,8 @@ using Swashbuckle.AspNetCore.Annotations;
 [Route("api/funkos")]
 public class FunkoController(
     IFunkoService _service,
-    IFunkoPriceHistoryService _historyService
+    IFunkoPriceHistoryService _historyService,
+    JwtService _jwtService
 ) : ControllerBase
 {
     // =========================================================
@@ -28,9 +29,13 @@ public class FunkoController(
     [SwaggerResponse(403, "No tienes permisos de administrador.")]
     [SwaggerResponse(409, "Conflicto al crear el Funko.")]
     public async Task<ActionResult<FunkoDto>> CreateFunko(
-        [FromBody] FunkoCreateRequestDto dto)
+        [FromBody] FunkoCreateRequestDto dto) // para obtener claim email
     {
-        var response = await _service.CreateFunkoAsync(dto);
+        var email = User.FindFirst("email")?.Value;
+
+        if (string.IsNullOrWhiteSpace(email))
+            return Unauthorized("El token no contiene el email del usuario.");
+        var response = await _service.CreateFunkoAsync(dto, email);
 
         return response.IsSuccess
             ? CreatedAtAction(nameof(GetFunkoById),
@@ -229,7 +234,8 @@ public class FunkoController(
         long id,
         CancellationToken ct)
     {
-        var response = await _service.DeleteFunkoAsync(id, ct);
+         var email = User.FindFirst("email")?.Value;
+        var response = await _service.DeleteFunkoAsync(id, email, ct);
 
         return response.IsSuccess
             ? Ok(response.Value)

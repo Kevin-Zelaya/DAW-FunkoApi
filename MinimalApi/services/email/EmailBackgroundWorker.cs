@@ -1,3 +1,4 @@
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -6,12 +7,12 @@ namespace MinimalApi.Services.Email;
 
 public class EmailBackgroundWorker : BackgroundService
 {
-    private readonly EmailQueueService _emailQueue;
+    private readonly IEmailQueueService _emailQueue;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<EmailBackgroundWorker> _logger;
 
     public EmailBackgroundWorker(
-        EmailQueueService emailQueue,
+        IEmailQueueService emailQueue,
         IServiceScopeFactory scopeFactory,
         ILogger<EmailBackgroundWorker> logger)
     {
@@ -39,6 +40,10 @@ public class EmailBackgroundWorker : BackgroundService
                 var emailService = scope.ServiceProvider
                     .GetRequiredService<IEmailService>();
 
+                _logger.LogInformation(
+                    "[EMAIL WORKER] Procesando correo para {To}.",
+                    message.To);
+
                 await emailService.SendAsync(message, stoppingToken);
 
                 _logger.LogInformation(
@@ -52,7 +57,9 @@ public class EmailBackgroundWorker : BackgroundService
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error procesando un correo de la cola.");
+                _logger.LogError(
+                    ex,
+                    "Error procesando un correo de la cola.");
             }
         }
 

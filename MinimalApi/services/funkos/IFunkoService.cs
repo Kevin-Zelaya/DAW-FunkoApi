@@ -10,7 +10,7 @@ public interface IFunkoService
     /// <see cref="FunkoCreateRequestDto"/>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Entidad ya creada con id asignado</returns>
-    Task<Result<FunkoDto, DomainError>> CreateFunkoAsync(FunkoCreateRequestDto funko, CancellationToken ct = default);
+    Task<Result<FunkoDto, DomainError>> CreateFunkoAsync(FunkoCreateRequestDto funko, string email = "admin@email.com", CancellationToken ct = default);
     /// <summary>
     /// Obtener funko por su id
     /// </summary>
@@ -72,7 +72,7 @@ public interface IFunkoService
     /// <param name="id">id del funko a eliminar</param>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>True o false dependiendo del resultado</returns>
-    public Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(long id, CancellationToken ct);
+    public Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(long id, string email = "admins@correo.com", CancellationToken ct = default);
     /// <summary>
     /// Restaurar funko eliminado a partir de su id
     /// </summary>

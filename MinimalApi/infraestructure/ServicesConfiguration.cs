@@ -16,7 +16,7 @@ public static class ServicesConfiguration
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IFunkoPriceHistoryService, FunkoPriceHistoryService>();
         services.AddScoped<INotificationService, NotificationService>();
-        services.AddScoped<IEmailService, MemoryEmailService>();
+        services.AddScoped<IEmailService, MailKitEmailService>();
         services.AddScoped<IEmailQueueService, EmailQueueService>();
         Log.Information("Servicios configurados correctamente.");
         return services;

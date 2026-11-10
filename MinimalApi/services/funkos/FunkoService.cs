@@ -25,6 +25,7 @@ public class FunkoService(
     /// <inheritdoc cref="IFunkoService.CreateFunkoAsync(FunkoCreateRequestDto, CancellationToken)"/>
     public async Task<Result<FunkoDto, DomainError>> CreateFunkoAsync(
         FunkoCreateRequestDto funko,
+        string email = "admin@email.com",
         CancellationToken ct = default)
     {
         _logger.LogDebug(
@@ -64,16 +65,29 @@ public class FunkoService(
                     MethodsHttp.POST.ToString(), 
                     NotificationStatus.Ok.ToString(),
                     $"Funko creado correctamente con el id {f.Id}"));}) // notificar del cambio en el recurso
-            .Tap(f => {
-            _emailQueue.Enqueue(new EmailMessage{
-                To = "admin@funkoapi.com",
-                Subject = $"Nuevo Funko Creado: {response.Name}",
-                Body = EmailTemplates.CreateBase(
-                    "Funko Creado Exitosamente",
-                    EmailTemplates.FunkoCreado(
-                        response.Name,
-                        (decimal)response.Price,
-                        response.Id)),IsHtml = true});}); // Envío de correo
+            .Tap(f =>
+{
+                _logger.LogInformation(
+                    "[EMAIL] Encolando correo para {To}.",
+                    "admin@funkoapi.com");
+
+                _emailQueue.Enqueue(new EmailMessage
+                {
+                    To = email,
+                    Subject = $"Nuevo Funko Creado: {response.Name}",
+                    Body = EmailTemplates.CreateBase(
+                        "Funko Creado Exitosamente",
+                        EmailTemplates.FunkoCreado(
+                            response.Name,
+                            (decimal)response.Price,
+                            response.Id)),
+                    IsHtml = true
+                });
+
+            _logger.LogInformation(
+                "[EMAIL] Correo añadido. Elementos en cola: {Count}. para el correo {mail}",
+                _emailQueue.Count, email);
+});
     }
 
     // =========================================================
@@ -387,6 +401,7 @@ public class FunkoService(
   /// <inheritdoc cref="IFunkoService.DeleteFunkoAsync(long, CancellationToken)"/>
 public async Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync(
     long id,
+    string email = "admin@correo.com",
     CancellationToken ct = default)
 {
     string key = $"FUNKO:{id}";
@@ -426,7 +441,7 @@ public async Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync
         id))
     .Tap(f => {
             _emailQueue.Enqueue(new EmailMessage{
-                To = "admin@funkoapi.com",
+                To = email,
                 Subject = $"Funko Eliminado: {exist.Name}",
                 Body = EmailTemplates.CreateBase(
                     "Funko Eliminado del Sistema",

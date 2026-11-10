@@ -14,6 +14,7 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="16.6.6" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="16.6.6" />
     <PackageReference Include="HotChocolate.Data" Version="16.6.6" />
+    <PackageReference Include="MailKit" Version="4.18.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />

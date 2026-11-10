@@ -1,13 +1,15 @@
+
 using Serilog;
 using ISession = Cassandra.ISession;
 using MinimalApi.config;
 using Microsoft.Extensions.Options;
 using MinimalApi.Services.Email;
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
 
 // ======= Logger de Serilog =============
 Console.OutputEncoding = System.Text.Encoding.UTF8;
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
@@ -25,26 +27,20 @@ Log.Information("Iniciando aplicación...");
 
 // ======= Configuración tipada ==========
 builder.Services.Configure<ApiConfig>(
-    builder.Configuration.GetSection("Api")); 
+    builder.Configuration.GetSection("Api"));
+builder.Services.Configure<SmtpSettings>(
+    builder.Configuration.GetSection("Smtp"));
 
-// ======= Configuración de swgger ==========
+// ======= Configuración de Swagger ==========
 builder.Services.AddEndpointsApiExplorer();
+builder.AddCustomSwagger();
 
-builder.AddCustomSwagger(); // separación de configuración de swagger 
-// ======= Registrando contoladores ========== 
+// ======= Registrando controladores ==========
 builder.Services.AddControllers(options =>
 {
     options.RespectBrowserAcceptHeader = true;
     options.ReturnHttpNotAcceptable = true;
 });
-
-// proximamente validadores
-// ======= Servicios de email ==========
-builder.Services.AddSingleton<EmailQueueService>();
-
-builder.Services.AddScoped<IEmailService, MemoryEmailService>();
-
-builder.Services.AddHostedService<EmailBackgroundWorker>();
 
 // ======= Infraestructura ==========
 builder.Services
@@ -56,14 +52,30 @@ builder.Services
     .AddAuthenticationJwt(builder.Configuration)
     .AddStorage()
     .AddSignalR();
+
+// ======= Servicios de email ==========
+
+// Cola de correos (Singleton)
+builder.Services.AddSingleton<EmailQueueService>();
+
+builder.Services.AddSingleton<IEmailQueueService>(
+    sp => sp.GetRequiredService<EmailQueueService>());
+
+
+// Worker que procesa la cola en segundo plano
+builder.Services.AddHostedService<EmailBackgroundWorker>();
+
+// ======= GraphQL ==========
 builder.Services.AddGraphQL(builder.Environment);
 
-// ======= MIDLEWARES ========== 
+// ======= MIDDLEWARES ==========
 var app = builder.Build();
+
 var apiConfig = app.Services
     .GetRequiredService<IOptions<ApiConfig>>()
     .Value;
-// ======= Configuración de cassandra ========== 
+
+// ======= Configuración de Cassandra ==========
 var cassandraSettings = app.Services
     .GetRequiredService<CassandraSettings>();
 
@@ -73,30 +85,32 @@ var cassandraSession = app.Services
 // Inicializar keyspace
 await cassandraSession.InitializeKeyspaceAsync(
     cassandraSettings.Keyspace);
-// Recrear base de dato si requiere el appsettings
+
+// Recrear base de datos si lo requiere appsettings
 var recreateCassandra =
     app.Environment.IsDevelopment() && apiConfig.shouldRecreateDb;
 
 await cassandraSession.InitializeTablesAsync(recreateCassandra);
+
 // Inicializar bases de datos
 await app.InitializeDatabasesAsync();
+
 if (apiConfig.shouldRecreateDb)
 {
-    // inicialización del servicio storage
+    // Inicialización del servicio storage
     app.InitializeStorage(true);
-    // Inicialización de mongo y postgre
+
+    // Inicialización de Mongo y PostgreSQL
     await app.RecreateDatabasesAsync();
 }
 
 app.UseHttpsRedirection();
 
-
-
-// Permite lectura de archiovs estaticos
+// Permite lectura de archivos estáticos
 app.UseStaticFiles();
 app.UseGlobalExceptionHandler();
 
-// ======= AUTHENTICATION - AUTHORIZATION ========== 
+// ======= AUTHENTICATION - AUTHORIZATION ==========
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -110,22 +124,27 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Funko API V1");
     });
 }
-// ======= Mapear endpoints de GraphQL ========== 
+
+// ======= Mapear endpoints de GraphQL ==========
 app.MapGraphQL();
-// ======= Buscar todos los controladores ========== 
+
+// ======= Buscar todos los controladores ==========
 app.MapControllers();
-// ======= SignalR hubs ========== 
+
+// ======= SignalR hubs ==========
 app.MapHub<FunkoHub>("/hubs/funkos").RequireAuthorization();
 
-// Falta vaciar la bd en el caso de mongo
+// Falta vaciar la BD en el caso de Mongo
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine("==============================================");
 Console.WriteLine("              FUNKO API                      ");
 Console.WriteLine("==============================================");
 Console.ResetColor();
+
 Console.WriteLine($"  Entorno:          {app.Environment.EnvironmentName}");
 Console.WriteLine($"  Swagger:          http://localhost:5205/swagger");
 Console.WriteLine($"  Reconstruir BD:   {(apiConfig.shouldRecreateDb ? "Sí" : "No")}");
+
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine("==============================================");
 Console.ResetColor();

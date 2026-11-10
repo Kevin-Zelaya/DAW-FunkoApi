@@ -1,9 +1,11 @@
-using MinimalApi.Services.Email;
+namespace MinimalApi.Services.Email;
 
 public interface IEmailQueueService
 {
     int Count { get; }
 
-    Task<EmailMessage?> DequeueAsync(CancellationToken cancellationToken = default);
     void Enqueue(EmailMessage message);
+
+    Task<EmailMessage?> DequeueAsync(
+        CancellationToken cancellationToken = default);
 }

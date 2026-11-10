@@ -80,5 +80,14 @@ public class JwtService(IConfiguration configuration) : IJwtService
             return null;
         }
     }
+    public string? GetClaimValue(string token, string claimType)
+    {
+        // 1. Limpiar el token por si viene con el prefijo "Bearer "
+        string tokenLimpio = token.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase) 
+            ? token.Substring(7).Trim() 
+            : token.Trim();
+        var principal = validateToken(tokenLimpio); // obtener claims
+        return principal.FindFirst(claimType)?.Value;
+    }
 
 }

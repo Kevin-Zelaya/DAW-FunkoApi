@@ -22,7 +22,7 @@ public class AuthService(
             Username = request.Username,
             Email = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password, workFactor: 11),
-            Role = Role.USER,
+            Role = Role.ADMIN,
             CreatedAt = DateTime.UtcNow
         };
         user = await _userRepository.CreateUserAsync(user);

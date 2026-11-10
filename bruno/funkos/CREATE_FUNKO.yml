@@ -10,25 +10,17 @@ http:
     type: json
     data: |-
       {
-<<<<<<< Updated upstream
-        "name": "pedro",
-=======
-        "name": "paca",
->>>>>>> Stashed changes
+        "name": "sisa",
         "franchise": "Marvel",
         "number": 1,
         "supplierId": "6aee3ce4035ea0d4b4a44432",
-        "categoryId": "amEb2xplqUO",
+        "categoryId": "9h30d9oboiW",
         "exclusive": false,
         "price": 14.99
       }
   auth:
     type: bearer
-<<<<<<< Updated upstream
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiMTJlZjhlODctODEwOS00OGY0LWJkMTUtNTE5NTE2NWIzODk4IiwiaWF0IjoxNzk0MTU3NTI1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTYwNTI1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.qOQ-IQfcJK5uUdkIgAM1MINqOle0y9u_KMynvokJzD4
-=======
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZGQ3ZWEwODYtZDU2Mi00YTUwLWJkZDYtMzI5ZjI3NjQ4NjdiIiwiaWF0IjoxNzk0MTc4NTM1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTc5NDM1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.xSX_2IrHxlYA4e0XBgGSIbuU5c-XALQ7DqfanK0xbVw
->>>>>>> Stashed changes
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiZW1haWwiOiJzZXJnaW9ndGY3QGdtYWlsLmNvbSIsImp0aSI6IjRjM2I3YzcwLWI2NGUtNDlhZi04Zjk0LTA2MmEwMzdiM2E0MiIsImlhdCI6MTc5NDMyNDE0OSwidXNlcm5hbWUiOiJDYXJsb3MiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3OTQzMjcxNDksImlzcyI6IlBydWR1Y3Rvc0FwaSIsImF1ZCI6IlByb2R1Y3Rvc0FwaUNsaWVudHMifQ.9MJvDz-2clYlwL6O94ue1KK0MpVPQgFhO2qS5BJFvH0
 
 settings:
   encodeUrl: true

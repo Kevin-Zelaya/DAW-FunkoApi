@@ -5,27 +5,7 @@ info:
 
 http:
   method: GET
-<<<<<<< Updated upstream
   url: http://localhost:5205/api/funkos/1
-=======
-  url: http://localhost:5205/api/funkos/3
-  body:
-    type: json
-    data: |-
-      {
-        "name": "Spider-Man",
-        "franchise": "Marvel",
-        "number": 123,
-        "supplierId": 1,
-        "category": {
-          "id": 1,
-          "name": "Superhéroes",
-          "description": "Personajes heroicos de Marvel y otras franquicias"
-        },
-        "exclusive": false,
-        "price": 14.99
-      }
->>>>>>> Stashed changes
   auth: inherit
 
 settings:
