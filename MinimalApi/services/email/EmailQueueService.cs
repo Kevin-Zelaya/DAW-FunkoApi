@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 
 namespace MinimalApi.Services.Email;
 
-public class EmailQueueService
+public class EmailQueueService : IEmailQueueService
 {
     private readonly ConcurrentQueue<EmailMessage> _queue = new();
     private readonly SemaphoreSlim _signal = new(0);

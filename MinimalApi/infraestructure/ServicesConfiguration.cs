@@ -17,6 +17,7 @@ public static class ServicesConfiguration
         services.AddScoped<IFunkoPriceHistoryService, FunkoPriceHistoryService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IEmailService, MemoryEmailService>();
+        services.AddScoped<IEmailQueueService, EmailQueueService>();
         Log.Information("Servicios configurados correctamente.");
         return services;
     }

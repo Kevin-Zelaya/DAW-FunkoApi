@@ -129,7 +129,6 @@ public class FunkoRepository(
         response.Franchise = funko.Franchise;
         response.Number = funko.Number;
         response.Exclusive = funko.Exclusive;
-        response.Price = funko.Price;
         response.Imagen = funko.Imagen ?? "default.png";
         response.UpdatedAt = DateTime.UtcNow;
 

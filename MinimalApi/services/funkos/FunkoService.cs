@@ -14,7 +14,7 @@ public class FunkoService(
     ILogger<FunkoService> _logger,
     ICache _cache,
     IFunkoPriceHistoryService _historyService,
-    EmailQueueService _emailQueue,
+    IEmailQueueService _emailQueue,
     INotificationService _notificationService
 ) : IFunkoService, IScoped
 {

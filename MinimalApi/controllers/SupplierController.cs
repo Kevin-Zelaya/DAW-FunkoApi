@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 [ApiController]
 [Route("api/suppliers")]
@@ -12,11 +13,17 @@ public class SupplierController(
     // CREATE
     // =========================================================
 
-    /// <summary>
-    /// Crea un nuevo proveedor.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpPost]
+    [SwaggerOperation(
+        Summary = "Crear un proveedor",
+        Description = "Crea un nuevo proveedor. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(201, "Proveedor creado correctamente.")]
+    [SwaggerResponse(400, "Los datos proporcionados no son válidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(409, "Conflicto al crear el proveedor.")]
     public async Task<ActionResult> CreateSupplier(
         [FromBody] SupplierCreateRequestDto request,
         CancellationToken ct)
@@ -35,11 +42,16 @@ public class SupplierController(
     // READ
     // =========================================================
 
-    /// <summary>
-    /// Obtiene todos los proveedores.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpGet("all")]
+    [SwaggerOperation(
+        Summary = "Obtener todos los proveedores",
+        Description = "Devuelve el listado completo de proveedores. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Proveedores obtenidos correctamente.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(400, "Error al obtener los proveedores.")]
     public async Task<ActionResult> GetAllSuppliers(
         CancellationToken ct)
     {
@@ -50,14 +62,23 @@ public class SupplierController(
             : BadRequest(response.Error);
     }
 
-    /// <summary>
-    /// Obtiene proveedores paginados.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpGet]
+    [SwaggerOperation(
+        Summary = "Obtener proveedores paginados",
+        Description = "Devuelve una página de proveedores según el número de página y el tamaño solicitado. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Página obtenida correctamente.")]
+    [SwaggerResponse(400, "El número de página o el tamaño son inválidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
     public async Task<ActionResult> GetPaginatedSuppliers(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10,
+        [FromQuery, SwaggerParameter("Número de página (mínimo 1).")]
+        int pageNumber = 1,
+
+        [FromQuery, SwaggerParameter("Cantidad de proveedores por página (mínimo 1).")]
+        int pageSize = 10,
+
         CancellationToken ct = default)
     {
         if (pageNumber < 1 || pageSize < 1)
@@ -72,12 +93,18 @@ public class SupplierController(
             : BadRequest(response.Error);
     }
 
-    /// <summary>
-    /// Obtiene un proveedor por su ID.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpGet("{id}")]
+    [SwaggerOperation(
+        Summary = "Obtener un proveedor por ID",
+        Description = "Busca y devuelve un proveedor mediante su identificador. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Proveedor encontrado.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Proveedor no encontrado.")]
     public async Task<ActionResult> GetSupplierById(
+        [SwaggerParameter("Identificador del proveedor.")]
         string id,
         CancellationToken ct)
     {
@@ -92,12 +119,19 @@ public class SupplierController(
     // UPDATE
     // =========================================================
 
-    /// <summary>
-    /// Actualiza un proveedor existente.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpPut("{id}")]
+    [SwaggerOperation(
+        Summary = "Actualizar un proveedor",
+        Description = "Actualiza los datos de un proveedor existente. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(200, "Proveedor actualizado correctamente.")]
+    [SwaggerResponse(400, "Los datos proporcionados no son válidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Proveedor no encontrado.")]
     public async Task<ActionResult> UpdateSupplier(
+        [SwaggerParameter("Identificador del proveedor.")]
         string id,
         [FromBody] SupplierUpdateRequestDto request,
         CancellationToken ct)
@@ -113,12 +147,18 @@ public class SupplierController(
     // DELETE
     // =========================================================
 
-    /// <summary>
-    /// Elimina lógicamente un proveedor.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpDelete("{id}")]
+    [SwaggerOperation(
+        Summary = "Eliminar un proveedor",
+        Description = "Realiza un borrado lógico de un proveedor. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(204, "Proveedor eliminado correctamente.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Proveedor no encontrado.")]
     public async Task<ActionResult> DeleteSupplier(
+        [SwaggerParameter("Identificador del proveedor.")]
         string id,
         CancellationToken ct)
     {
@@ -133,12 +173,18 @@ public class SupplierController(
     // RESTORE
     // =========================================================
 
-    /// <summary>
-    /// Restaura un proveedor eliminado lógicamente.
-    /// </summary>
     [Authorize(Roles = "ADMIN")]
     [HttpPatch("{id}/restore")]
+    [SwaggerOperation(
+        Summary = "Restaurar un proveedor",
+        Description = "Restaura un proveedor eliminado lógicamente. Solo accesible para administradores."
+    )]
+    [SwaggerResponse(204, "Proveedor restaurado correctamente.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos de administrador.")]
+    [SwaggerResponse(404, "Proveedor no encontrado.")]
     public async Task<ActionResult> RestoreSupplier(
+        [SwaggerParameter("Identificador del proveedor.")]
         string id,
         CancellationToken ct)
     {

@@ -36,9 +36,7 @@ builder.Services.AddControllers(options =>
 {
     options.RespectBrowserAcceptHeader = true;
     options.ReturnHttpNotAcceptable = true;
-})
-.AddXmlDataContractSerializerFormatters();
-
+});
 
 // proximamente validadores
 // ======= Servicios de email ==========
@@ -59,9 +57,6 @@ builder.Services
     .AddStorage()
     .AddSignalR();
 builder.Services.AddGraphQL(builder.Environment);
-
-
-
 
 // ======= MIDLEWARES ========== 
 var app = builder.Build();
@@ -107,11 +102,12 @@ app.UseAuthorization();
 
 // ======= Configuración de Swagger ==========
 if (app.Environment.IsDevelopment())
-{       
-    app.MapOpenApi();
+{
+    app.UseSwagger();
+
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Funko API V1");
     });
 }
 // ======= Mapear endpoints de GraphQL ========== 
