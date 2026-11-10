@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using CSharpFunctionalExtensions;
+using MinimalApi.Services.Email;
 
 [TestFixture]
 public class FunkoServiceTests
@@ -221,7 +222,6 @@ public class FunkoServiceTests
             100,
             false,
             null,
-            25,
             1
         );
 
@@ -234,7 +234,6 @@ public class FunkoServiceTests
             SupplierId = _supplier.Id,
             Category = _category.ToEntity(),
             CategoryId = _category.Id,
-            Price = request.Price
         };
 
         _repository

@@ -1,5 +1,6 @@
 
 using Cassandra;
+using DotNet.Testcontainers.Builders;
 using MinimalApi.repositories;
 using NUnit.Framework;
 using Testcontainers.Cassandra;
@@ -17,8 +18,12 @@ public class FunkoPriceHistoryRepositoryTests
     public async Task OneTimeSetup()
     {
         _container = new CassandraBuilder()
-            .WithImage("cassandra:4.1")
-            .Build();
+        .WithImage("cassandra:4.1")
+        .WithWaitStrategy(
+            Wait.ForUnixContainer()
+                .UntilExternalTcpPortIsAvailable(9042)
+        )
+        .Build();
 
         await _container.StartAsync();
 
@@ -27,7 +32,18 @@ public class FunkoPriceHistoryRepositoryTests
             .WithPort(_container.GetMappedPublicPort(9042))
             .Build();
 
-        _session = await _cluster.ConnectAsync();
+        for (int i = 0; i < 10; i++)
+        {
+            try
+            {
+                _session = await _cluster.ConnectAsync();
+                break;
+            }
+            catch (NoHostAvailableException) when (i < 9)
+            {
+                await Task.Delay(5000);
+            }
+        }
 
         await _session.ExecuteAsync(new SimpleStatement(@"
             CREATE KEYSPACE IF NOT EXISTS funko_test

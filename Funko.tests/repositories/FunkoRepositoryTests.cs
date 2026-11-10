@@ -93,7 +93,6 @@ public class FunkoRepositoryTests
             Number: 200,
             Exclusive: true,
             Imagen: "batman-updated.jpg",
-            Price: 19.99,
             RowVersion: rowVersion
         );
     }
@@ -286,7 +285,6 @@ public class FunkoRepositoryTests
         Assert.That(result!.Name, Is.EqualTo(request.Name));
         Assert.That(result.Franchise, Is.EqualTo(request.Franchise));
         Assert.That(result.Number, Is.EqualTo(request.Number));
-        Assert.That(result.Price, Is.EqualTo(request.Price));
         Assert.That(result.Exclusive, Is.EqualTo(request.Exclusive));
     }
 

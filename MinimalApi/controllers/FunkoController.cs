@@ -9,8 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 [Route("api/funkos")]
 public class FunkoController(
     IFunkoService _service,
-    IFunkoPriceHistoryService _historyService,
-    JwtService _jwtService
+    IFunkoPriceHistoryService _historyService
 ) : ControllerBase
 {
     // =========================================================
