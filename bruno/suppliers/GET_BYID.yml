@@ -11,7 +11,11 @@ http:
     data: ""
   auth:
     type: bearer
+<<<<<<< Updated upstream
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNDc0YmQxMmMtOWRiYS00Mjc0LTgwYmItMDkyM2M5OTA2N2FiIiwiaWF0IjoxNzk0MTQyNzcxLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTQ1NzcxLCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.yLucxYnCXi94lkpOUmTmHAnvz6FZN0GDV_AtyqNt-_g
+=======
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZGQ3ZWEwODYtZDU2Mi00YTUwLWJkZDYtMzI5ZjI3NjQ4NjdiIiwiaWF0IjoxNzk0MTc4NTM1LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MTc5NDM1LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.xSX_2IrHxlYA4e0XBgGSIbuU5c-XALQ7DqfanK0xbVw
+>>>>>>> Stashed changes
 
 settings:
   encodeUrl: true
