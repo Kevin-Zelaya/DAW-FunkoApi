@@ -31,7 +31,7 @@ public class FunkoService(
         _logger.LogDebug(
             "[SERVICE-CREATE] Intentando crear un Funko.");
         // Comprobar si existe algún con ese username
-        var exist = await _repository.ExistByNameAsync(funko.Name, ct);
+        var exist = await _repository.ExistByNameAsync(funko.Name, 0, ct);
         if(exist)
             return Result.Failure<FunkoDto, DomainError>(
                 ConflictError.Duplicate("Funko", funko.Name));
@@ -230,16 +230,13 @@ public class FunkoService(
             "[SERVICE-UPDATE] Intentando actualizar el Funko con ID {Id}.",
             id);
 
-        // Obtenemos el Funko actual antes de actualizar para conocer su precio previo
-        var funkoActual = await _repository.GetFunkoByIdAsync(id, ct);
-        if(funkoActual is null)
+        var existName = await _repository.ExistByNameAsync(request.Name, id, ct);
+        if(existName)
             return Result.Failure<FunkoDto, DomainError>(
-                FunkoError.NotFound(id))
-                .Tap(_ => _logger.LogWarning(
-                    "[SERVICE-UPDATE] No se encontró el Funko con ID {Id}.",
-                    id));
+                ConflictError.Duplicate("Funko", request.Name))
+                .Tap(_ => _logger.LogWarning("[SERVICE-UPDATE] Ya existe un funko con ese nombre."));
 
-        // Actualizar en la base de datos principal (Postgre/Mongo)
+        // Actualizar en la base de datos principal 
         var response = await _repository.UpdateFunkoAsync(id, request, ct);
         if(response is null)
             return Result.Failure<FunkoDto, DomainError>(
@@ -307,7 +304,7 @@ public class FunkoService(
         // Retornar respuesta exitosa
         return Result.Success<FunkoPriceUpdatedResponseDto, DomainError>(
             new FunkoPriceUpdatedResponseDto(
-                funkoActual.Price,
+                request.Price,
                 phResponse.Value))
         .Tap(f => _logger.LogInformation(
             "[SERVICE-UPDATE] Funko con ID {Id} actualizado correctamente.",
@@ -460,13 +457,14 @@ public async Task<Result<FunkoDeletedResponseDto, DomainError>> DeleteFunkoAsync
             id);
 
         var response = await _repository.RestoreFunkoAsync(id, ct);
-        if(response is null)
+        if(response is null) 
             return Result.Failure<FunkoDto, DomainError>(
                 FunkoError.NotFound(id))
                 .Tap(_ => _logger.LogWarning(
                     "[SERVICE-Restore] No se encontró el Funko con ID {Id}.",
                     id));
         var supplier = await _supplierService.GetSupplierByIdAsync(response!.SupplierId, ct);
+        await _historyService.RestoreHistoryAsync(id, ct);
         Console.WriteLine(supplier.Value.Name+"--------------------------");
         return response is not null
             ? Result.Success<FunkoDto, DomainError>(response.ToDto(supplier.Value))

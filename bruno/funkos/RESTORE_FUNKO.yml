@@ -1,30 +1,14 @@
 info:
   name: RESTORE_FUNKO
   type: http
-  seq: 5
+  seq: 6
 
 http:
   method: PATCH
-  url: http://localhost:5205/api/funkos/5/restore
-  body:
-    type: json
-    data: |-
-      {
-        "name": "Spider-Man",
-        "franchise": "Marvel",
-        "number": 123,
-        "supplierId": 1,
-        "category": {
-          "id": 1,
-          "name": "Superhéroes",
-          "description": "Personajes heroicos de Marvel y otras franquicias"
-        },
-        "exclusive": false,
-        "price": 14.99
-      }
+  url: http://localhost:5205/api/funkos/1/restore
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiY2Y5NTZhMWItMmI0YS00NWRlLTk4MzgtNjE1MDM4MmMwYmI4IiwiaWF0IjoxNzk0MDg3MDE0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0MDg3OTE0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.Xbyh9BQFboi9boq1po4vs4S1aiGm82iaEu2K7hiWKfk
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNWQzNTAxOGEtNWMyOS00Y2UzLTkwOGMtNWQxNDIzYWVmNmYwIiwiaWF0IjoxNzk0MzkzMzI5LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk2MzI5LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.GdjDX3DpRz6bZboU9WsgtZW8LWDFBiu-Z7-OIuD3-bY
 
 settings:
   encodeUrl: true

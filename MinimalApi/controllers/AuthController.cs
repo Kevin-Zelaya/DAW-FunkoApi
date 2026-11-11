@@ -36,6 +36,31 @@ public class AuthController(IAuthService authService) : ControllerBase
             : result.Error.ToHttpResult<AuthResponse>();
     }
 
+     // =========================================================
+    // SIGNUP ADMIN
+    // =========================================================
+
+    [HttpPost("signup/admin")]
+    [Authorize(Roles = "ADMIN")]
+    [SwaggerOperation(
+        Summary = "Registrar un administrador",
+        Description = "Permite a un administrador existente registrar nuevos usuarios administradores."
+    )]
+    [SwaggerResponse(201, "Administrador registrado correctamente.", typeof(AuthResponse))]
+    [SwaggerResponse(400, "Los datos proporcionados no son válidos.")]
+    [SwaggerResponse(401, "No autenticado.")]
+    [SwaggerResponse(403, "No tienes permisos para crear administradores.")]
+    [SwaggerResponse(409, "El usuario ya existe.")]
+    public async Task<ActionResult<AuthResponse>> SignupAdmin(
+        [FromBody] SingupRequest request)
+    {
+        var result = await authService.SignupAdminAsync(request);
+
+        return result.IsSuccess
+            ? StatusCode(StatusCodes.Status201Created, result.Value)
+            : result.Error.ToHttpResult<AuthResponse>();
+    }
+
     // =========================================================
     // LOGIN
     // =========================================================

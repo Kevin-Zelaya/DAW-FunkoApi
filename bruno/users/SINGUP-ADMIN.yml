@@ -1,0 +1,26 @@
+info:
+  name: SINGUP-ADMIN
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://localhost:5205/api/auth/signup/admin
+  body:
+    type: json
+    data: |-
+      {
+        "Username": "Kenrro",
+        "Email": "kmzp2003@gmail.com",
+        "Password": "Kevinelmejor3"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

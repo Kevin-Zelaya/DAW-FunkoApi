@@ -97,15 +97,16 @@ public class FunkoRepository(
             hasNextPage
         );
     }
-    /// <inheritdoc cref="IFunkoRepository.ExistByNameAsync(string, CancellationToken)"/>
+    /// <inheritdoc cref="IFunkoRepository.ExistByNameAsync(string, long, CancellationToken)"/>
     public async Task<bool> ExistByNameAsync(
     string name,
+    long id,
     CancellationToken ct = default)
     {
         return await _context.Funkos
             .AsNoTracking()
             .IgnoreQueryFilters()
-            .AnyAsync(f => f.Name == name, ct);
+            .AnyAsync(f => f.Name == name && f.Id != id, ct);
     } // 
 
     // =========================================================

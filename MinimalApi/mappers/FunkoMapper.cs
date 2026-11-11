@@ -111,7 +111,18 @@ public static class FunkoMapper
         Name= dto.Name,
         Description = dto.Description
     };
+    // =========================================================
+    // Suppliers
+    // =========================================================
 
-    
+    public static UserDto ToDto(this User entity) => new UserDto(
+        Id: entity.Id,
+        Username: entity.Username,
+        Email: entity.Email,
+        Role: entity.Role.ToString(),
+        IsDeleted: entity.IsDeleted,
+        CreatedAt: entity.CreatedAt,
+        LastLoginAt: entity.LastLoginAt
+    );    
     
 }
