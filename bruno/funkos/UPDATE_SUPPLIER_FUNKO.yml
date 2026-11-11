@@ -5,7 +5,7 @@ info:
 
 http:
   method: PATCH
-  url: http://localhost:5205/api/funkos/1/supplier
+  url: http://{{host}}:{{port}}/api/funkos/1/supplier
   body:
     type: json
     data: |-

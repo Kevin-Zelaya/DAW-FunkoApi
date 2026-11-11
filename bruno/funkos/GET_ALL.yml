@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/funkos/all
+  url: http://{{host}}:{{port}}/api/funkos/all
   body:
     type: json
     data: ""

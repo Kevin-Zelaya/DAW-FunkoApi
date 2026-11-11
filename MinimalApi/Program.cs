@@ -134,8 +134,8 @@ app.MapControllers();
 // ======= SignalR hubs ==========
 app.MapHub<FunkoHub>("/hubs/funkos").RequireAuthorization();
 
-// Falta vaciar la BD en el caso de Mongo
-Console.ForegroundColor = ConsoleColor.Cyan;
+// TODO: Falta vaciar la BD en el caso de Mongo
+Console.ForegroundColor = ConsoleColor.Blue;
 Console.WriteLine("==============================================");
 Console.WriteLine("              FUNKO API                      ");
 Console.WriteLine("==============================================");
@@ -143,9 +143,9 @@ Console.ResetColor();
 
 Console.WriteLine($"  Entorno:          {app.Environment.EnvironmentName}");
 Console.WriteLine($"  Swagger:          http://localhost:5205/swagger");
-Console.WriteLine($"  Reconstruir BD:   {(apiConfig.shouldRecreateDb ? "Sí" : "No")}");
+Console.WriteLine($"  Reconstruir Db:   {(apiConfig.shouldRecreateDb ? "Sí" : "No")}");
 
-Console.ForegroundColor = ConsoleColor.Cyan;
+Console.ForegroundColor = ConsoleColor.Blue;
 Console.WriteLine("==============================================");
 Console.ResetColor();
 Console.WriteLine();

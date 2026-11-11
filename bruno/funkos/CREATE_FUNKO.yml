@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: http://localhost:5205/api/funkos
+  url: http://{{host}}:{{port}}/api/funkos
   body:
     type: json
     data: |-
@@ -20,7 +20,7 @@ http:
       }
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiZW1haWwiOiJrbXpwMjAwM0BnbWFpbC5jb20iLCJqdGkiOiJhZWIzMTAyOS02YzRiLTRmYTYtOWM5ZC05M2I3YzZkM2Q3MjEiLCJpYXQiOjE3OTQzOTcyOTAsInVzZXJuYW1lIjoiS2VucnJvIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDAwMjkwLCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.-kZPZWOE046ETdnFoK3oKiHf3XnCp2Q2JVJfvx3iTIU
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZjhlN2U4ODEtOGIwYy00MDE0LTg4MDYtNWYwZTk2YjgzOWEyIiwiaWF0IjoxNzk0NDA0Nzc3LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDA3Nzc3LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.MoEXm40YER1Ob42fepI2ENWs50oLE4pZXiFFg_Qo8zg
 
 settings:
   encodeUrl: true

@@ -94,7 +94,7 @@ public class FunkoServiceTests
         );
 
         _repository
-            .Setup(x => x.ExistByNameAsync(request.Name, It.IsAny<CancellationToken>()))
+            .Setup(x => x.ExistByNameAsync(request.Name, 0, It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
         _supplierService

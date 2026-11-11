@@ -242,7 +242,7 @@ public class FunkoRepositoryTests
         await _context.SaveChangesAsync();
 
         // Act
-        var result = await _repository.ExistByNameAsync(funko.Name);
+        var result = await _repository.ExistByNameAsync(funko.Name, 0);
 
         // Assert
         Assert.That(result, Is.True);
@@ -253,7 +253,7 @@ public class FunkoRepositoryTests
     {
         // Arrange
         // Act
-        var result = await _repository.ExistByNameAsync("No existe");
+        var result = await _repository.ExistByNameAsync("No existe", 0);
 
         // Assert
         Assert.That(result, Is.False);

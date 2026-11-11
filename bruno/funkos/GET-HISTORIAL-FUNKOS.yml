@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/funkos/1/price-history
+  url: http://{{host}}:{{port}}/api/funkos/1/price-history
   auth:
     type: bearer
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNWQzNTAxOGEtNWMyOS00Y2UzLTkwOGMtNWQxNDIzYWVmNmYwIiwiaWF0IjoxNzk0MzkzMzI5LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk2MzI5LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.GdjDX3DpRz6bZboU9WsgtZW8LWDFBiu-Z7-OIuD3-bY

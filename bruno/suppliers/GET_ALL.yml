@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/suppliers/all
+  url: http://http://{{host}}:{{port}}/api/suppliers/6aee3ce4035ea0d4b4a44432/api/suppliers/all
   body:
     type: json
     data: ""

@@ -1,0 +1,93 @@
+name: funko-api-production
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: funko-api-production
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      DbConnections__Postgre__ConnectionStrings__DefaultConnection: "Host=postgres-production;Port=5432;Database=users_db;Username=admin;Password=admin123"
+      DbConnections__Mongo__ConnectionStrings__DefaultConnection: "mongodb://admin:admin123@mongodb-production:27017/tienda?authSource=admin"
+      DbConnections__Cassandra__ContactPoints__0: "cassandra-production"
+      Redis__ConnectionString: "redis-production:6379,abortConnect=false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      cassandra:
+        condition: service_started
+
+  postgres:
+    image: postgres:17
+    container_name: postgres-production
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: users_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_production:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d users_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:8
+    container_name: mongodb-production
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data_production:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')", "-u", "admin", "-p", "admin123", "--authenticationDatabase", "admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis-production
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data_production:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra-production
+    restart: unless-stopped
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=FunkoCluster
+    volumes:
+      - cassandra_data_production:/var/lib/cassandra
+
+volumes:
+  postgres_data_production:
+  redis_data_production:
+  mongo_data_production:
+  cassandra_data_production:

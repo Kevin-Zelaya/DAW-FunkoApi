@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/funkos?pageNumber=1&pageSize=2
+  url: http://{{host}}:{{port}}/api/funkos?pageNumber=1&pageSize=2
   params:
     - name: pageNumber
       value: "1"

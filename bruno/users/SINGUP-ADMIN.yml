@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: http://localhost:5205/api/auth/signup/admin
+  url: http://{{host}}:{{port}}/api/auth/signup/admin
   body:
     type: json
     data: |-

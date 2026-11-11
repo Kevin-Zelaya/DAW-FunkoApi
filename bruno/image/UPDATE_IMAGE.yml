@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: http://localhost:5205/api/funkos/1/image
+  url: http://{{host}}:{{port}}/api/funkos/1/image
   body:
     type: multipart-form
     data:

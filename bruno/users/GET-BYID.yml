@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:5205/api/users/2
+  url: http://{{host}}:{{port}}/api/users/2
   auth:
     type: bearer
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNzRmNzgzNmYtN2Q2Zi00ZTU4LWIwYzQtODg4NDE3YTQxZjBjIiwiaWF0IjoxNzk0Mzk3NTA4LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDAwNTA4LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.7dqiXz1o2CN9HfnrbrDR2EgXWdAeqc9nLb21JHPcaUo

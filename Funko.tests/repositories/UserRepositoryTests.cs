@@ -392,11 +392,13 @@ public class UserRepositoryTests
         var user = CreateUserValid();
         await _repository.CreateUserAsync(user);
 
-        var updated = new User
-        {
-            Username = "usuario_actualizado",
-            Email = "actualizado@test.com"
-        };
+        var updated = new UserUpdateRegularRequestDto
+        
+        (
+            user.Id,
+            "usuario_actualizado",
+            "actualizado@test.com"
+        );
 
         // Act
         var response = await _repository.UpdateUserAsync(user.Id, updated);
@@ -414,7 +416,14 @@ public class UserRepositoryTests
         var user = CreateUserValid();
 
         // Act
-        var response = await _repository.UpdateUserAsync(999, user);
+        var updated = new UserUpdateRegularRequestDto
+        
+        (
+            user.Id,
+            "usuario_actualizado",
+            "actualizado@test.com"
+        );
+        var response = await _repository.UpdateUserAsync(999, updated);
 
         // Assert
         Assert.That(response, Is.Null);
@@ -429,8 +438,15 @@ public class UserRepositoryTests
 
         await _repository.DeleteUserAsync(user.Id);
 
+        var updated = new UserUpdateRegularRequestDto
+        
+        (
+            user.Id,
+            "usuario_actualizado",
+            "actualizado@test.com"
+        );
         // Act
-        var response = await _repository.UpdateUserAsync(user.Id, user);
+        var response = await _repository.UpdateUserAsync(user.Id, updated);
 
         // Assert
         Assert.That(response, Is.Null);
