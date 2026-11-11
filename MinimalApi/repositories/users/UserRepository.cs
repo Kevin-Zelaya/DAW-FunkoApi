@@ -150,7 +150,7 @@ public class UserRepository(
 
     public async Task<User?> UpdateUserAsync(
         long id,
-        User user,
+        UserUpdateRegularRequestDto user,
         CancellationToken ct = default)
     {
         _logger.LogDebug(

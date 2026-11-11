@@ -7,6 +7,7 @@ namespace MinimalApi.repositories;
 
 public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistoryRepository
 {
+    /// <inheritdoc cref="IFunkoPriceHistoryRepository.AddPriceAsync(long, decimal, decimal, CancellationToken)"/>
     public async Task AddPriceAsync(long funkoId, decimal precioNuevo, decimal precioAnterior, CancellationToken ct)
     {
        
@@ -19,7 +20,7 @@ public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistory
 
         await _session.ExecuteAsync(statement);
     }
-
+    /// <inheritdoc cref="IFunkoPriceHistoryRepository.GetHistoryByFunkoIdAsync(long, CancellationToken)"/>
     public async Task<List<PriceHistoryDto>> GetHistoryByFunkoIdAsync(long funkoId, CancellationToken ct)
     {
         var selectCql = @"
@@ -41,6 +42,7 @@ public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistory
         }).ToList();
     }
     // queda pendiente eliminar todos los registros de 
+    /// <inheritdoc cref="IFunkoPriceHistoryRepository.DeleteHistoryByFunkoId(long, CancellationToken)"/>
     public async Task DeleteHistoryByFunkoId(
         long funkoId,
         CancellationToken ct)
@@ -68,6 +70,7 @@ public class FunkoPriceHistoryRepository(ISession _session) : IFunkoPriceHistory
             );
         }
     }
+    /// <inheritdoc cref="IFunkoPriceHistoryRepository.RestoreHistoryByFunkoId(long, CancellationToken)"/>
     public async Task RestoreHistoryByFunkoId(long funkoId, CancellationToken ct)
     {
         var select = await _session.PrepareAsync(

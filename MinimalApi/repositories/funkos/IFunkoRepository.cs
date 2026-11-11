@@ -37,7 +37,7 @@ public interface IFunkoRepository
     /// <param name="name">Nombre a comprobar</param>
     /// <param name="ct">Token de cancelación</param>
     /// <returns>Funko encontrado o null</returns>
-    public Task<bool> ExistByNameAsync(string name, CancellationToken ct = default);
+    public Task<bool> ExistByNameAsync(string name, long id = 0, CancellationToken ct = default);
     /// <summary>
     /// Obtener lista páginada de funkos
     /// </summary>

@@ -1,0 +1,174 @@
+2026-11-11 11:34:42.214 [INF] Iniciando aplicación...
+2026-11-11 11:34:43.242 [INF] Registrando repositorios...
+2026-11-11 11:34:43.244 [INF] Repositorios registrados correctamente.
+2026-11-11 11:34:43.676 [INF] Configurando la base de datos...
+2026-11-11 11:34:43.702 [INF] Bases de datos configurada correctamente.
+2026-11-11 11:34:44.103 [INF] Configurando la conexión a Redis...
+2026-11-11 11:34:44.440 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 11:34:44.451 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 11:34:45.213 [INF] Configurando servicios...
+2026-11-11 11:34:45.214 [INF] Servicios configurados correctamente.
+2026-11-11 11:34:45.367 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 11:34:45.376 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 11:34:47.085 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 11:34:48.095 [INF] Conectado al keyspace funko_store
+2026-11-11 11:34:48.097 [INF] [CASSANDRA] Eliminando tablas existentes.
+2026-11-11 11:34:51.513 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 11:34:55.618 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 11:34:55.624 [INF] [DESARROLLO] Preparando directorio de almacenamiento: D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\wwwroot\uploads
+2026-11-11 11:34:55.627 [INF] Contenido del directorio borrado
+2026-11-11 11:34:56.726 [INF] [POSTGRES] Base de datos recreada.
+2026-11-11 11:34:57.479 [INF] [MONGO] Base de datos recreada.
+2026-11-11 11:34:57.556 [INF] [REDIS] Caché vaciada
+2026-11-11 11:35:47.633 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:36:21.920 [INF] PageNumber: 1, PageSize: 1
+2026-11-11 11:38:02.532 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:38:16.302 [ERR] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id 1
+2026-11-11 11:40:06.210 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:40:51.836 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:55:12.509 [INF] Iniciando aplicación...
+2026-11-11 11:55:12.631 [INF] Registrando repositorios...
+2026-11-11 11:55:12.632 [INF] Repositorios registrados correctamente.
+2026-11-11 11:55:12.649 [INF] Configurando la base de datos...
+2026-11-11 11:55:12.666 [INF] Bases de datos configurada correctamente.
+2026-11-11 11:55:12.689 [INF] Configurando la conexión a Redis...
+2026-11-11 11:55:12.914 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 11:55:12.919 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 11:55:13.293 [INF] Configurando servicios...
+2026-11-11 11:55:13.295 [INF] Servicios configurados correctamente.
+2026-11-11 11:55:13.319 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 11:55:13.321 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 11:55:13.384 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 11:55:13.609 [INF] Conectado al keyspace funko_store
+2026-11-11 11:55:13.611 [INF] [CASSANDRA] Eliminando tablas existentes.
+2026-11-11 11:55:15.109 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 11:55:17.706 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 11:55:17.712 [INF] [DESARROLLO] Preparando directorio de almacenamiento: D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\wwwroot\uploads
+2026-11-11 11:55:17.715 [INF] Contenido del directorio borrado
+2026-11-11 11:55:18.294 [INF] [POSTGRES] Base de datos recreada.
+2026-11-11 11:55:18.668 [INF] [MONGO] Base de datos recreada.
+2026-11-11 11:55:18.679 [INF] [REDIS] Caché vaciada
+2026-11-11 11:55:26.669 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:56:16.146 [INF] Usuario conectado: null (ID: null)
+2026-11-11 11:56:48.457 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:57:11.834 [INF] PageNumber: 1, PageSize: 1
+2026-11-11 11:57:24.597 [INF] PageNumber: 1, PageSize: 2
+2026-11-11 11:57:53.553 [INF] Notification sent: Funko updated successfully
+2026-11-11 11:58:17.598 [ERR] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id 1
+2026-11-11 12:12:10.667 [INF] Usuario desconectado: null
+2026-11-11 12:12:21.964 [INF] Iniciando aplicación...
+2026-11-11 12:12:22.016 [INF] Registrando repositorios...
+2026-11-11 12:12:22.018 [INF] Repositorios registrados correctamente.
+2026-11-11 12:12:22.022 [INF] Configurando la base de datos...
+2026-11-11 12:12:22.033 [INF] Bases de datos configurada correctamente.
+2026-11-11 12:12:22.037 [INF] Configurando la conexión a Redis...
+2026-11-11 12:12:22.204 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 12:12:22.215 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 12:12:22.446 [INF] Configurando servicios...
+2026-11-11 12:12:22.447 [INF] Servicios configurados correctamente.
+2026-11-11 12:12:22.461 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 12:12:22.462 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 12:12:22.481 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 12:12:22.606 [INF] Conectado al keyspace funko_store
+2026-11-11 12:12:22.608 [INF] [CASSANDRA] Eliminando tablas existentes.
+2026-11-11 12:12:23.907 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 12:12:25.953 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 12:12:25.958 [INF] [DESARROLLO] Preparando directorio de almacenamiento: D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\wwwroot\uploads
+2026-11-11 12:12:25.961 [INF] Contenido del directorio borrado
+2026-11-11 12:12:26.356 [INF] [POSTGRES] Base de datos recreada.
+2026-11-11 12:12:26.631 [INF] [MONGO] Base de datos recreada.
+2026-11-11 12:12:26.644 [INF] [REDIS] Caché vaciada
+2026-11-11 12:12:28.113 [INF] Usuario conectado: null (ID: null)
+2026-11-11 12:12:33.172 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:12:35.765 [INF] PageNumber: 1, PageSize: 2
+2026-11-11 12:12:43.574 [ERR] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id 1
+2026-11-11 12:13:16.594 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:13:32.318 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:15:40.066 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:18:50.825 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:19:53.154 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:33:52.910 [INF] Notification sent: Supplier updated successfully
+2026-11-11 12:34:31.560 [INF] Notification sent: Supplier updated successfully
+2026-11-11 12:34:33.928 [ERR] [REPOSITORY-UPDATE] Error de concurrencia al actualizar el proveedor con ID 6af452a0581d0ba45224821e.
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: Conflicts were detected when performing updates to 'tienda.suppliers'. Did not perform 1 modifications, 0 insertions, and 0 deletions.
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.AssertWritesApplied(MongoUpdateBatch batch, BulkWriteResult`1 result, CollectionNamespace collectionNamespace)
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.WriteBatchesAsync(IEnumerable`1 updates, IClientSessionHandle session, CancellationToken cancellationToken)
+   at MongoDB.EntityFrameworkCore.Storage.MongoDatabaseWrapper.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at SuppliersRepository.UpdateSupplierAsync(String id, SupplierUpdateRequestDto request, CancellationToken ct)
+2026-11-11 12:36:04.984 [ERR] [REPOSITORY-UPDATE] Error de concurrencia, al actualizar el funko con id _O5v8i1Sa4v
+2026-11-11 12:41:42.945 [INF] Notification sent: Funko updated successfully
+2026-11-11 12:51:08.733 [INF] Usuario desconectado: null
+2026-11-11 12:51:59.694 [INF] Iniciando aplicación...
+2026-11-11 12:51:59.749 [INF] Registrando repositorios...
+2026-11-11 12:51:59.750 [INF] Repositorios registrados correctamente.
+2026-11-11 12:51:59.752 [INF] Configurando la base de datos...
+2026-11-11 12:51:59.763 [INF] Bases de datos configurada correctamente.
+2026-11-11 12:51:59.767 [INF] Configurando la conexión a Redis...
+2026-11-11 12:51:59.930 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 12:51:59.933 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 12:52:00.184 [INF] Configurando servicios...
+2026-11-11 12:52:00.185 [INF] Servicios configurados correctamente.
+2026-11-11 12:52:00.191 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 12:52:00.192 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 12:52:00.203 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 12:52:00.320 [INF] Conectado al keyspace funko_store
+2026-11-11 12:52:00.328 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 12:52:02.145 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 13:03:57.305 [INF] Iniciando aplicación...
+2026-11-11 13:03:57.360 [INF] Registrando repositorios...
+2026-11-11 13:03:57.361 [INF] Repositorios registrados correctamente.
+2026-11-11 13:03:57.364 [INF] Configurando la base de datos...
+2026-11-11 13:03:57.375 [INF] Bases de datos configurada correctamente.
+2026-11-11 13:03:57.379 [INF] Configurando la conexión a Redis...
+2026-11-11 13:03:57.546 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 13:03:57.549 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 13:03:57.830 [INF] Configurando servicios...
+2026-11-11 13:03:57.830 [INF] Servicios configurados correctamente.
+2026-11-11 13:03:57.837 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 13:03:57.838 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 13:03:57.855 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 13:03:57.975 [INF] Conectado al keyspace funko_store
+2026-11-11 13:03:57.985 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 13:03:59.893 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 13:34:25.514 [INF] Iniciando aplicación...
+2026-11-11 13:34:25.597 [INF] Registrando repositorios...
+2026-11-11 13:34:25.599 [INF] Repositorios registrados correctamente.
+2026-11-11 13:34:25.602 [INF] Configurando la base de datos...
+2026-11-11 13:34:25.621 [INF] Bases de datos configurada correctamente.
+2026-11-11 13:34:25.627 [INF] Configurando la conexión a Redis...
+2026-11-11 13:34:25.793 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 13:34:25.796 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 13:34:26.036 [INF] Configurando servicios...
+2026-11-11 13:34:26.038 [INF] Servicios configurados correctamente.
+2026-11-11 13:34:26.044 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 13:34:26.045 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 13:34:26.059 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 13:34:26.165 [INF] Conectado al keyspace funko_store
+2026-11-11 13:34:26.173 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 13:34:28.042 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 13:40:24.036 [INF] Iniciando aplicación...
+2026-11-11 13:40:24.131 [INF] Registrando repositorios...
+2026-11-11 13:40:24.132 [INF] Repositorios registrados correctamente.
+2026-11-11 13:40:24.136 [INF] Configurando la base de datos...
+2026-11-11 13:40:24.152 [INF] Bases de datos configurada correctamente.
+2026-11-11 13:40:24.159 [INF] Configurando la conexión a Redis...
+2026-11-11 13:40:24.345 [INF] Conexión a Redis configurada correctamente.
+2026-11-11 13:40:24.349 [INF] Conectando a cassandra: localhost:9042
+2026-11-11 13:40:24.606 [INF] Configurando servicios...
+2026-11-11 13:40:24.611 [INF] Servicios configurados correctamente.
+2026-11-11 13:40:24.617 [INF] Configurando el almacenamiento de archivos...
+2026-11-11 13:40:24.618 [INF] Almacenamiento de archivos configurado correctamente.
+2026-11-11 13:40:24.631 [INF] Configurando GraphQL con HotChocolate...
+2026-11-11 13:40:24.739 [INF] Conectado al keyspace funko_store
+2026-11-11 13:40:24.743 [INF] [CASSANDRA] Eliminando tablas existentes.
+2026-11-11 13:40:26.039 [INF] [CASSANDRA] Tablas inicializadas.
+2026-11-11 13:40:28.152 [INF] [DATABASES] Bases de datos inicializadas.
+2026-11-11 13:40:28.158 [INF] [DESARROLLO] Preparando directorio de almacenamiento: D:\DAW\PrimerTrimestre\ES\Clase\DAW-Funkoapi\MinimalApi\wwwroot\uploads
+2026-11-11 13:40:28.160 [INF] Contenido del directorio borrado
+2026-11-11 13:40:28.702 [INF] [POSTGRES] Base de datos recreada.
+2026-11-11 13:40:29.088 [INF] [MONGO] Base de datos recreada.
+2026-11-11 13:40:29.101 [INF] [REDIS] Caché vaciada
+2026-11-11 14:48:41.336 [INF] Notification sent: Funko updated successfully

@@ -18,6 +18,7 @@ public static class ServicesConfiguration
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IEmailService, MailKitEmailService>();
         services.AddScoped<IEmailQueueService, EmailQueueService>();
+        services.AddScoped<IUserService, UserService>();
         Log.Information("Servicios configurados correctamente.");
         return services;
     }

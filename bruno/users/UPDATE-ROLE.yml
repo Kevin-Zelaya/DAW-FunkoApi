@@ -1,0 +1,21 @@
+info:
+  name: UPDATE-ROLE
+  type: http
+  seq: 9
+
+http:
+  method: PATCH
+  url: http://localhost:5205/api/users/2/role
+  body:
+    type: json
+    data: '"USER"'
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZmE0MjUyMzgtMjJmOC00NDU5LThjMGMtZmQxODMzZGIxNmEyIiwiaWF0IjoxNzk0NDAwODU2LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDAzODU2LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.6jvhPcCjw-az4BW8L-ksGjY2UT2U7Y8PQSljb6NVTXU
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

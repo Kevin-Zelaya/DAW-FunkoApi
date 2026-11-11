@@ -110,7 +110,7 @@ public interface IUserRepository
     /// </returns>
     Task<User?> UpdateUserAsync(
         long id,
-        User user,
+        UserUpdateRegularRequestDto user,
         CancellationToken ct = default);
 
     /// <summary>
