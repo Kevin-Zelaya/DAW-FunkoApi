@@ -1,0 +1,24 @@
+info:
+  name: GET_BYID copy
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: http://{{host}}:{{port}}/api/funkos/1
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        bru.setEnvVar("rowVersionf2", String(res.body.rowVersion));
+
+        console.log("RowVersion guardado: " + res.body.rowVersion);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -26,6 +26,7 @@ runtime:
         test("El proveedor debe tener un identificador", function() {
             expect(res.body).to.have.property("id");
         });
+        bru.setEnvVar("rowVersionS", String(res.body.rowVersion));
 
 settings:
   encodeUrl: true

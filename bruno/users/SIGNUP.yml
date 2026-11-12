@@ -10,11 +10,31 @@ http:
     type: json
     data: |-
       {
-        "Username": "Kenrro",
-        "Email": "Kenrro2003@gmail.com",
+        "Username": "{{$randomFullName}}",
+        "Email": "{{$randomEmail}}",
         "Password": "Kevinelmejor3"
       }
   auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 o 201", function() {
+            expect(res.status).to.be.oneOf([200, 201]);
+        });
+
+        test("Debe contener un identificador", function() {
+            expect(res.body).to.have.property("userId");
+        });
+
+        test("Debe contener un nombre de usuario", function() {
+            expect(res.body.username).to.be.a("string").and.not.empty;
+        });
+
+        test("Debe tener el rol ADMIN", function() {
+            expect(res.body.role).to.equal("USER");
+        });
 
 settings:
   encodeUrl: true

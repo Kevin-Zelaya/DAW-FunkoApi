@@ -1,14 +1,28 @@
 info:
   name: RESTORE_FUNKO
   type: http
-  seq: 6
+  seq: 7
 
 http:
   method: PATCH
   url: http://{{host}}:{{port}}/api/funkos/1/restore
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNWQzNTAxOGEtNWMyOS00Y2UzLTkwOGMtNWQxNDIzYWVmNmYwIiwiaWF0IjoxNzk0MzkzMzI5LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk2MzI5LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.GdjDX3DpRz6bZboU9WsgtZW8LWDFBiu-Z7-OIuD3-bY
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener un identificador", function() {
+            expect(res.body).to.have.property("id");
+        });
+
+        test("La respuesta debe contener un nombre", function() {
+            expect(res.body.name).to.be.a("string").and.not.empty;
+        });
 
 settings:
   encodeUrl: true

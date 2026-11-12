@@ -15,6 +15,34 @@ http:
       }
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener un token de acceso", function() {
+            expect(res.body.accessToken).to.be.a("string").and.not.empty;
+        });
+
+        test("La respuesta debe contener un token de renovación", function() {
+            expect(res.body.refreshToken).to.be.a("string").and.not.empty;
+        });
+
+        test("La respuesta debe contener un identificador de usuario", function() {
+            expect(res.body).to.have.property("userId");
+        });
+
+        test("La respuesta debe contener un nombre de usuario", function() {
+            expect(res.body.username).to.be.a("string").and.not.empty;
+        });
+
+        test("La respuesta debe contener un rol", function() {
+            expect(res.body.role).to.be.a("string").and.not.empty;
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

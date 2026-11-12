@@ -8,6 +8,31 @@ http:
   url: http://{{host}}:{{port}}/api/funkos/1
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener un identificador", function() {
+            expect(res.body).to.have.property("id");
+        });
+
+        test("La respuesta debe contener un nombre", function() {
+            expect(res.body.name).to.be.a("string").and.not.empty;
+        });
+
+        test("La respuesta debe contener rowVersion", function() {
+            expect(res.body.rowVersion).to.be.a("number");
+        });
+
+        bru.setEnvVar("rowVersionf", String(res.body.rowVersion));
+
+
+        console.log("RowVersion guardado: " + res.body.rowVersion);
+
 settings:
   encodeUrl: true
   timeout: 0

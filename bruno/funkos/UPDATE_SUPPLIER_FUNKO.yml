@@ -1,7 +1,7 @@
 info:
   name: UPDATE_SUPPLIER_FUNKO
   type: http
-  seq: 8
+  seq: 9
 
 http:
   method: PATCH
@@ -10,12 +10,10 @@ http:
     type: json
     data: |-
       {
-        "supplierid": "6af44d99581d0ba452248218",
-        "rowversion": 805
+        "supplierid": "6aee3ce4035ea0d4b4a44432",
+        "rowversion": {{rowVersionf1}}
       }
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+  auth: inherit
 
 settings:
   encodeUrl: true

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://{{host}}:{{port}}/api/users/email/kevin@correo.com
+  url: http://{{host}}:{{port}}/api/users/email/sergio@correo.com
   auth: inherit
 
 runtime:
@@ -21,7 +21,7 @@ runtime:
         });
 
         test("El correo electrónico debe coincidir", function() {
-            expect(res.body.email).to.equal("kevin@correo.com");
+            expect(res.body.email).to.equal("sergio@correo.com");
         });
 
 settings:

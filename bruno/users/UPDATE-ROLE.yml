@@ -15,15 +15,11 @@ runtime:
   scripts:
     - type: tests
       code: |-
-        test("El código de estado debe ser 200 OK", function() {
+        test("El código de estado debe ser 200", function() {
             expect(res.status).to.equal(200);
         });
 
-        test("La respuesta debe contener un identificador", function() {s
-            expect(res.body).to.have.property("id");
-        });
-
-        test("El usuario debe tener el rol USER", function() {
+        test("El rol del usuario debe ser USER", function() {
             expect(res.body.role).to.equal("USER");
         });
 

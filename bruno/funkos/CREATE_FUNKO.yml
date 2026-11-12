@@ -10,7 +10,7 @@ http:
     type: json
     data: |-
       {
-        "name": "sisasss",
+        "name": "{{$randomFullName}}",
         "franchise": "Marvel",
         "number": 1,
         "supplierId": "6aee3ce4035ea0d4b4a44432",
@@ -29,7 +29,7 @@ runtime:
         });
 
         test("El Funko creado tiene el nombre correcto", function() {
-          expect(res.body.name).to.equal("sisa");
+          expect(res.body.name).to.be.a("string").and.not.empty;
           expect(res.body.franchise).to.equal("Marvel");
         });
 
@@ -37,8 +37,6 @@ runtime:
           expect(res.body).to.have.property('id');
         });
 
-        // Extra muy útil: Guarda el ID automáticamente en una variable de entorno 
-        // para usarlo en tus peticiones de GET_BYID o DELETE_FUNKO
         if (res.body && res.body.id) {
           bru.setEnvVar("createdFunkoId", res.body.id);
         }

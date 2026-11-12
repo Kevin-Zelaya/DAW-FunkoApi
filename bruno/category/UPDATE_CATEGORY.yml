@@ -5,19 +5,17 @@ info:
 
 http:
   method: PUT
-  url: http://{{host}}:{{port}}/api/categories/_O5v8i1Sa4v
+  url: http://{{host}}:{{port}}/api/categories/e823IW7x_iC
   body:
     type: json
     data: |-
       {
-            "id": "_O5v8i1Sa4v",
+            "id": "e823IW7x_iC",
             "name": "pedro",
             "description": "Figuras Funko de personajes del mundo de los videojuegos.",
-            "rowVersion": 801
+            "rowVersion": {{rowVersionK}}
           }
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+  auth: inherit
 
 runtime:
   scripts:

@@ -15,11 +15,9 @@ http:
         "franchise": "Marvel",
         "number": 123,
         "exclusive": false,
-        "rowVersion": 802
+        "rowVersion": {{rowVersionf1}}
       }
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNWQzNTAxOGEtNWMyOS00Y2UzLTkwOGMtNWQxNDIzYWVmNmYwIiwiaWF0IjoxNzk0MzkzMzI5LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk2MzI5LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.GdjDX3DpRz6bZboU9WsgtZW8LWDFBiu-Z7-OIuD3-bY
+  auth: inherit
 
 settings:
   encodeUrl: true

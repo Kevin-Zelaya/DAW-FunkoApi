@@ -27,6 +27,7 @@ runtime:
         test("La respuesta es de tipo JSON", function() {
             expect(res.headers["content-type"]).to.include("application/json");
         });
+        bru.setEnvVar("rowVersionK", String(res.body.rowVersion));
 
 settings:
   encodeUrl: true

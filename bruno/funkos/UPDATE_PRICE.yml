@@ -1,7 +1,7 @@
 info:
   name: UPDATE_PRICE
   type: http
-  seq: 10
+  seq: 13
 
 http:
   method: PATCH
@@ -11,10 +11,20 @@ http:
     data: |
       {
         "price": 17.99,
-        "rowVersion": 807}
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+        "rowVersion": {{rowVersionf3}}}
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("El precio actual debe ser 17.99", function() {
+            expect(res.body.currentPrice).to.equal(17.99);
+        });
 
 settings:
   encodeUrl: true
