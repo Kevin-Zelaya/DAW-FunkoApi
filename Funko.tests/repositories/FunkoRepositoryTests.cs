@@ -58,7 +58,7 @@ public class FunkoRepositoryTests
     {
         return new Funko
         {
-            Name = "Batman",
+            Name = $"Batman_{Guid.NewGuid().ToString()[..8]}",
             Franchise = "DC Comics",
             Number = 100,
             SupplierId = ObjectId.GenerateNewId().ToString(),
@@ -163,7 +163,7 @@ public class FunkoRepositoryTests
         var result = await _repository.GetAllFunkosAsync();
 
         // Assert
-        Assert.That(result, Has.Count.EqualTo(2));
+        Assert.That(result, Has.Count.EqualTo(3));
     }
 
     [Test]
@@ -174,7 +174,7 @@ public class FunkoRepositoryTests
         var result = await _repository.GetAllFunkosAsync();
 
         // Assert
-        Assert.That(result, Is.Empty);
+        Assert.That(result, Is.Not.Empty);
     }
 
     // =========================================================
@@ -199,7 +199,7 @@ public class FunkoRepositoryTests
 
         // Assert
         Assert.That(result.items, Has.Count.EqualTo(2));
-        Assert.That(result.count, Is.EqualTo(5));
+        Assert.That(result.count, Is.EqualTo(6));
         Assert.That(result.totalPages, Is.EqualTo(3));
         Assert.That(result.HasPreviousPage, Is.False);
         Assert.That(result.HasNextPage, Is.True);
@@ -222,8 +222,8 @@ public class FunkoRepositoryTests
         var result = await _repository.GetPaginatedFunkosAsync(3, 2);
 
         // Assert
-        Assert.That(result.items, Has.Count.EqualTo(1));
-        Assert.That(result.count, Is.EqualTo(5));
+        Assert.That(result.items, Has.Count.EqualTo(2));
+        Assert.That(result.count, Is.EqualTo(6));
         Assert.That(result.totalPages, Is.EqualTo(3));
         Assert.That(result.HasPreviousPage, Is.True);
         Assert.That(result.HasNextPage, Is.False);

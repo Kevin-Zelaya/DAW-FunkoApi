@@ -137,4 +137,63 @@ public class AuthControllerTests
         // Assert
         result.Result.Should().BeOfType<UnauthorizedObjectResult>();
     }
+
+
+    // =========================================================
+    // SIGNUP ADMIN
+    // =========================================================
+
+    [Test]
+    public async Task SignupAdmin_ReturnsCreated()
+    {
+        // Arrange
+        var request = new SingupRequest(
+            "admin",
+            "admin@test.com",
+            "Password123"
+        );
+
+        _authService
+            .Setup(s => s.SignupAdminAsync(request))
+            .ReturnsAsync(
+                Result.Success<AuthResponse, DomainError>(_authResponse)
+            );
+
+        // Act
+        var result = await _controller.SignupAdmin(request);
+
+        // Assert
+        result.Result.Should().BeOfType<ObjectResult>();
+
+        var response = result.Result.Should()
+            .BeOfType<ObjectResult>().Subject;
+
+        response.StatusCode.Should().Be(StatusCodes.Status201Created);
+        response.Value.Should().BeEquivalentTo(_authResponse);
+    }
+
+    [Test]
+    public async Task SignupAdmin_WithExistingUser_ReturnsConflict()
+    {
+        // Arrange
+        var request = new SingupRequest(
+            "admin",
+            "admin@test.com",
+            "Password123"
+        );
+
+        _authService
+            .Setup(s => s.SignupAdminAsync(request))
+            .ReturnsAsync(
+                Result.Failure<AuthResponse, DomainError>(
+                    AuthError.DuplicateUser(request.Email))
+            );
+
+        // Act
+        var result = await _controller.SignupAdmin(request);
+
+        // Assert
+        result.Result.Should().BeOfType<ConflictObjectResult>();
+    }
+
 }

@@ -16,6 +16,42 @@ http:
         contentType: image/jpeg
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El estado debe ser 200", function () {
+            expect(res.status).to.equal(200);
+        });
+
+        test("Debe devolver un objeto", function () {
+            expect(res.body).to.be.an("object");
+        });
+
+        test("El ID debe ser 1", function () {
+            expect(res.body.id).to.equal(1);
+        });
+
+        test("El nombre debe ser Batman", function () {
+            expect(res.body.name).to.equal("Batman");
+        });
+
+        test("Debe devolver una imagen", function () {
+            expect(res.body.image).to.exist;
+        });
+
+        test("La imagen debe ser una cadena", function () {
+            expect(res.body.image).to.be.a("string");
+        });
+
+        test("La imagen debe estar en la carpeta uploads", function () {
+            expect(res.body.image).to.include("/uploads/funkos/");
+        });
+
+        test("La imagen debe ser JPG", function () {
+            expect(res.body.image).to.match(/\.jpg$/i);
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

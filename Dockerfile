@@ -1,11 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY MinimalApi/MinimalApi.csproj FunkoApi/
+COPY FunkoApi/MinimalApi.csproj FunkoApi/
 RUN dotnet restore FunkoApi/MinimalApi.csproj
 
 COPY . .
-RUN dotnet publish MinimalApi -c Release -o /app/publish
+RUN dotnet publish FunkoApi -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app

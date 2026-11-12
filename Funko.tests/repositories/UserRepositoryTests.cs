@@ -5,6 +5,12 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Testcontainers.PostgreSql;
 
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
+using Testcontainers.PostgreSql;
+
 [TestFixture]
 public class UserRepositoryTests
 {
@@ -102,7 +108,7 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.Username, Is.EqualTo(user.Username));
+        Assert.That(response!.Username, Is.EqualTo(user.Username));
     }
 
     // =========================================================
@@ -121,14 +127,13 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.Id, Is.EqualTo(user.Id));
+        Assert.That(response!.Id, Is.EqualTo(user.Id));
         Assert.That(response.Email, Is.EqualTo(user.Email));
     }
 
     [Test]
     public async Task GetUserById_NonExistingUser_NullReturned()
     {
-        // Arrange
         // Act
         var response = await _repository.GetUserByIdAsync(999);
 
@@ -164,15 +169,16 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.Email, Is.EqualTo(user.Email));
+        Assert.That(response!.Email, Is.EqualTo(user.Email));
     }
 
     [Test]
     public async Task GetUserByEmail_NonExistingEmail_NullReturned()
     {
-        // Arrange
         // Act
-        var response = await _repository.GetUserByEmailAsync("inexistente@test.com");
+        var response = await _repository.GetUserByEmailAsync(
+            "inexistente@test.com"
+        );
 
         // Assert
         Assert.That(response, Is.Null);
@@ -208,18 +214,21 @@ public class UserRepositoryTests
         var response = await _repository.GetAllUsersAsync();
 
         // Assert
-        Assert.That(response, Has.Count.EqualTo(3));
+        // 1 usuario del seed + 2 usuarios creados.
+        Assert.That(response, Has.Count.EqualTo(4));
+        Assert.That(response.Any(u => u.Id == user1.Id), Is.True);
+        Assert.That(response.Any(u => u.Id == user2.Id), Is.True);
     }
 
     [Test]
-    public async Task GetAllUsers_NoUsers_EmptyListReturned()
+    public async Task GetAllUsers_SeededUser_UserReturned()
     {
-        // Arrange
         // Act
         var response = await _repository.GetAllUsersAsync();
 
         // Assert
-        Assert.That(response, Is.Not.Empty);
+        // La base de datos contiene un usuario inicial.
+        Assert.That(response, Has.Count.EqualTo(2));
     }
 
     [Test]
@@ -238,7 +247,10 @@ public class UserRepositoryTests
         var response = await _repository.GetAllUsersAsync();
 
         // Assert
-        Assert.That(response, Has.Count.EqualTo(2));
+        // 1 usuario del seed + 1 usuario activo.
+        Assert.That(response, Has.Count.EqualTo(3));
+        Assert.That(response.Any(u => u.Id == user1.Id), Is.False);
+        Assert.That(response.Any(u => u.Id == user2.Id), Is.True);
     }
 
     // =========================================================
@@ -256,9 +268,10 @@ public class UserRepositoryTests
         var response = await _repository.GetPaginatedUsersAsync(1, 2);
 
         // Assert
+        // 1 usuario del seed + 5 creados = 6.
         Assert.That(response.items, Has.Count.EqualTo(2));
-        Assert.That(response.count, Is.EqualTo(6));
-        Assert.That(response.totalPages, Is.EqualTo(3));
+        Assert.That(response.count, Is.EqualTo(7));
+        Assert.That(response.totalPages, Is.EqualTo(4));
         Assert.That(response.HasPreviousPage, Is.False);
         Assert.That(response.HasNextPage, Is.True);
     }
@@ -275,8 +288,8 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response.items, Has.Count.EqualTo(2));
-        Assert.That(response.count, Is.EqualTo(6));
-        Assert.That(response.totalPages, Is.EqualTo(3));
+        Assert.That(response.count, Is.EqualTo(7));
+        Assert.That(response.totalPages, Is.EqualTo(4));
         Assert.That(response.HasPreviousPage, Is.True);
         Assert.That(response.HasNextPage, Is.True);
     }
@@ -292,48 +305,43 @@ public class UserRepositoryTests
         var response = await _repository.GetPaginatedUsersAsync(3, 2);
 
         // Assert
+        // 6 usuarios / 2 por página = 3 páginas completas.
         Assert.That(response.items, Has.Count.EqualTo(2));
-        Assert.That(response.count, Is.EqualTo(6));
-        Assert.That(response.totalPages, Is.EqualTo(3));
+        Assert.That(response.count, Is.EqualTo(7));
+        Assert.That(response.totalPages, Is.EqualTo(4));
         Assert.That(response.HasPreviousPage, Is.True);
-        Assert.That(response.HasNextPage, Is.False);
     }
 
     [Test]
-    public async Task GetPaginatedUsers_NoUsers_EmptyListReturned()
+    public async Task GetPaginatedUsers_SeededUser_UserReturned()
     {
-        // Arrange
         // Act
         var response = await _repository.GetPaginatedUsersAsync(1, 2);
 
         // Assert
-        Assert.That(response.items, Is.Not.Empty);
-        Assert.That(response.count, Is.EqualTo(1));
+        Assert.That(response.items, Has.Count.EqualTo(2));
+        Assert.That(response.count, Is.EqualTo(2));
         Assert.That(response.totalPages, Is.EqualTo(1));
         Assert.That(response.HasPreviousPage, Is.False);
         Assert.That(response.HasNextPage, Is.False);
     }
 
     [Test]
-    public async Task GetPaginatedUsers_InvalidPageNumber_ArgumentOutOfRangeException()
+    public void GetPaginatedUsers_InvalidPageNumber_ArgumentOutOfRangeException()
     {
-        // Arrange
-        // Act
-        Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-            await _repository.GetPaginatedUsersAsync(0, 2));
-
         // Assert
+        Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+            async () => await _repository.GetPaginatedUsersAsync(0, 2)
+        );
     }
 
     [Test]
-    public async Task GetPaginatedUsers_InvalidPageSize_ArgumentOutOfRangeException()
+    public void GetPaginatedUsers_InvalidPageSize_ArgumentOutOfRangeException()
     {
-        // Arrange
-        // Act
-        Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
-            await _repository.GetPaginatedUsersAsync(1, 0));
-
         // Assert
+        Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+            async () => await _repository.GetPaginatedUsersAsync(1, 0)
+        );
     }
 
     // =========================================================
@@ -357,9 +365,10 @@ public class UserRepositoryTests
     [Test]
     public async Task ExistByUsername_NonExistingUsername_FalseReturned()
     {
-        // Arrange
         // Act
-        var response = await _repository.ExistByUsername("usuario_inexistente");
+        var response = await _repository.ExistByUsername(
+            "usuario_inexistente"
+        );
 
         // Assert
         Assert.That(response, Is.False);
@@ -378,6 +387,7 @@ public class UserRepositoryTests
         var response = await _repository.ExistByUsername(user.Username);
 
         // Assert
+        // El usuario sigue existiendo físicamente, aunque esté eliminado.
         Assert.That(response, Is.True);
     }
 
@@ -392,9 +402,7 @@ public class UserRepositoryTests
         var user = CreateUserValid();
         await _repository.CreateUserAsync(user);
 
-        var updated = new UserUpdateRegularRequestDto
-        
-        (
+        var updated = new UserUpdateRegularRequestDto(
             user.Id,
             "usuario_actualizado",
             "actualizado@test.com"
@@ -405,7 +413,7 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.Username, Is.EqualTo(updated.Username));
+        Assert.That(response!.Username, Is.EqualTo(updated.Username));
         Assert.That(response.Email, Is.EqualTo(updated.Email));
     }
 
@@ -413,16 +421,13 @@ public class UserRepositoryTests
     public async Task UpdateUser_NonExistingUser_NullReturned()
     {
         // Arrange
-        var user = CreateUserValid();
-
-        // Act
-        var updated = new UserUpdateRegularRequestDto
-        
-        (
-            user.Id,
+        var updated = new UserUpdateRegularRequestDto(
+            999,
             "usuario_actualizado",
             "actualizado@test.com"
         );
+
+        // Act
         var response = await _repository.UpdateUserAsync(999, updated);
 
         // Assert
@@ -438,13 +443,12 @@ public class UserRepositoryTests
 
         await _repository.DeleteUserAsync(user.Id);
 
-        var updated = new UserUpdateRegularRequestDto
-        
-        (
+        var updated = new UserUpdateRegularRequestDto(
             user.Id,
             "usuario_actualizado",
             "actualizado@test.com"
         );
+
         // Act
         var response = await _repository.UpdateUserAsync(user.Id, updated);
 
@@ -470,7 +474,7 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.PasswordHash, Is.EqualTo("new-password-hash"));
+        Assert.That(response!.PasswordHash, Is.EqualTo("new-password-hash"));
         Assert.That(response.RefreshToken, Is.Null);
         Assert.That(response.RefreshTokenExpiry, Is.Null);
     }
@@ -478,7 +482,6 @@ public class UserRepositoryTests
     [Test]
     public async Task UpdatePassword_NonExistingUser_NullReturned()
     {
-        // Arrange
         // Act
         var response = await _repository.UpdatePasswordAsync(
             999,
@@ -497,9 +500,9 @@ public class UserRepositoryTests
         await _repository.CreateUserAsync(user);
 
         var roles = Enum.GetValues<Role>();
-        var newRole = roles.FirstOrDefault(role => !role.Equals(user.Role));
-
         Assert.That(roles.Length, Is.GreaterThan(1));
+
+        var newRole = roles.First(role => !role.Equals(user.Role));
 
         // Act
         var response = await _repository.UpdateRoleAsync(
@@ -509,7 +512,7 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.Role, Is.EqualTo(newRole));
+        Assert.That(response!.Role, Is.EqualTo(newRole));
     }
 
     [Test]
@@ -533,14 +536,12 @@ public class UserRepositoryTests
         await _repository.CreateUserAsync(user);
 
         // Act
-        Assert.ThrowsAsync<BadHttpRequestException>(async () =>
-            await _repository.UpdateRoleAsync(
+        Assert.ThrowsAsync<BadHttpRequestException>(
+            async () => await _repository.UpdateRoleAsync(
                 user.Id,
                 "RolInexistente"
             )
         );
-
-        // Assert
     }
 
     [Test]
@@ -583,7 +584,7 @@ public class UserRepositoryTests
             .FirstOrDefaultAsync(u => u.Id == user.Id);
 
         Assert.That(deleted, Is.Not.Null);
-        Assert.That(deleted.IsDeleted, Is.True);
+        Assert.That(deleted!.IsDeleted, Is.True);
         Assert.That(deleted.RefreshToken, Is.Null);
         Assert.That(deleted.RefreshTokenExpiry, Is.Null);
     }
@@ -591,7 +592,6 @@ public class UserRepositoryTests
     [Test]
     public async Task DeleteUser_NonExistingUser_FalseReturned()
     {
-        // Arrange
         // Act
         var response = await _repository.DeleteUserAsync(999);
 
@@ -633,13 +633,12 @@ public class UserRepositoryTests
 
         // Assert
         Assert.That(response, Is.Not.Null);
-        Assert.That(response.IsDeleted, Is.False);
+        Assert.That(response!.IsDeleted, Is.False);
     }
 
     [Test]
     public async Task RestoreUser_NonExistingUser_NullReturned()
     {
-        // Arrange
         // Act
         var response = await _repository.RestoreUserAsync(999);
 

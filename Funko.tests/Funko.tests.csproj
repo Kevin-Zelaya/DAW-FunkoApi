@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MinimalApi\MinimalApi.csproj" />
+    <ProjectReference Include="..\FunkoApi\MinimalApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,6 +8,22 @@ http:
   url: http://{{host}}:{{port}}/uploads/funkos/default.png
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El estado debe ser 200", function () {
+            expect(res.status).to.equal(200);
+        });
+
+        test("Debe devolver una imagen PNG", function () {
+            expect(res.headers["content-type"]).to.include("image/png");
+        });
+
+        test("El contenido no debe estar vacío", function () {
+            expect(res.headers["content-length"]).to.not.equal("0");
+        });
+
 settings:
   encodeUrl: true
   timeout: 0
