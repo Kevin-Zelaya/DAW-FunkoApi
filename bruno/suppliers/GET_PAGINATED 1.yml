@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://http://{{host}}:{{port}}/api/suppliers/6aee3ce4035ea0d4b4a44432/api/suppliers?pageNumber=1&pageSize=5
+  url: http://{{host}}:{{port}}/api/suppliers?pageNumber=1&pageSize=5
   params:
     - name: pageNumber
       value: "1"
@@ -16,9 +16,28 @@ http:
   body:
     type: json
     data: ""
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener una lista de proveedores", function() {
+            expect(res.body.items).to.be.an("array");
+        });
+
+        test("La respuesta debe contener información de paginación", function() {
+            expect(res.body).to.have.property("count");
+            expect(res.body).to.have.property("totalPages");
+        });
+
+        test("La lista no debe superar los 5 proveedores", function() {
+            expect(res.body.items.length).to.be.at.most(5);
+        });
 
 settings:
   encodeUrl: true

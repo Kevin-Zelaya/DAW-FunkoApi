@@ -14,9 +14,27 @@ http:
         "username": "Kevo",
         "email": "pedro@gmail.com"
       }
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJLZW5ycm8yMDAzQGdtYWlsLmNvbSIsImp0aSI6IjUyYjYyNThkLTZlNWQtNGQzYS04NzBmLTY4NzhkZGNjMDJiNyIsImlhdCI6MTc5NDM5OTY4OSwidXNlcm5hbWUiOiJLZW5ycm8iLCJyb2xlIjoiVVNFUiIsImV4cCI6MTc5NDQwMjY4OSwiaXNzIjoiUHJ1ZHVjdG9zQXBpIiwiYXVkIjoiUHJvZHVjdG9zQXBpQ2xpZW50cyJ9.EulF80hMDtFonoPj4PwteV5ypGvsZf912oU-ZMBHdug
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener un identificador", function() {
+            expect(res.body).to.have.property("id");
+        });
+
+        test("El nombre de usuario debe ser Kevo", function() {
+            expect(res.body.username).to.equal("Kevo");
+        });
+
+        test("El correo electrónico debe ser correcto", function() {
+            expect(res.body.email).to.equal("pedro@gmail.com");
+        });
 
 settings:
   encodeUrl: true

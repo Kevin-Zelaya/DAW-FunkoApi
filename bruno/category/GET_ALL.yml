@@ -11,6 +11,18 @@ http:
     data: ""
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener una lista de categorías", function() {
+            expect(res.body.items).to.be.an('array');
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

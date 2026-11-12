@@ -16,9 +16,27 @@ http:
   body:
     type: json
     data: ""
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de respuesta es 200", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta no está vacía", function() {
+            expect(res.body).to.exist;
+        });
+
+        test("La respuesta tarda menos de 1000 ms", function() {
+            expect(res.responseTime).to.be.below(1000);
+        });
+
+        test("La respuesta es de tipo JSON", function() {
+            expect(res.headers["content-type"]).to.include("application/json");
+        });
 
 settings:
   encodeUrl: true

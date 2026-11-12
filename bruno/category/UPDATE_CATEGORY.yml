@@ -19,6 +19,26 @@ http:
     type: bearer
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Debe actualizar una categoria correctamente", function () {
+            expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Debe devolver el nombre actualizado", function () {
+            const body = res.getBody();
+
+            expect(body.name).to.equal("pedro");
+        });
+
+        test("Debe devolver la descripcion actualizada", function () {
+            const body = res.getBody();
+
+            expect(body.description).to.equal("Figuras Funko de personajes del mundo de los videojuegos.");
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

@@ -9,9 +9,23 @@ http:
   body:
     type: json
     data: '"USER"'
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZmE0MjUyMzgtMjJmOC00NDU5LThjMGMtZmQxODMzZGIxNmEyIiwiaWF0IjoxNzk0NDAwODU2LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDAzODU2LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.6jvhPcCjw-az4BW8L-ksGjY2UT2U7Y8PQSljb6NVTXU
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener un identificador", function() {s
+            expect(res.body).to.have.property("id");
+        });
+
+        test("El usuario debe tener el rol USER", function() {
+            expect(res.body.role).to.equal("USER");
+        });
 
 settings:
   encodeUrl: true

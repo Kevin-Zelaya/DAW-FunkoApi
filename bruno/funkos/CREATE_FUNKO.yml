@@ -10,7 +10,7 @@ http:
     type: json
     data: |-
       {
-        "name": "sisssa",
+        "name": "sisasss",
         "franchise": "Marvel",
         "number": 1,
         "supplierId": "6aee3ce4035ea0d4b4a44432",
@@ -18,9 +18,30 @@ http:
         "exclusive": false,
         "price": 14.99
       }
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZjhlN2U4ODEtOGIwYy00MDE0LTg4MDYtNWYwZTk2YjgzOWEyIiwiaWF0IjoxNzk0NDA0Nzc3LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDA3Nzc3LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.MoEXm40YER1Ob42fepI2ENWs50oLE4pZXiFFg_Qo8zg
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser exitoso (200 o 201)", function() {
+          expect(res.status).to.be.oneOf([200, 201]);
+        });
+
+        test("El Funko creado tiene el nombre correcto", function() {
+          expect(res.body.name).to.equal("sisa");
+          expect(res.body.franchise).to.equal("Marvel");
+        });
+
+        test("La respuesta devuelve un ID asignado", function() {
+          expect(res.body).to.have.property('id');
+        });
+
+        // Extra muy útil: Guarda el ID automáticamente en una variable de entorno 
+        // para usarlo en tus peticiones de GET_BYID o DELETE_FUNKO
+        if (res.body && res.body.id) {
+          bru.setEnvVar("createdFunkoId", res.body.id);
+        }
 
 settings:
   encodeUrl: true

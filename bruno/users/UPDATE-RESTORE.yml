@@ -6,9 +6,27 @@ info:
 http:
   method: PATCH
   url: http://{{host}}:{{port}}/api/users/2/restore
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiZmE0MjUyMzgtMjJmOC00NDU5LThjMGMtZmQxODMzZGIxNmEyIiwiaWF0IjoxNzk0NDAwODU2LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0NDAzODU2LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.6jvhPcCjw-az4BW8L-ksGjY2UT2U7Y8PQSljb6NVTXU
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 OK", function() {
+            expect(res.status).to.equal(200);
+        });
+
+        test("La respuesta debe contener un identificador", function() {
+            expect(res.body).to.have.property("id");
+        });
+
+        test("La respuesta debe contener un nombre de usuario", function() {
+            expect(res.body.username).to.be.a("string").and.not.empty;
+        });
+
+        test("El usuario debe estar restaurado", function() {
+            expect(res.body).to.have.property("isDeleted", false);
+        });
 
 settings:
   encodeUrl: true

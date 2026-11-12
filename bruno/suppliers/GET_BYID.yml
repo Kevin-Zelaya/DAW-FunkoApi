@@ -9,9 +9,23 @@ http:
   body:
     type: json
     data: ""
-  auth:
-    type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiNTM2ODM1YTgtYzZjZS00MDhjLTkyNmItZjFmMGMxNDc2NWM1IiwiaWF0IjoxNzk0Mzk0NTU0LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk0Mzk3NTU0LCJpc3MiOiJQcnVkdWN0b3NBcGkiLCJhdWQiOiJQcm9kdWN0b3NBcGlDbGllbnRzIn0.kwAj6g_-ugaK-KFrfxH6BVH1AlR8CRol7vapUmEu_ls
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("El código de estado debe ser 200 o 201", function() {
+            expect(res.status).to.be.oneOf([200, 201]);
+        });
+
+        test("La respuesta debe contener un nombre", function() {
+            expect(res.body.name).to.be.a("string").and.not.empty;
+        });
+
+        test("El proveedor debe tener un identificador", function() {
+            expect(res.body).to.have.property("id");
+        });
 
 settings:
   encodeUrl: true
