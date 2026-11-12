@@ -44,8 +44,26 @@ public abstract class PosgreContextConfiguration
                 .HasForeignKey(f => f.CategoryId);
 
             entity.HasQueryFilter(f => !f.IsDelete);
-            
-        });
+
+            entity.HasData(
+            new Funko
+            {
+                Id = 1,
+                Name = "Batman",
+                Franchise = "DC Comics",
+                Number = 1,
+                SupplierId = "6aee3ce4035ea0d4b4a44432",
+                CategoryId = "e823IW7x_iC",
+                Exclusive = false,
+                Price = 14.99,
+                Imagen = null,
+                IsDelete = false,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null,
+                DeleteAT = null
+            }
+        );
+    });
         
         modelBuilder.Entity<Category>(entity =>
         {
@@ -139,6 +157,14 @@ public abstract class PosgreContextConfiguration
                     Email = "kevin@correo.com",
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
                     Role = Role.ADMIN
+                },
+                new User
+                {
+                    Id = 2,
+                    Username = "Sergio",
+                    Email = "sergio@correo.com",
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+                    Role = Role.USER
                 }
             );
         });

@@ -76,13 +76,15 @@ services:
       retries: 5
 
   cassandra:
-    image: cassandra:latest
+    image: cassandra:5.0
     container_name: cassandra-production
     restart: unless-stopped
     ports:
       - "9042:9042"
     environment:
-      - CASSANDRA_CLUSTER_NAME=FunkoCluster
+      CASSANDRA_CLUSTER_NAME: FunkoCluster
+      CASSANDRA_RPC_ADDRESS: 0.0.0.0
+      CASSANDRA_BROADCAST_RPC_ADDRESS: cassandra
     volumes:
       - cassandra_data_production:/var/lib/cassandra
 
