@@ -15,14 +15,17 @@ config:
       bypassProxy: ""
 
 request:
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJrZXZpbkBjb3JyZW8uY29tIiwianRpIjoiN2M4YzkwNDYtZWNlOS00MTY3LWIyZGEtZmFhNmI0MGZjZWFiIiwiaWF0IjoxNzk0NDM4OTU4LCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzk1MDQzNzU4LCJpc3MiOiJGdW5rb3NBcGkiLCJhdWQiOiJGdW5rb3NBcGlDbGllbnRzIn0.CcAMRe3NcOs4zl0KI9HYC2MtCldZNLeSFpM6EGHM53A
   variables:
     - name: host
       value: localhost
     - name: port
-      value: "5432"
-      disabled: true
+      value: "8080"
     - name: port
       value: "5205"
+      disabled: true
 bundled: false
 extensions:
   bruno:
